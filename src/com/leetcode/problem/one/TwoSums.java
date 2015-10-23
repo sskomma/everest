@@ -15,6 +15,7 @@ import java.util.Map;
  * Output: index1=1, index2=2
  * 
  * @author Ram Komma
+ * @email sskomma@hotmail.com
  *
  */
 public class TwoSums
