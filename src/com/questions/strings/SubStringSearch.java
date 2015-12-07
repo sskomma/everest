@@ -57,6 +57,9 @@ public class SubStringSearch
     {
         if(text == null || pattern == null || text.isEmpty() || pattern.isEmpty())
             return -1;
+        //Return with out search, of pattern is bigger than text.
+        if(pattern.length() > text.length()) return 0;
+        
         int[] tempArray = computeTemporaryArray(pattern.toCharArray());
         
         for(int t = 0, p = 0; t < text.length() && p < pattern.length(); )

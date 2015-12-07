@@ -1,4 +1,4 @@
-package com.leetcode.problem.two;
+package com.questions.linkedlist;
 
 /**
  * Definition for singly-linked list.*/
