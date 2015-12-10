@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**Description: https://leetcode.com/problems/two-sum/
+ * 
+ * Better solution:  https://github.com/sskomma/leetcode/blob/master/src/com/questions/arrays/ArrayPairSum.java
  *  
  * Given an array of integers, find two numbers such that they add up to a specific target number.
  * The function twoSum should return indices of the two numbers such that they add up to the target, 
@@ -17,6 +19,7 @@ import java.util.Map;
  * @author Ram Komma
  *
  */
+
 public class TwoSums
 {
 
