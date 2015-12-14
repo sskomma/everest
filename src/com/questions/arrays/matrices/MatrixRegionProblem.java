@@ -2,6 +2,13 @@ package com.questions.arrays.matrices;
 
 import java.util.HashMap;
 import java.util.Map;
+/**Description: http://www.ardendertat.com/2011/09/20/programming-interview-questions-2-matrix-region-sum/
+ * 
+ * Given an Matrix of number, compute the sum of a give square of numbers.
+ * 
+ * @author Ram Komma
+ *
+ */
 
 public class MatrixRegionProblem 
 {
