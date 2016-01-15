@@ -3,6 +3,16 @@ package com.questions.misc;
 import java.util.HashMap;
 import java.util.Map;
 
+/**Description: 
+ * A Class to convert Roman numbers to Integers and Integers to Roman numbers.
+ * Assumption: This problems assumes the input numbers are between 1- 3999
+ * 
+ * Solves: 
+ * 1. https://leetcode.com/problems/integer-to-roman/
+ * 2. https://leetcode.com/problems/roman-to-integer/
+ * @author Ram Komma
+ *
+ */
 public class RomanToNumber {
 
     private static int[] numbers = {1,4,5,9,10,40,50,90,100,400,500,900,1000};
@@ -54,6 +64,11 @@ public class RomanToNumber {
         
     }
     
+    /**A method to convert a give number to a roman number. 
+     * 
+     * @param number, that gets converted to Roman number. 
+     * @return String, Roman number representation of the given number. 
+     */
     public String convertNumberToRoman(int number)
     {
         StringBuffer sb = new StringBuffer();
@@ -76,6 +91,11 @@ public class RomanToNumber {
         return sb;
     }
     
+    /**A method to convert a give roman number.to a number..    
+     * 
+     * @param String, that gets converted to an Integer. 
+     * @return int, Numeric representation of the given Roman number 
+     */
     public int convertRomanToNumber(String roman)
     {
         char[] chars = roman.toCharArray();
