@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.text.html.MinimalHTMLWriter;
-
 /**Give a dollar value, and list of denominations find the least number of denominations,
  * to make up the dollar value. 
  * 
