@@ -2,7 +2,7 @@ package com.questions.linkedlist;
 
 public class LinkedList
 {
-    private Node head;
+    private ListNode head;
     
     /**Adds a node ad the end of the linked list. If the list is empty, it will create a new head. 
      * 
@@ -11,15 +11,15 @@ public class LinkedList
     public void addNode(int n)
     {
        if(head == null)
-           head = new Node(n);
+           head = new ListNode(n);
        else
        {
-           Node traverse = head;
+           ListNode traverse = head;
            while(traverse.hasNext())
            {
                traverse = traverse.getNext();
            }
-           traverse.next = new Node(n);
+           traverse.next = new ListNode(n);
        }
     }
 
@@ -27,7 +27,7 @@ public class LinkedList
      * 
      * @param number
      */
-    public void removeNode(int number)
+    public void removeNodesWithValue(int number)
     {
         if(head == null)
             return;
@@ -37,7 +37,7 @@ public class LinkedList
             if(head.hasNext())
             {
                 head = head.getNext();
-                removeNode(number);
+                removeNodesWithValue(number);
             }
             else{
                 head = null;
@@ -45,8 +45,8 @@ public class LinkedList
             return;
         }
         
-        Node traverser = head;
-        Node previous = null;
+        ListNode traverser = head;
+        ListNode previous = null;
         while(traverser.hasNext())
         {
             previous = traverser;
@@ -65,7 +65,7 @@ public class LinkedList
      */
     public void printList()
     {
-        Node node = head;
+        ListNode node = head;
         if(node != null)
         {
             do
@@ -90,7 +90,7 @@ public class LinkedList
         list.addNode(3);
         System.out.println("Linked list before printing");
         list.printList();
-        list.removeNode(5);
+        list.removeNodesWithValue(5);
         System.out.println("Linked list after printing");
         list.printList();
 

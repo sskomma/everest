@@ -17,17 +17,17 @@ package com.questions.linkedlist;
 public class AddTwoNumbers
 {
      
-    public static Node addTwoNumbers(Node l1, Node l2) {
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         return findSum(l1, l2, null, 0);
     }
         
-    public static Node findSum(Node l1, Node l2, Node sum, int carryFwd) {
+    public static ListNode findSum(ListNode l1, ListNode l2, ListNode sum, int carryFwd) {
 
         if(l1 == null && l2 == null && carryFwd == 0){
             return sum;
         }
         else{
-            Node nextNode = new Node(0);
+            ListNode nextNode = new ListNode(0);
 
             if(sum == null)
                 sum=nextNode;
@@ -62,19 +62,19 @@ public class AddTwoNumbers
     public static void main(String[] args)
     {
         // Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-        Node l1= new Node(1);
+        ListNode l1= new ListNode(1);
         //l1.next=new ListNode(4);
         //l1.next.next=new ListNode(3);
 
-        Node l2= new Node(9);
-        l2.next=new Node(9);
+        ListNode l2= new ListNode(9);
+        l2.next=new ListNode(9);
         //l2.next.next=new ListNode(4);
         
-        Node total = addTwoNumbers(l1,l2);
+        ListNode total = addTwoNumbers(l1,l2);
         printList(total);
 
     }
-    public static void printList(Node l){
+    public static void printList(ListNode l){
         
         if(l!=null)
         {
