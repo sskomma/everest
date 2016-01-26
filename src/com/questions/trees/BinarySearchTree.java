@@ -2,7 +2,9 @@ package com.questions.trees;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**Description: A Class that represents a binary search tree.
  * With implementations of common use cases encountered with it. 
@@ -36,6 +38,10 @@ public class BinarySearchTree {
 		allowDuplicates = true;
 	}
 	
+	public BinarySearchTree(TreeNode n){
+	    root = n;
+	}
+	
 	/**To add a given value to tree.
 	 * If the @param allowDuplicates is configured to true, a duplicated value is ignored and not added to tree. 
 	 * Otherwise, a duplicate value is placed in the left sub-tree.
@@ -60,13 +66,48 @@ public class BinarySearchTree {
 		return root;
 	}
 	
+	/**Method deletes a node with given value from tree. In case of deleting a node with children, it replaces the node with 
+	 * right most node of left subtree. In case of duplicates, it deletes only one node. 
+	 * 
+	 * @param n, Nodes with this value to be deleted from the tree. 
+	 */
 	public void removeNode(int n)
 	{
-		removeNode(root, n);
+		root = removeNode(root, n);
 	} 
-	private void removeNode(TreeNode node, int n)
+	private TreeNode removeNode(TreeNode node, int n)
 	{
-		
+	    if(n > node.val)
+	       node.right = removeNode(node.right, n);
+	    else if (n<node.val)
+	        node.left = removeNode(node.left, n);
+	    else
+	    {
+	        //Node is a leaf node. 
+	        if(node.left == null && node.right == null)
+	            return null;
+	        //Node has only right child
+	        else if(node.left == null && node.right != null)
+	            return node.right;
+	        //Node has only left child
+            else if(node.right == null && node.left != null)
+                return node.left;
+            else
+            {
+                TreeNode rightMostChildOfLeftSubTree = getRightMostNode(node.left);
+                node.val = rightMostChildOfLeftSubTree.val;
+                node.left = removeNode(node.left, node.val);
+            }
+	    }
+	    return node;
+	}
+	private TreeNode getRightMostNode(TreeNode node){
+	    if(node == null)
+	        return null;
+	    if(node.right != null)
+	        return getRightMostNode(node.right);
+
+	    return node;
 	}
 	
 	/**Method prints out tree node values, encountered while traversing tree inline.  
@@ -260,7 +301,7 @@ public class BinarySearchTree {
 		List<TreeNode> nextLevel = new ArrayList<TreeNode>();
 		
         int floor = height - level;
-        //multiplied by 2 and subtracted by 2 because, each note in tree is printed to take 2 letters.
+        //multiplied by 2 and subtracted by 2 because, each node in tree is printed to take 2 units of space.
         //to be be updated to 3, if nodes in tree take 3 letter spaces to print each node. 
         int firstSpaces = (int) Math.pow(2, (floor))*2 -2;
         int betweenSpaces = (int) Math.pow(2, (floor + 1))*2-2;
@@ -288,21 +329,57 @@ public class BinarySearchTree {
         for (int i = 0; i < count; i++)
             System.out.print(" ");
     }
+	
+	/**Method to find the kth smallest element in binary search tree.
+	 * https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+	 * 
+	 * @param k, kth smallest element to be found in tree. 
+	 * @return int, value of the kth smallest node. 
+	 */
+	public int kthSmallestElementInBST(int k)
+	{
+	    Set<Integer> setOfUnique  = kthSmallestElementInBST(root, k, new LinkedHashSet<Integer>());
+	    if(setOfUnique.size() < k)
+	        return -1;
+	    else
+	        return (Integer) setOfUnique.toArray()[k -1];
+	}
+	private Set<Integer> kthSmallestElementInBST(TreeNode node, int k, Set<Integer> setOfUnique)
+	{
+	    if( node == null)
+	        return setOfUnique;
+	    if(setOfUnique.size() < k){
+	        setOfUnique = kthSmallestElementInBST(node.left, k, setOfUnique);
+	        setOfUnique.add(node.val);
+	        setOfUnique = kthSmallestElementInBST(node.right, k, setOfUnique);
+	    }
+	    return setOfUnique;
+	}
+	
 		
 	public static void main(String[] args)
 	{
-		BinarySearchTree tree = new BinarySearchTree(1);
-		tree.addToTree(2);
+		BinarySearchTree tree = new BinarySearchTree(10);
 		tree.addToTree(5);
+		tree.addToTree(15);
+		tree.addToTree(3);
+		tree.addToTree(1);
 		tree.addToTree(2);
-		tree.addToTree(16);
-		tree.addToTree(18);
-		tree.addToTree(19);
-		
-		//System.out.println("Height of Tree:" + tree.heightOfTree());
-		//tree.inlineTraversal();
+		tree.addToTree(4);
+	    tree.addToTree(4);
+		tree.addToTree(7);
+		tree.addToTree(6);
+		tree.addToTree(9);
+		tree.addToTree(8);
+        tree.addToTree(13);
+        tree.addToTree(14);
+        tree.addToTree(11);
+        tree.addToTree(12);
+        tree.addToTree(18);
+        tree.addToTree(16);
+        tree.addToTree(19);		
 		tree.printTree();
-		System.out.println(BinaryTreeUtils.isBST(tree.root));
-		
+		System.out.println(tree.kthSmallestElementInBST(5));
+
 	}
 }

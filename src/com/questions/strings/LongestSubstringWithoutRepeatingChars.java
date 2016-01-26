@@ -34,7 +34,8 @@ public class LongestSubstringWithoutRepeatingChars
             if(existing.get(s.charAt(i)) == null){
                 cur_len++;
             }
-            else{
+            else
+            {
                 if(existing.get(s.charAt(i)) < window_start){
                     cur_len++;
                 }
