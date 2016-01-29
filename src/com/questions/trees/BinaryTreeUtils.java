@@ -2,6 +2,7 @@ package com.questions.trees;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**A utilities class, that does various things with Binary trees and Binary search trees.  
  * 
@@ -64,11 +65,81 @@ public class BinaryTreeUtils
 	    return currentNode;
 	}
 	
+	/** Method to find the least common ancestor in a tree
+	 * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+	 * 
+	 * @param node, root node of the tree.
+	 * @param a, fist node of which common ancestor is to be found.
+	 * @param b, second node of which common ancestor is to be found.
+	 * @return TreeNode, least common ancestor of node a and node b. 
+	 */
+	public TreeNode lowestCommonAncestorOfBST(TreeNode node,TreeNode a, TreeNode b)
+	{
+		if(node == null || a== null || b == null)
+			return null;
+		if(a.val < node.val && b.val < node.val)
+			return lowestCommonAncestorOfBST(node.left, a, b);
+		if(a.val > node.val && b.val > node.val)
+			return lowestCommonAncestorOfBST(node.right, a, b);
+		if(a.val == node.val)
+			return a;
+		if(b.val == node.val)
+			return b;
+		return node;
+	}
+	
+	public static TreeNode lowestCommonAncestorOfBinaryTree(TreeNode root, TreeNode a, TreeNode b)
+	{
+		assert(root!=null && a!= null && b!= null);
+		Stack<TreeNode> aStack = new Stack<TreeNode>(); 
+		findNodeInTree(root, a,aStack );
+		Stack<TreeNode> bStack = new Stack<TreeNode>(); 
+		findNodeInTree(root, b,bStack );
+		
+		TreeNode lca = root;
+		
+		while(!aStack.isEmpty() && !bStack.isEmpty() )
+		{
+			if(aStack.peek().val == bStack.peek().val)
+			{
+				lca = aStack.pop();
+				bStack.pop();
+			}
+			else
+			{
+				return lca;
+			}
+		}
+		return lca;
+	}
+	
+	public static boolean findNodeInTree(TreeNode node, TreeNode a, Stack<TreeNode> path)
+	{
+		if(node != null && a != null)
+		{
+			if(node.val == a.val)
+			{
+				path.push(a);
+				return true;
+			}
+			if(findNodeInTree(node.left, a, path) || findNodeInTree(node.right, a, path))
+			{
+				path.push(node);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static void main(String[] args)
+
+	
 	{
 	    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19}; 
 	    BinarySearchTree bst = new BinarySearchTree(sortedArrayToBST(numbers));
 	    bst.printTree();
+	    TreeNode lca = lowestCommonAncestorOfBinaryTree(bst.getRoot(), new TreeNode(14), new TreeNode(13));
+	    System.out.println(lca.val);
 	}
 
 	

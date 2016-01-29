@@ -17,17 +17,18 @@ public class BinarySearchTree {
 	private TreeNode root;
 	private boolean allowDuplicates;
 	
+	public TreeNode getRoot(){return root;}
+	
 	/** Constructor to initialize a binary search tree. 
 	 * 
 	 * @param n, value of the root node.
 	 * @param allowDuplicates, indicates if duplicate values are to be added to tree.
 	 */
-	public BinarySearchTree(int n, boolean allowDuplicates)
+ 	public BinarySearchTree(int n, boolean allowDuplicates)
 	{
 		root = new TreeNode(n);
 		this.allowDuplicates = allowDuplicates;  
 	}
-	
 	/** Constructor to initialize a binary search tree.
 	 * By default, tree is configured to allow duplicate values into tree.  
 	 * 
@@ -37,7 +38,6 @@ public class BinarySearchTree {
 		root = new TreeNode(n);
 		allowDuplicates = true;
 	}
-	
 	public BinarySearchTree(TreeNode n){
 	    root = n;
 	}
