@@ -65,7 +65,7 @@ public class BinaryTreeUtils
 	    return currentNode;
 	}
 	
-	/** Method to find the least common ancestor in a tree
+	/** Method to find the least common ancestor in a Binary Search tree
 	 * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
 	 * 
 	 * @param node, root node of the tree.
@@ -88,6 +88,14 @@ public class BinaryTreeUtils
 		return node;
 	}
 	
+	 /** Method to find the least common ancestor in a Binary tree
+     * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+     * 
+     * @param node, root node of the tree.
+     * @param a, fist node of which common ancestor is to be found.
+     * @param b, second node of which common ancestor is to be found.
+     * @return TreeNode, least common ancestor of node a and node b. 
+     */
 	public static TreeNode lowestCommonAncestorOfBinaryTree(TreeNode root, TreeNode a, TreeNode b)
 	{
 		assert(root!=null && a!= null && b!= null);
@@ -100,7 +108,7 @@ public class BinaryTreeUtils
 		
 		while(!aStack.isEmpty() && !bStack.isEmpty() )
 		{
-			if(aStack.peek().val == bStack.peek().val)
+			if(aStack.peek().equals(bStack.peek()))
 			{
 				lca = aStack.pop();
 				bStack.pop();
@@ -117,7 +125,7 @@ public class BinaryTreeUtils
 	{
 		if(node != null && a != null)
 		{
-			if(node.val == a.val)
+			if(node.equals(a))
 			{
 				path.push(a);
 				return true;
