@@ -139,16 +139,45 @@ public class BinaryTreeUtils
 		return false;
 	}
 	
-	public static void main(String[] args)
+	public static TreeNode getRightMostNode(TreeNode node){
+	    if(node == null)
+	        return null;
+	    if(node.right != null)
+	        return getRightMostNode(node.right);
 
+	    return node;
+	}
+ 	
+	/**Method to flatten a tree to right heavy tree. For more details look at the link below. 
+	 * https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+	 * @param node
+	 */
+	public static void flattenBinaryTree(TreeNode node)
+	{
+		if(node == null) return ;
+		TreeNode leftSubTree = node.left;
+		TreeNode rightSubTree = node.right;
+		TreeNode rightMostInLeftSubTree = null;
+		if(leftSubTree != null)
+		{
+			node.right = leftSubTree;
+			node.left = null;
+			flattenBinaryTree(leftSubTree);
+			rightMostInLeftSubTree = getRightMostNode(leftSubTree);
+		}
+		if(rightMostInLeftSubTree != null)
+			rightMostInLeftSubTree.right = rightSubTree;
+		if(rightSubTree != null)
+			flattenBinaryTree(rightSubTree);
+	}
 	
+	public static void main(String[] args)
 	{
 	    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19}; 
 	    BinarySearchTree bst = new BinarySearchTree(sortedArrayToBST(numbers));
 	    bst.printTree();
-	    TreeNode lca = lowestCommonAncestorOfBinaryTree(bst.getRoot(), new TreeNode(14), new TreeNode(13));
-	    System.out.println(lca.val);
+	    TreeNode root = bst.getRoot();
+	    flattenBinaryTree(root);
+	    bst.printTree();
 	}
-
-	
 }
