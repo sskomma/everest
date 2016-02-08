@@ -12,4 +12,5 @@ public class ListNode {
           return next != null;
       }
       ListNode getNext(){ return next;}
+      public String toString(){return Integer.toString(val);}
 }

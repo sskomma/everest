@@ -27,7 +27,6 @@ public class LinkedListUtils {
 			node.val = next.val;
 			node.next = next.next;
 		}
-		
 	}
 	
 	/**Description: A method, to put all nodes in odd positions in list before all even nodes. 
@@ -64,31 +63,33 @@ public class LinkedListUtils {
 		return head;
 	}
 	
-	public static ListNode reverseList(ListNode head)
-	{
-	    if(head == null)
-	        return null;
-	    ListNode navigator = head;
-	    ListNode reverseHead = null;
-	    Stack<ListNode> stack = new Stack<ListNode>();
-	    while(navigator!= null)
-	    {
-	        stack.push(navigator);
-	        navigator = navigator.next;
-	    }
-	    navigator = null;
-	    while(!stack.isEmpty())
-	    {
-	        ListNode popped = stack.pop();
-	        if(reverseHead == null){
-	            reverseHead = popped;
-	            navigator = reverseHead;
-	        }
-	        else
-	            reverseHead.next = popped;
-	        popped.next = null;
-	    }
-	    return reverseHead;
+	/**Given a linked list, swap every two adjacent nodes and return its head.
+	 * For example,
+	 * Given 1->2->3->4, you should return the list as 2->1->4->3.
+	 * Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
+	 * 
+	 * https://leetcode.com/problems/swap-nodes-in-pairs/
+	 * 
+	 * @param head of the linked list, of which nodes are to be swapped. 
+	 * @return head
+	 */
+	public static ListNode swapPairs(ListNode head){
+		if(head == null)
+			return null;
+		ListNode current = head;
+		ListNode next = head.next;
+		
+		while(next != null)
+		{
+			int temp = current.val;
+			current.val = next.val;
+			next.val = temp;
+			if(next.next == null)
+				break;
+			current = next.next;
+			next = current.next;
+		}
+		return head;
 	}
 	
 	public static void main(String[] args)
@@ -97,7 +98,10 @@ public class LinkedListUtils {
 	    list.addNode(1);
 	    list.addNode(2);
 	    list.addNode(3);
-	    
+	    list.addNode(4);
+	    list.printList();
+	    swapPairs(list.getHead());
+	    list.printList();
 		
 	}
 	

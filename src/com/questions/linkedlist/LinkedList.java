@@ -9,6 +9,8 @@ public class LinkedList
     public LinkedList(){} 
     public LinkedList(ListNode node){head = node;} 
     
+    public ListNode getHead(){return head;}
+    
     /**Adds a node at the end of the linked list. If the list is empty, it will create a new head. 
      * 
      * @param n number to be placed in the new node. 
@@ -99,6 +101,10 @@ public class LinkedList
     }
     
     /**Returns a reversed linked linked list.
+     * Time Complexity	: O(n)
+     * Space Complexity	: O(n) ~ Because we use stack to save each node
+     * Although, a better implementation of reversing a linked list is done
+     * in method reverseListII()
      * https://leetcode.com/problems/reverse-linked-list/
      * 
      * @return
@@ -131,6 +137,71 @@ public class LinkedList
         }
         return new LinkedList(reverseHead);
     }
+
+    /**Returns a reversed linked linked list.
+     * Time Complexity	: O(n)
+     * Space Complexity	: O(1)
+     * An older implementation of reversing a linked list is done
+     * in method reverseList()
+     * https://leetcode.com/problems/reverse-linked-list/
+     */
+    public ListNode reverseListII(ListNode current)
+    {
+    	ListNode previous = null;
+    	ListNode next;
+    	while(current!=null)
+    	{
+    		next = current.next;
+    		current.next = previous;
+    		
+    		previous = current;
+    		current = next;
+    	}
+    	return previous;
+    }
+
+    /**Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+     * reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+     * 
+     * You must do this in-place without altering the nodes' values.
+     * 
+     * For example,
+     * Given {1,2,3,4}, reorder it to {1,4,2,3}.
+     * https://leetcode.com/problems/reorder-list/
+     */
+    public void reOrder()
+    {
+    	if(head == null || head.next == null)
+    		return;
+    	
+    	ListNode slowPtr = head;
+    	ListNode fastPtr = head.next;
+    	
+    	while(fastPtr.next != null && fastPtr.next.next != null)
+    	{
+    		slowPtr = slowPtr.next;
+    		fastPtr = fastPtr.next.next;
+    	}
+    	//List is of odd length..Moving slowPtr one more pointer up to get to middle
+    	if(fastPtr.next != null)
+    	{
+    		slowPtr = slowPtr.next;
+    		fastPtr = fastPtr.next;
+    	}
+    	ListNode secondHalf = slowPtr.next;
+    	slowPtr.next = null;
+    	ListNode reversedSecondHalf = reverseListII(secondHalf);
+    	
+    	ListNode firstHalf = head;
+    	while( reversedSecondHalf !=null && firstHalf!= null)
+    	{
+    		ListNode popped = reversedSecondHalf;
+    		reversedSecondHalf = reversedSecondHalf.next;
+    		popped.next = firstHalf.next;
+    		firstHalf.next = popped;
+    		firstHalf = popped.next;
+    	}
+    }
     
     /**Prints out the linked list
      * 
@@ -158,10 +229,16 @@ public class LinkedList
         list.addNode(1);
         list.addNode(2);
         list.addNode(3);
-        System.out.println("Linked list before reversing");
+        list.addNode(4);
+        list.addNode(5);
+        list.addNode(6);
+        list.addNode(7);
+        
+        System.out.println("Linked list before reordering");
         list.printList();
-        LinkedList n = list.reverseList();
-        System.out.println("Linked list after printing");
+        list.reOrder();
+        System.out.println("Linked list after reordering");
+        list.printList();
         /*list.addNode(2);
         list.addNode(5);
         list.addNode(5);
@@ -170,9 +247,7 @@ public class LinkedList
         list.printList();
         list.removeNodesWithValue(5);
         System.out.println("Linked list after printing");
-        list.printList();*/
-        
-
+*/
     }
 
 }
