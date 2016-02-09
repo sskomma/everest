@@ -76,21 +76,60 @@ public class LinkedListUtils {
 	public static ListNode swapPairs(ListNode head){
 		if(head == null)
 			return null;
-		ListNode current = head;
-		ListNode next = head.next;
-		
-		while(next != null)
+		ListNode firstNode = head;
+		ListNode secondNode = firstNode.next;
+		ListNode previousNode = null;
+		while(secondNode != null)
 		{
-			int temp = current.val;
-			current.val = next.val;
-			next.val = temp;
-			if(next.next == null)
-				break;
-			current = next.next;
-			next = current.next;
+			if(previousNode != null)
+			    previousNode.next = secondNode;
+            firstNode.next = secondNode.next;
+            secondNode.next = firstNode;
+
+            if(previousNode == null)
+                head = secondNode;
+            
+			previousNode = firstNode;
+			
+            if(firstNode.next == null)
+                break;
+            firstNode = firstNode.next;
+			secondNode = firstNode.next;
 		}
 		return head;
 	}
+	
+	public static boolean hasCycle(ListNode head)
+	{
+	    if(head == null) return false;
+	    ListNode slowPtr = head;
+	    ListNode fastPtr = head;
+	    
+	    while(fastPtr.next != null && fastPtr.next.next != null)
+	    {
+	        slowPtr = slowPtr.next;
+	        fastPtr = fastPtr.next.next;
+	        if(fastPtr.equals(slowPtr))
+	            return true;
+	    }
+	    return false;
+	} 
+	
+    public static void printListFromNode(ListNode node)
+    {
+        if(node != null)
+        {
+            do
+            {
+                System.out.print(node.val);
+                if(node.hasNext()) System.out.print("->");
+                node = node.next;
+            }while(node != null);
+        }
+        else
+            System.out.println("Empty List");
+        System.out.println("");
+    }
 	
 	public static void main(String[] args)
 	{
@@ -99,9 +138,16 @@ public class LinkedListUtils {
 	    list.addNode(2);
 	    list.addNode(3);
 	    list.addNode(4);
+	    list.addNode(5);
+	    list.addNode(6);
+	    list.addNode(7);
+	    list.addNode(8);
+	    list.addNode(9);
+	    list.addNode(10);
+	    
 	    list.printList();
-	    swapPairs(list.getHead());
-	    list.printList();
+	    ListNode n = swapPairs(list.getHead());
+	    printListFromNode(n);
 		
 	}
 	

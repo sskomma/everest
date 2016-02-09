@@ -203,25 +203,11 @@ public class LinkedList
     	}
     }
     
-    /**Prints out the linked list
+    /**Prints out the linked list. 
      * 
      */
-    public void printList(){printList(head);}
-    public void printList(ListNode node)
-    {
-        if(node != null)
-        {
-            do
-            {
-                System.out.print(node.val);
-                if(node.hasNext()) System.out.print("->");
-                node = node.next;
-            }while(node != null);
-        }
-        else
-            System.out.println("Empty List");
-        System.out.println("");
-    }
+    public void printList(){LinkedListUtils.printListFromNode(head);}
+
     
     public static void main(String[] args)
     {
