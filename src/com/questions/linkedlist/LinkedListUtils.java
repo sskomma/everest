@@ -99,6 +99,13 @@ public class LinkedListUtils {
 		return head;
 	}
 	
+	/**Given a linked list, determine if it has a cycle in it.
+	 * 
+	 * Description: https://leetcode.com/problems/linked-list-cycle/
+	 * 
+	 * @param head of the linked list
+	 * @return true, if it has cycles; false otherwise.
+	 */
 	public static boolean hasCycle(ListNode head)
 	{
 	    if(head == null) return false;
@@ -114,6 +121,54 @@ public class LinkedListUtils {
 	    }
 	    return false;
 	} 
+
+	/**Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+	 * 
+	 * Description: https://leetcode.com/problems/merge-two-sorted-lists/
+	 * @param l1, head of list1. 
+	 * @param l2, head of list2. 
+	 * @return head of merged list1 and list2. 
+	 */
+	public static ListNode mergeTwoLists(ListNode l1, ListNode l2) 
+	{
+	    if(l1 == null && l2 == null)
+	        return null;
+	    else if(l1 == null)
+	        return l2;
+	    else if(l2 == null)
+	        return l1;
+	    else
+	    {
+	        ListNode l3 = new ListNode(0);
+	        ListNode nav = l3;
+	        while(l1 != null && l2 != null)
+	        {
+	            if(l1.val < l2.val){
+	                nav.next = l1;
+	                l1 = l1.next;
+	            }
+	            else if(l1.val > l2.val){
+	                nav.next = l2;
+	                l2 = l2.next;
+	            }
+	            else{
+                    nav.next = l1;
+                    l1 = l1.next;
+                    nav = nav.next;
+                    nav.next = l2;
+                    l2 = l2.next;                    
+	            }
+	            nav = nav.next;
+	        }
+	            
+            if(l1 != null && l2 == null)
+                nav.next = l1;
+            else if(l1 == null && l2 != null)
+	            nav.next = l2;
+
+            return l3.next;
+	    }
+	}
 	
     public static void printListFromNode(ListNode node)
     {
