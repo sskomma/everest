@@ -26,7 +26,7 @@ public class ThreeSum
     /**
      * @param args
      */
-    public static List<List<Integer>> threeSum(int[] nums)
+    public List<List<Integer>> threeSum(int[] nums)
     {
         if(nums == null || nums.length == 0 ) return null;
         Arrays.sort(nums);
@@ -42,8 +42,9 @@ public class ThreeSum
             {
                 if( a + nums[si] + nums[ei] == 0)
                 {
-                    Triplet t = new Triplet(a, nums[si++], nums[ei--]);
+                    Triplet t = new Triplet(a, nums[si], nums[ei]);
                     setOfTriplets.add(t);
+                    si++; ei--;
                 }
                 else if( a + nums[si] + nums[ei] > 0)
                     ei--;
@@ -55,7 +56,7 @@ public class ThreeSum
         return convertSetToList(setOfTriplets);
     }
 
-    private static List<List<Integer>> convertSetToList(Set<Triplet> setOfTriplets)
+    private List<List<Integer>> convertSetToList(Set<Triplet> setOfTriplets)
     {
         List<List<Integer>> listOfTriplets = new ArrayList<List<Integer>>();
         for(Triplet t: setOfTriplets)
@@ -66,7 +67,8 @@ public class ThreeSum
     public static void main(String[] args)
     {
         int[] S = {7,-1,14,-12,-8,7,2,-15,8,8,-8,-14,-4,-5,7,9,11,-4,-15,-6,1,-14,4,3,10,-5,2,1,6,11,2,-2,-5,-7,-6,2,-15,11,-6,8,-4,2,1,-1,4,-6,-15,1,5,-15,10,14,9,-8,-6,4,-6,11,12,-15,7,-1,-9,9,-1,0,-4,-1,-12,-2,14,-9,7,0,-3,-4,1,-2,12,14,-10,0,5,14,-1,14,3,8,10,-8,8,-5,-2,6,-11,12,13,-7,-12,8,6,-13,14,-2,-5,-11,1,3,-6};
-        for(List<Integer> i:threeSum(S))
+        ThreeSum ts = new ThreeSum();
+        for(List<Integer> i:ts.threeSum(S))
         {
             System.out.print("[");
             for(Integer j:i )
@@ -76,7 +78,7 @@ public class ThreeSum
         
     }
 
-    static class Triplet
+    class Triplet
     {
         int a, b, c;
         public Triplet(int x, int y, int z)
@@ -88,7 +90,7 @@ public class ThreeSum
             List<Integer> triplet = new ArrayList<Integer>();
             triplet.add(a);
             triplet.add(b);
-            triplet.add(b);
+            triplet.add(c);
             return triplet;
         }
         public boolean eqals(Object obj)
@@ -103,7 +105,12 @@ public class ThreeSum
             int primeNumber2 = 37;
             int primeNumber3 = 41;
             int primeNumber4 = 43;
-            return ((a+b+c) * primeNumber );//;+ (a+b-c) * primeNumber2+ (a+c-b) * primeNumber3 + (c+b-a) * primeNumber4);
+            return ( (a*primeNumber + b*primeNumber2 + c*primeNumber3)*primeNumber4 );
+        }
+        @Override
+        public String toString()
+        {
+            return "Triplet [" + a + ", " + b + "," + c + "]";
         }
         
     }
