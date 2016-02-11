@@ -3,8 +3,6 @@ package com.questions.trees;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
 /**Description: A Class that represents a binary tree.
  * With implementations of common use cases encountered with it. 
@@ -213,5 +211,36 @@ public class BinaryTree {
 		if( l == 0 || r == 0)
 			return l + r + 1;
 		return Math.min(l , r ) + 1;
+	}
+
+	/**Invert a binary tree.
+	 *      4
+	 *    /   \
+	 *   2     7
+	 *  / \   / \
+	 * 1   3 6   9
+	 * 
+	 * to
+	 *      4
+	 *    /   \
+	 *   7     2
+	 *  / \   / \
+	 * 9   6 3   1
+	 * 
+	 * https://leetcode.com/problems/invert-binary-tree/<br>
+	 * @param root
+	 * @return
+	 */
+	public TreeNode invertTree(TreeNode root)
+	{
+	    if(root != null){
+	        invertTree(root.left);
+	        invertTree(root.right);
+	        TreeNode temp = root.right;
+	        root.right = root.left;
+	        root.left =temp;
+	    }
+	    return root;
+	    
 	}
 }
