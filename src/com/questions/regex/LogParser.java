@@ -1,4 +1,4 @@
-package com.questions.misc;
+package com.questions.regex;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

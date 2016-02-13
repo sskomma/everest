@@ -79,17 +79,51 @@ public class BinaryTree {
 		return levelOrderOfTree;
 	}
 	
-	public void binaryTreePaths()
+	/**Given a binary tree, return all root-to-leaf paths.
+	 * For example, given the following binary tree: 
+	 *    1
+	 *  /   \
+	 * 2     3
+	 *  \
+	 *    5
+	 *    All root-to-leaf paths are: ["1->2->5", "1->3"]
+	 * 
+	 * Description: https://leetcode.com/problems/binary-tree-paths/
+	 * @return List of strings
+	 */
+	public List<String> binaryTreePaths()
 	{
 		List<String> paths = new ArrayList<String>();
-		binaryTreePaths(root, paths);
+		int[] path = new int[1000];
+		binaryTreePaths(root,path,0, paths);
+		return paths;
 	}
-	private void binaryTreePaths(TreeNode node, List<String> paths)
+	private void binaryTreePaths(TreeNode node, int[] path, int pathLength, List<String> paths)
 	{
 		if(node == null)
 		{
-			
+			return;
 		}
+		path[pathLength] = node.val;
+		if(node.left == null && node.right == null){
+		    paths.add(printArrayAsPath(path, pathLength));
+		}
+		else{
+		    pathLength++;
+		    binaryTreePaths(node.left,path,pathLength, paths);
+		    binaryTreePaths(node.right,path,pathLength, paths);
+		}
+	}
+	private String printArrayAsPath(int[] path, int pathLength)
+	{
+	    StringBuffer pathString= new StringBuffer();
+	    for(int i=0; i<= pathLength; i++)
+	    {
+	     pathString.append(path[i]);
+	     if(i!= pathLength)
+	         pathString.append("->");
+	    }
+	    return pathString.toString();
 	}
 	
 	

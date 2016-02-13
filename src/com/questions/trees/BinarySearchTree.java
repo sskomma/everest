@@ -180,7 +180,10 @@ public class BinarySearchTree extends BinaryTree{
         tree.addToTree(16);
         tree.addToTree(19);		
 		tree.printTree();
-		System.out.println(tree.kthSmallestElementInBST(5));
+		for(String s:tree.binaryTreePaths())
+		{
+		    System.out.println(s);
+		}
 
 	}
 }
