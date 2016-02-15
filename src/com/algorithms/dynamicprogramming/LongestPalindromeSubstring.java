@@ -24,6 +24,7 @@ public class LongestPalindromeSubstring
 		int maxLength =1; 
 		int start = 0;
 		int begin, end =0;
+		//Loop to check, if i'th element is the center of the palindrome
 		for(int i = 1 ; i < string.length(); i++)
 		{
 			//Even numbered palindromic string
