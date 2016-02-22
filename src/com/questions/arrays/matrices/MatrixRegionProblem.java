@@ -29,25 +29,11 @@ public class MatrixRegionProblem
 			{66,36,92,85,50,21,72,27,52,65},
 			{60,0,67,37,59,14,33,13,36,36}
 		};
-		printMatrix(matrix);
+		MatrixUtils.printMatrix(matrix, 10);
 		computeSumOfAllBoxesInMatrixWithZeroCorner(matrix);
 		printSumsMap();
 	}
 	
-	public static void printMatrix(int[][] matrix)
-	{
-		for(int i=0;i< 10; i++)
-		{
-			System.out.print("|");
-			for(int j=0;j<10;j++)
-			{
-				System.out.format("%2d", matrix[i][j]); 
-				System.out.print("|");
-			}
-			System.out.println("");
-		}
-		
-	}
 	
 	private void computeSumOfAllBoxesInMatrixWithZeroCorner(int[][] matrix)
 	{
