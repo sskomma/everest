@@ -3,6 +3,14 @@ package com.algorithms.dynamicprogramming;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Description: To solve 0/1 KnapSack problem.
+ * 
+ * That is, of the given items, identify the ones that needs to be picked to get maximum value. 
+ * User can either pick or not pick an item into their  knapsack..But can not take piece of it. 
+ * https://www.youtube.com/watch?v=8LusJS5-AGo&index=1&list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr
+ * 
+ * @author Ram Komma
+ */
 public class KnapsackProblem01
 {
 
@@ -53,7 +61,6 @@ public class KnapsackProblem01
 		
 		return selectedItems;
 	}
-    
     
     public static void main(String[] args)
     {

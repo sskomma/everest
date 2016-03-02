@@ -61,7 +61,5 @@ public class LongestPalindromeSubstring
     	String input = "forgeeksskeegfor";
     	System.out.println("Find the Largest palindromic substring for :" + input );
     	System.out.println(isSubStringPalindrome(input));
-
     }
-
 }
