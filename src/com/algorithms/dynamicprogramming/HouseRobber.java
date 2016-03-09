@@ -71,9 +71,6 @@ public class HouseRobber {
 		return Math.max(picked[numOfHouses], notPicked[numOfHouses]);
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		int[] money = {2,1,1,2};
 		System.out.println(maxRobValue(money));
