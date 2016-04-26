@@ -1,6 +1,6 @@
 package com.questions.sorting;
 
-public class Sorting
+public class QuickSorting
 {
     /**Utility method to perform quick sort in an array of ints
      * 

@@ -34,9 +34,7 @@ public class NumberProblems
         }
         catch(Exception e){
             return 0;
-        }
-        
-        
+        }        
         return reverseNumber;
     }
     
