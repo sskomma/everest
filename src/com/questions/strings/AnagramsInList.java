@@ -3,6 +3,7 @@ package com.questions.strings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class AnagramsInList
      * */
     public static void findAnagram(String[] words)
     {
-        Map<Integer, List<Integer>> xorMap = new HashMap<Integer, List<Integer>>();
+        Map<Integer, List<Integer>> xorMap = new Hashtable<Integer, List<Integer>>();
         
         for(int i = 0; i < words.length; i++)
         {
@@ -47,6 +48,10 @@ public class AnagramsInList
         }
     }
     
+    /**This method finds out sets of all anagram strings in list.
+     * 
+     * @param words
+     */
     public static void findAnagramsInList(String[] words)
     {
         Map<String,List<String>> anagramMap = new HashMap<String, List<String>>();
