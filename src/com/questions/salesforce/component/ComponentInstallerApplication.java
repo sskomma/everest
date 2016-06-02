@@ -12,7 +12,6 @@ public class ComponentInstallerApplication {
 		c.makeDependency(3, 1);
 		c.makeDependency(4, 3);
 		c.install(4);
-		c.printInstalledComponents();
 		c.install(2);
 		c.remove(1);
 	}

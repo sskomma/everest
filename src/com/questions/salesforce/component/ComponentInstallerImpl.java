@@ -15,6 +15,10 @@ public class ComponentInstallerImpl implements ComponentInstaller
 		componentRegistry = new HashMap<>();
 		installedComponents = new HashSet<>();
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void makeDependency(long c1, long c2) 
 	{
@@ -36,7 +40,10 @@ public class ComponentInstallerImpl implements ComponentInstaller
 		comp2.addDependentComponent(comp1);
 		System.out.println(comp1 + " requires "+ comp2);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void install(long c1) {
 		Component component = componentRegistry.get(c1);
@@ -53,7 +60,9 @@ public class ComponentInstallerImpl implements ComponentInstaller
 		System.out.println("Installed " + component);
 	}
 
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void remove(long c1) {
 		removeDependentComponents(c1);
@@ -81,11 +90,4 @@ public class ComponentInstallerImpl implements ComponentInstaller
 		}
 		return true;
 	}
-	@Override
-	public void printInstalledComponents() {
-		for(Component c:installedComponents)
-			System.out.println(c);
-	}
-	
-
 }
