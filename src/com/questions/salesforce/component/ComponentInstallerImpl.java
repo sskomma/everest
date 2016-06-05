@@ -7,20 +7,20 @@ import java.util.Set;
 
 public class ComponentInstallerImpl implements ComponentInstaller
 {
-	private Map<Long, Component> componentRegistry;
+	private Map<String, Component> componentRegistry;
 	private Set<Component> installedComponents;
 	
 	public ComponentInstallerImpl()
 	{
-		componentRegistry = new HashMap<>();
-		installedComponents = new HashSet<>();
+		componentRegistry = new HashMap<String, Component>();
+		installedComponents = new HashSet<Component>();
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void makeDependency(long c1, long c2) 
+	public void makeDependency(String c1, String c2) 
 	{
 		Component comp1, comp2;
 		comp1 = componentRegistry.get(c1);
@@ -45,41 +45,42 @@ public class ComponentInstallerImpl implements ComponentInstaller
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void install(long c1) {
+	public void install(String c1) {
 		Component component = componentRegistry.get(c1);
 		if(component == null)
 		{
-			component = new Component(c1);
+		    component = new Component(c1);
 			componentRegistry.put(c1, component);
 		}
 		for(Component comp: component.getRequiredComponents())
 		{
-			install(comp.getId());
+		    if(installedComponents.contains(comp))
+		        System.out.println(component.getComponentName() + " is already installed"); 
+		    else 
+		    {
+		        install(comp.getComponentName());
+		        installedComponents.add(component);
+		        System.out.println("Installing " + component);
+		    }
 		}
-		installedComponents.add(component);
-		System.out.println("Installed " + component);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void remove(long c1) {
-		removeDependentComponents(c1);
-	
-	}
-	private void removeDependentComponents(long c1)
+	public void remove(String component) 
 	{
-		Component component = componentRegistry.get(c1);
-		if(component == null)
-			return;
-		installedComponents.remove(component);
-		System.out.println("Removed "+ component);
-		//Remove all components that need on c1.
-		for(Component comp: component.getDependentComponents())
-		{
-			removeDependentComponents(comp.getId());
-		}
+	    Component c = componentRegistry.get(component);
+	    if(!isComponentDangling(c))
+	    {
+	        System.out.println(c.getComponentName() + "is still Needed");
+	    }
+	    else
+	    {
+	        
+	    }
+	
 	}
 	private boolean isComponentDangling(Component comp)
 	{
@@ -90,4 +91,14 @@ public class ComponentInstallerImpl implements ComponentInstaller
 		}
 		return true;
 	}
+	
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void listInstalledComponents()
+    {
+        for(Component c:installedComponents)
+            System.out.println(c.getComponentName());
+    }
 }

@@ -106,7 +106,6 @@ public class ThreeSum
             int primeNumber = 31;
             int primeNumber2 = 37;
             int primeNumber3 = 41;
-            int primeNumber4 = 43;
             return ( (a*primeNumber + b*primeNumber2 + c*primeNumber3));
         }
         @Override
