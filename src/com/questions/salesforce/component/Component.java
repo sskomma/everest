@@ -6,18 +6,18 @@ import java.util.List;
 
 public class Component {
 
-	private long id;
+	private String component;
 	private List<Component> reqComponents;
 	private List<Component> dependentComponents;
 	
-	public Component(long id)
+	public Component(String component)
 	{
-		this.id = id;
+		this.component = component;
 	}
 	public void addRequiredComponent(Component d)
 	{
 		if(reqComponents == null)
-			reqComponents = new ArrayList<>();
+			reqComponents = new ArrayList<Component>();
 		reqComponents.add(d);
 	}
 	
@@ -31,7 +31,7 @@ public class Component {
 	public void addDependentComponent(Component d)
 	{
 		if(dependentComponents == null)
-			dependentComponents = new ArrayList<>();
+			dependentComponents = new ArrayList<Component>();
 		dependentComponents.add(d);
 	}
 	
@@ -41,16 +41,13 @@ public class Component {
 			return Collections.emptyList();
 		return dependentComponents;
 	}
-	public long getId()
+	public String getComponentName()
 	{
-		return id;
+		return component;
 	}
 	public int hashCode()
 	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
+	    return component.hashCode();
 	}
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -60,13 +57,13 @@ public class Component {
 		if (getClass() != obj.getClass())
 			return false;
 		Component other = (Component) obj;
-		if (id != other.getId())
+		if (component.equals(other.getComponentName()))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Component [" + id + "]";
+		return "Component [" + component + "]";
 	}
 	
 }

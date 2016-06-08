@@ -2,13 +2,14 @@ package com.questions.strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class AnagramsInList
+public class AnagramProblems
 {
 
     /**
@@ -49,10 +50,21 @@ public class AnagramsInList
     }
     
     /**This method finds out sets of all anagram strings in list.
+     * Given an array of strings, group anagrams together.
+     * 
+     * For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"],
+     * Return:
+     * 
+     * [
+     *   ["ate", "eat","tea"],
+     *   ["nat","tan"],
+     *   ["bat"]
+     * ]
+     * https://leetcode.com/problems/anagrams/
      * 
      * @param words
      */
-    public static void findAnagramsInList(String[] words)
+    public static List<List<String>> findAnagramsInList(String[] words)
     {
         Map<String,List<String>> anagramMap = new HashMap<String, List<String>>();
         for(String word: words)
@@ -84,13 +96,36 @@ public class AnagramsInList
                     System.out.println(word);
             }
         }
+        return new ArrayList<List<String>>(anagramMap.values());
     }
     
+    /**Given two strings, check if they are anagrams of each other. 
+     * https://leetcode.com/problems/valid-anagram/
+     *  
+     * @param s, String one
+     * @param t, String two
+     * @return true if the two strings are anagrams, false otherwise. 
+     */
+    public static boolean isAnagram(String s, String t) 
+    {
+        if(s == null || t == null)
+            return false;
+        if(s.equals(t)) 
+            return true;
+        char[] s2 = s.toCharArray();
+        Arrays.sort(s2);
+        char[] t2 = t.toCharArray();
+        Arrays.sort(t2);
+        System.out.println();
+        System.out.println(t2.toString());
+        return new String(s2).equals(new String(t2));
+    }
     
     public static void main(String[] args)
     {
         String[] words = {"iceman","cinema","mary","army","cat","baba","nana","abba","nnaa"};
         findAnagramsInList(words);
+        System.out.println("is anagram"+isAnagram("ab", "ba"));
     }
 
 }

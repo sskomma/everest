@@ -60,8 +60,6 @@ public class RomanToNumber {
         romanToNumberMap.put("D", 500);
         romanToNumberMap.put("CM",900);
         romanToNumberMap.put("M", 1000);
-        
-        
     }
     
     /**A method to convert a give number to a roman number. 
@@ -77,7 +75,7 @@ public class RomanToNumber {
 
     private StringBuffer convertNumberToRoman(int number, StringBuffer sb)
     {
-        if(number <=0) return sb;
+        if(number <= 0) return sb;
         for(int i = numbers.length -1; i>= 0 ; i--)
         {
             if(number >= numbers[i])

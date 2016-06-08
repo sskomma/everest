@@ -8,7 +8,7 @@ public interface ComponentInstaller
 	 * @param c1, id of a component that has a dependency.
 	 * @param c2, id of a component that is required for c1. 
 	 */
-	public void makeDependency(long c1, long c2);
+	public void makeDependency(String c1, String c2);
 	
 	/**Installs a component with id c1. 
 	 * Recursively reaches the end of dependency tree and installs all required components 
@@ -16,12 +16,17 @@ public interface ComponentInstaller
 	 * 
 	 * @param c1, id of the component to be installed. 
 	 */
-	public void install(long c1);
+	public void install(String c1);
 	
-	/**Removes component from system. 
-	 * It removes all components that require c1 directly or transitively. 
+	/**Removes component from system, if this is not required by other components 
+	 * It also, tries to remove components that  
 	 * 
 	 * @param c1, id of the component to be removed from system. 
 	 */
-	public void remove(long c1);
+	public void remove(String c1);
+	
+	/**List all components that are installed so far. 
+	 * 
+	 */
+	public void listInstalledComponents();
 }

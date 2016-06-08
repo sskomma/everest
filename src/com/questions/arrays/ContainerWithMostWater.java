@@ -9,29 +9,29 @@ package com.questions.arrays;
  */
 public class ContainerWithMostWater {
 
-	public static int maxArea(int[] height)
+	public static int maxArea(int[] heights)
 	{
-		if(height == null || height.length <2)
+		if(heights == null || heights.length <2)
 			return 0;
-		int area = Integer.MIN_VALUE;
-		int lowPtr = 0;
-		int highPtr = height.length -1;
-		while(highPtr > lowPtr)
+		int maxArea = Integer.MIN_VALUE;
+		int rightPtr = 0;
+		int leftPtr = heights.length -1;
+		while(leftPtr > rightPtr)
 		{
-			int lowerHeight = height[lowPtr];
-			int highHeight = height[highPtr];
-			int y = lowerHeight< highHeight ?lowerHeight:highHeight;
-			int candidate = (highPtr - lowPtr) * y;
-			area = area > candidate ? area:candidate;
+			int rightEdge = heights[rightPtr];
+			int leftEdge = heights[leftPtr];
+			int containerHeight = Math.min(rightEdge, leftEdge);
+			int area = (leftPtr - rightPtr) * containerHeight;
+			maxArea = Math.max(maxArea, area);
 			
-			if(height[lowPtr] <= height[highPtr])
-				while(highPtr > lowPtr && height[lowPtr] <= lowerHeight)
-					lowPtr++;
+			if(heights[rightPtr] <= heights[leftPtr])
+				while(leftPtr > rightPtr && heights[rightPtr] <= rightEdge)
+					rightPtr++;
 			else
-				while(highPtr > lowPtr && height[highPtr] <= highHeight)
-					highPtr --;
+				while(leftPtr > rightPtr && heights[leftPtr] <= leftEdge)
+					leftPtr --;
 		}
-		return area;
+		return maxArea;
 	}
 	
 	public static void main(String[] args) {

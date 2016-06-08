@@ -1,7 +1,7 @@
 package com.questions.arrays;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**Description: 
  * 
@@ -26,12 +26,12 @@ public class CheckIfArrayElementsAreConsecutive
     public static boolean areElementsConsecutive(int[] elements)
     {
         int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
-        Map<Integer, Boolean> visitInfo = new HashMap<Integer, Boolean>();
+        Set<Integer> visited = new HashSet<Integer>();
         for(int element: elements)
         {
-            if(visitInfo.get(element) != null)
+            if(visited.contains(element))
                 return false;
-            visitInfo.put(element, true);
+            visited.add(element);
             min = element < min ? element: min;
             max = element > max ? element: max;
         }

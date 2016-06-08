@@ -1,7 +1,5 @@
 package com.questions.linkedlist;
 
-import com.questions.trees.TreeNode;
-
 
 /**A Utility class with Static methods, to perform various jobs on LinkedList and Nodes.  
  * 
