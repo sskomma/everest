@@ -19,7 +19,7 @@ public class BinaryTreeUtils
 		if(root == null)
 			return true;
 		List<Integer> sequence = new ArrayList<Integer>();
-		sequence = inOrderTraversal(root,sequence );
+		sequence = inOrderTraversal(root,sequence);
 		if(!sequence.isEmpty())
 		{
 			int lastVisited = sequence.get(0);

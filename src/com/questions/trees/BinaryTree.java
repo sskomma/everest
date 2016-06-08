@@ -27,20 +27,20 @@ public class BinaryTree {
 		
 		if( nodes== null || nodes.isEmpty())
 			return levelOrderOfTree;
-		List<Integer> currentLevelNumbers = new ArrayList<Integer>();
+		List<Integer> currentLevelValues = new ArrayList<Integer>();
 		List<TreeNode> nextLevel = new ArrayList<TreeNode>();
 		
 		for(TreeNode node: nodes)
 		{
 			if(node != null){
-				currentLevelNumbers.add(node.val);
+				currentLevelValues.add(node.val);
 				if(node.left != null)
 					nextLevel.add(node.left);
 				if(node.right != null)
 					nextLevel.add(node.right);
 			}
 		}
-		levelOrderOfTree.add(currentLevelNumbers);
+		levelOrderOfTree.add(currentLevelValues);
 		return levelOrderTraversal(nextLevel, levelOrderOfTree);
 	}
 	
@@ -56,7 +56,7 @@ public class BinaryTree {
     }
 	private List<List<Integer>> levelOrderBottom(List<TreeNode> nodes){
 		
-		if( nodes== null || nodes.isEmpty())
+		if( nodes == null || nodes.isEmpty())
 			return null;
 		List<Integer> currentLevelNumbers = new ArrayList<Integer>();
 		List<TreeNode> nextLevel = new ArrayList<TreeNode>();
