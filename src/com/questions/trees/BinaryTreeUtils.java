@@ -1,6 +1,7 @@
 package com.questions.trees;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -171,6 +172,52 @@ public class BinaryTreeUtils
 			flattenBinaryTree(rightSubTree);
 	}
 	
+	/**Given a binary tree, imagine yourself standing on the right side of it, 
+	 * return the values of the nodes you can see ordered from top to bottom.
+	 * 
+	 * For example:
+	 * Given the following binary tree,
+	 *       1            <---
+	 *     /   \
+	 *    2     3         <---
+	 *     \     \
+	 *       5     4       <---
+	 * You should return [1, 3, 4].
+	 * 
+	 * 
+	 * https://leetcode.com/problems/binary-tree-right-side-view/
+	 * @param node
+	 * @return
+	 */
+	public static List<Integer> rightSideView(TreeNode node)
+	{
+		if(node == null)
+			return Collections.emptyList();
+		List<TreeNode> nodes = new ArrayList<TreeNode>();
+		nodes.add(node);
+		List<Integer> rightElements = new ArrayList<Integer>();
+		return rightSideView(nodes,rightElements );
+	}
+	private static List<Integer> rightSideView( List<TreeNode> nodes, List<Integer> rightElements)
+	{
+		if(nodes.isEmpty())
+			return null;
+		int size = nodes.size();
+		List<TreeNode> nextLevel = new ArrayList<TreeNode>();
+		for(int i = 0; i < size; i++)
+		{
+			TreeNode n = nodes.get(i);
+			if(n.left != null)
+				nextLevel.add(n.left);
+			if(n.right != null)
+				nextLevel.add(n.right);
+			if( i == size-1)
+				rightElements.add(n.val);
+		}
+		rightSideView(nextLevel, rightElements);
+		return rightElements;
+	}
+	
 	public static void main(String[] args)
 	{
 	    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19}; 
@@ -181,3 +228,4 @@ public class BinaryTreeUtils
 	    bst.printTree();
 	}
 }
+ 
