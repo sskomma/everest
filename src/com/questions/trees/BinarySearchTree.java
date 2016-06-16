@@ -157,7 +157,47 @@ public class BinarySearchTree extends BinaryTree{
 	    }
 	    return setOfUnique;
 	}
-		
+	
+	/**Given the root of a binary search tree and 2 numbers min and max, 
+	 * trim the tree such that all the numbers in the new tree are between min and max (inclusive). 
+	 * The resulting tree should still be a valid binary search tree. 
+	 * 
+	 * http://www.ardendertat.com/2012/01/17/programming-interview-questions-26-trim-binary-search-tree/
+	 * 
+	 * @param min, minimum number the trimmed tree can have. 
+	 * @param max, maximum number the trimmed tree can have. 
+	 */
+	public void trim(int min, int max) throws Exception
+	{
+		if(min > max )
+			throw new Exception("Invalid Range");
+		else
+			root = trim(min, max,root);
+			
+	}
+	private TreeNode trim(int min, int max, TreeNode node)
+	{
+		if(node == null)
+			return node;
+		else if(node.val == min)
+			node.left = null;
+		else if(node.val == max)
+			node.right = null;
+		else if(node.val > min && node.val < max)
+		{
+			node.left = trim(min, max,node.left);
+			node.right = trim(min,max, node.right);
+		}
+		else if(node.val < min)
+		{
+			return trim(min,max, node.right);
+		}
+			
+		else if(node.val > max)
+			return trim(min, max, node.left);
+		return node;
+	}
+	
 	public static void main(String[] args)
 	{
 		BinarySearchTree tree = new BinarySearchTree(10);
@@ -180,10 +220,11 @@ public class BinarySearchTree extends BinaryTree{
         tree.addToTree(16);
         tree.addToTree(19);		
 		tree.printTree();
-		for(String s:tree.binaryTreePaths())
-		{
-		    System.out.println(s);
+		try {
+			tree.trim(13, 16);
+		} catch (Exception e) {
+			System.out.println("Invalid range for min and max");
 		}
-
+		tree.printTree();
 	}
 }

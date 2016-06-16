@@ -68,9 +68,38 @@ public class NumberProblems
         return true;
     }
     
+    /** Find the squareroot of a given number rounded down to the nearest integer, without using the sqrt function. 
+     * For example, squareroot of a number between [9, 15] should return 3, and [16, 24] should be 4.
+     * 
+     * http://www.ardendertat.com/2012/01/26/programming-interview-questions-27-squareroot-of-a-number/
+     * 
+     * @param number, for which square root is to be found. 
+     * @return, squareroot of the number passed in.
+     */
+    public static int sqareRoot(int number)
+    {
+    	if(number == 0 || number == 1)
+    		return number;
+    	int high = 1+ (number/ 2);
+    	int low = 1, mid = 1;
+    	while(1+ low < high)
+    	{
+    		mid = (low + high)/2;
+    		int square = mid * mid;
+    		if(square == number)
+    			return mid;
+    		else if(square < number)
+    			low = mid;
+    		else
+    			high = mid;
+    	}
+    	return (low+high)/2;
+    }
+    
+    
     public static void main(String[] args)
     {
-        System.out.println(isPalindrome(93639));
+        System.out.println(sqareRoot(17));
         //System.out.println(reverseNumber(534236469));
         
     }
