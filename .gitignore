@@ -62,4 +62,5 @@ fabric.properties
 .gitignore
 .idea/
 bin/
+.settings
 DataStructuresAndAlgorithms.iml
