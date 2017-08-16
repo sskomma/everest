@@ -2,7 +2,8 @@ package com.questions.strings;
 
 /**Problem:  Find the substring in the given text.
  * 
- * Algorithm: Knuth-Morris-Pratt(KMP) Pattern matching. The complexity of this algorith is O(m+n), where m is the length of text and n is the length of pattern
+ * Algorithm: Knuth-Morris-Pratt(KMP) Pattern matching. The complexity of this algorith is O(m+n),
+ * where m is the length of text and n is the length of pattern
  * 
  * Thanks to Tushar Roy, his video helped me understand this algorithm. 
  * https://www.youtube.com/watch?v=GTJr8OvyEVQ
