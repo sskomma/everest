@@ -1,5 +1,7 @@
 package com.questions.arrays;
 
+import static com.questions.arrays.ArrayUtils.printArrayFromNtoOne;
+
 /**Give two arrays. Treat each array as an number and add them.. 
 
  * @author Ram Komma
@@ -45,43 +47,39 @@ public class ArrayAddition {
 		return sum;
 	}
 
-	public static String printArray(int [] a)
-	{
-		if(a == null || a.length ==0) return "";
-		StringBuffer sb = new StringBuffer();
-		for(int i= a.length -1 ; i >= 0 ;i--)
-		{
-			sb.append(a[i]);
-		}
-		return sb.toString();
-	}
 	public static void main(String[] args) {
 		int[] a = {9,3,2,8};
 		int[] b = {1,2,3};
-		System.out.println("The sum of arrays a: "+printArray(a)+ " and b: "+printArray(b));
-		System.out.println(printArray(addArraysTake2(a, b)));
+		System.out.println("The sum of arrays a: "+ printArrayFromNtoOne(a)+ " and b: "+ printArrayFromNtoOne(b));
+		System.out.println(printArrayFromNtoOne(addArraysTake2(a, b)));
 	}
 
-	public static int[] addArraysTake2(int[] A1, int[] A2) {
-	  if(A1 == null && A2 == null) return null;
-	  else if(A1 == null) return A2;
-	  else if(A2 == null) return A1;
+	/**
+	 * This method takes in two arrays, and adds them together. Where the number is put together from n - 0
+	 * @param a, first array of single digit integers to be added to other array.
+	 * @param b, second array of single digit integers to be added to the other array.
+	 * @return an array of integers, resulted after addition of  input arrays.
+	 */
+	public static int[] addArraysTake2(int[] a, int[] b) {
+	  if(a == null && b == null) return null;
+	  else if(a == null) return b;
+	  else if(b == null) return a;
 
-    int s1 = A1.length, s2 = A2.length, carryForward = 0, i = 0;
+    int s1 = a.length, s2 = b.length, carryForward = 0, i = 0;
 		int size = Math.max(s1, s2)+1;
 		int[] sum = new int[size];
 
 		for(; i < s1 && i < s2; i ++) {
-		  int temp = A1[s1-1 -i] + A2[s2-1-i] + carryForward;
+		  int temp = a[s1-1 -i] + b[s2-1-i] + carryForward;
 		  sum[size-1-i] = temp%10;
 		  carryForward = temp/10;
     }
     for(; i < s2; i ++) {
-      sum[size-1-i] = A2[s2-1-i] + carryForward;
+      sum[size-1-i] = b[s2-1-i] + carryForward;
       carryForward = 0;
 		}
     for(; i < s1; i ++) {
-      sum[size-1-i] = A1[s1-1-i]+ carryForward;
+      sum[size-1-i] = a[s1-1-i]+ carryForward;
       carryForward = 0;
     }
     if(carryForward > 0){

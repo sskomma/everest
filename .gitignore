@@ -1,6 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
-*.class
+.class
 
 # BlueJ files
 *.ctxt
@@ -9,7 +9,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+.jar
 *.war
 *.ear
 
@@ -20,8 +20,8 @@ hs_err_pid*
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/workspace.xml
 .idea/tasks.xml
+.idea/
 
 # Sensitive or high-churn files:
 .idea/dataSources/
@@ -60,7 +60,7 @@ crashlytics-build.properties
 fabric.properties
 
 .gitignore
-.idea/
 bin/
 .settings
 DataStructuresAndAlgorithms.iml
+target/
