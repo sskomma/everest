@@ -7,7 +7,7 @@ package com.questions.arrays;
  * For example, given [1,2,3,4], return [24,12,8,6].
  * https://leetcode.com/problems/product-of-array-except-self/
  * 
- * @author Ram Komm
+ * @author Ram Komma
  *
  */
 public class ProductofArrayExceptSelf
