@@ -2,14 +2,15 @@ package com.questions.arrays;
 
 import static com.questions.arrays.ArrayUtils.printArrayFromOneToN;
 
-/**Problem Description: https://leetcode.com/problems/jump-game/description/
+/**Problem Description: https://leetcode.com/problems/remove-element/description/
  *
- * Given an array of non-negative integers, you are initially positioned at the first index of the array.
- * Each element in the array represents your maximum jump length at that position.
- * Determine if you are able to reach the last index.
- * For example:
- * A = [2,3,1,1,4], return true.
- * A = [3,2,1,0,4], return false
+ * Given an array and a value, remove all instances of that value in place and return the new length.
+ * Do not allocate extra space for another array, you must do this in place with constant memory.
+ * The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+ * Example:
+ * Given input array nums = [3,2,2,3], val = 3
+ *
+ * Your function should return length = 2, with the first two elements of nums being 2
  *
  * @author Ram Komma
  */
