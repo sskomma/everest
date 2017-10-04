@@ -28,7 +28,6 @@ public class IntervalProblems
         if(intervals == null || intervals.isEmpty())
             return Collections.emptyList();
         Collections.sort(intervals, new Comparator<Interval>(){
-            @Override
             public int compare(Interval o1, Interval o2)
             {
                 Integer i1 = o1.start;

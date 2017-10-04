@@ -168,30 +168,57 @@ public class LinkedListUtils {
             return l3.next;
 	    }
 	}
-	
-    public static void printListFromNode(ListNode node)
-    {
-        if(node != null)
-        {
-            do
-            {
-                System.out.print(node.val);
-                if(node.hasNext()) System.out.print("->");
-                node = node.next;
-            }while(node != null);
-        }
-        else
-            System.out.println("Empty List");
-        System.out.println("");
+
+  /**
+   * https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/
+   *
+   * Given a sorted linked list, delete all duplicates such that each element appear only once.
+   * For example,
+   * Given 1->1->2, return 1->2.
+   * Given 1->1->2->3->3, return 1->2->3.
+   *
+   * @param node, head of the linked list with duplicates.
+   * @return head of the linked list, whose duplicates are removed.
+   */
+
+  public static ListNode removeDuplicatesFromSortedLinkedList(ListNode node) {
+    if(node == null)
+      return null;
+    ListNode slow = node, fast=node.getNext();
+    while(fast !=null) {
+      if(slow.val != fast.val) {
+        slow.next = fast;
+        slow = fast;
+      }
+      fast = fast.next;
     }
+    slow.next = null;
+    return node;
+  }
+
+	public static void printListFromNode(ListNode node)
+	{
+			if(node != null)
+			{
+					do
+					{
+							System.out.print(node.val);
+							if(node.hasNext()) System.out.print("->");
+							node = node.next;
+					}while(node != null);
+			}
+			else
+					System.out.println("Empty List");
+			System.out.println("");
+	}
 	
 	public static void main(String[] args)
 	{
 	    LinkedList list = new LinkedList();
 	    list.addNode(1);
 	    list.addNode(2);
-	    list.addNode(3);
-	    list.addNode(4);
+	    list.addNode(2);
+	    list.addNode(2);
 	    list.addNode(5);
 	    list.addNode(6);
 	    list.addNode(7);
@@ -200,8 +227,8 @@ public class LinkedListUtils {
 	    list.addNode(10);
 	    
 	    list.printList();
-	    ListNode n = swapPairs(list.getHead());
-	    printListFromNode(n);
+	    ListNode n = removeDuplicatesFromSortedLinkedList(list.getHead());
+	    list.printList();
 		
 	}
 	

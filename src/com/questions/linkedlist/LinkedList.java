@@ -30,7 +30,8 @@ public class LinkedList
        }
     }
 
-    /**Removes all nodes that have a given value. 
+    /**
+     * Removes all nodes that have a given value.
      * https://leetcode.com/problems/remove-linked-list-elements/
      * 
      * @param number, value of nodes in linked list to be removed. 
