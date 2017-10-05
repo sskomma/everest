@@ -22,57 +22,30 @@ public class PartitionList {
       return null;
     }
 
-    ListNode smallerRunner = null,smallerHead = null;
-    ListNode equalRunner = null, equalHead= null;
-    ListNode largerRunner=null, largerHead = null;
+    ListNode smallerHead = new ListNode(0), smallerRunner = smallerHead;
+    ListNode equalHead = new ListNode(0), equalRunner= equalHead;
+    ListNode largerHead = new ListNode(0), largerRunner = largerHead;
 
     while (node != null) {
       if(node.val < x) {
-        if( smallerHead == null) {
-          smallerHead = node;
-        }
-        else {
-          smallerRunner.next = node;
-        }
+        smallerRunner.next = node;
         smallerRunner = node;
       }
       else if( node.val == x) {
-        if( equalHead == null) {
-          equalHead = node;
-        }
-        else {
-          equalRunner.next = node;
-        }
+        equalRunner.next = node;
         equalRunner = node;
       }
       else {
-        if( largerHead == null) {
-          largerHead = node;
-        }
-        else {
-          largerRunner.next = node;
-        }
+        largerRunner.next = node;
         largerRunner = node;
       }
       node = node.next;
     }
-    ListNode result = null;
-
-    if(largerHead != null) {
-      largerRunner.next = null;
-      result = largerHead;
-    }
-   if (equalHead != null) {
-      equalRunner.next = result;
-     result = equalHead;
-    }
-
-    if(smallerHead != null) {
-      smallerRunner.next = result;
-      result = smallerHead;
-    }
-
-    return result;
+    
+    largerRunner.next = null;
+    equalRunner.next = largerHead.next;
+    smallerRunner.next = equalHead.next;
+    return smallerHead.next;
   }
 
 
@@ -80,7 +53,7 @@ public class PartitionList {
   public static void main(String[] args)
   {
     LinkedList list = new LinkedList();
-/*    list.addNode(5);
+   list.addNode(5);
     list.addNode(10);
     list.addNode(2);
     list.addNode(2);
@@ -88,7 +61,7 @@ public class PartitionList {
     list.addNode(6);
     list.addNode(1);
     list.addNode(7);
-    list.addNode(9);*/
+    list.addNode(9);
     list.addNode(2);
     list.addNode(1);
 
