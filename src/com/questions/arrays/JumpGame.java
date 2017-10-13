@@ -16,16 +16,17 @@ public class JumpGame {
 
   public static boolean canJump(int[] numbers) {
     int max = 0;
-    for(int i = 0; i < numbers.length ; i++){
-      if(i > max) { return false; }
-      max = Math.max( numbers[i] + i, max);
+    for (int i = 0; i < numbers.length; i++) {
+      if (i > max) {
+        return false;
+      }
+      max = Math.max(numbers[i] + i, max);
     }
     return true;
   }
 
   public static void main(String[] args) {
-    int[] numbers = {3,2,1,0,4};
+    int[] numbers = {3, 2, 1, 0, 4};
     System.out.println(canJump(numbers));
   }
-
 }

@@ -6,44 +6,41 @@ package com.questions.arrays;
  * <b>Note:</b><br>
  * You must do this in-place without making a copy of the array.<br>
  * Minimize the total number of operations.<br><br>
- * 
+ *
  * https://leetcode.com/problems/move-zeroes/<br>
- * 
+ *
  * @author Ram Komma
  *
  */
-public class MoveZeros
-{
+public class MoveZeros {
 
-    public static void moveZeros(int[] A)
-    {
-        if(A==null) return;
-        int length = A.length;
-        int j = 0;
-        for(int i = 0 ; i < length-1; i++)
-        {
-            if( A[i]== 0 )
-            {
-                j = j<i ?i + 1:j;
-                while(j<length-1 && A[j]==0){j++;}
-                int temp = A[j];
-                A[j] = A[i];
-                A[i] = temp;
-            }
-        }
+  public static void moveZeros(int[] A) {
+    if (A == null) {
+      return;
     }
-    
-    /**
-     * @param args
-     */
-    public static void main(String[] args)
-    {
-        int[] array = {1,3, 0,5,0, 13,0, 14,0,0};
-        moveZeros(array);
-        for(int i: array)
-        {
-            System.out.print(i+" ");
+    int length = A.length;
+    int j = 0;
+    for (int i = 0; i < length - 1; i++) {
+      if (A[i] == 0) {
+        j = j < i ? i + 1 : j;
+        while (j < length - 1 && A[j] == 0) {
+          j++;
         }
+        int temp = A[j];
+        A[j] = A[i];
+        A[i] = temp;
+      }
     }
+  }
 
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
+    int[] array = {1, 3, 0, 5, 0, 13, 0, 14, 0, 0};
+    moveZeros(array);
+    for (int i : array) {
+      System.out.print(i + " ");
+    }
+  }
 }

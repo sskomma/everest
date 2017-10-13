@@ -17,12 +17,12 @@ import static com.questions.arrays.ArrayUtils.printArrayFromOneToN;
 public class RemoveElement {
 
   public static int removeElement(int[] nums, int val) {
-    if( nums == null || nums.length == 0) {
+    if (nums == null || nums.length == 0) {
       return 0;
     }
     int fastRunner = 0, slowRunner = 0;
-    for(;fastRunner < nums.length; fastRunner++){
-      if(nums[fastRunner] != val){
+    for (; fastRunner < nums.length; fastRunner++) {
+      if (nums[fastRunner] != val) {
         nums[slowRunner++] = nums[fastRunner];
       }
     }
@@ -30,11 +30,10 @@ public class RemoveElement {
   }
 
   public static void main(String[] args) {
-    int[] numbers = {3,2,2,3};
+    int[] numbers = {3, 2, 2, 3};
     int val = 3;
     int length = removeElement(numbers, val);
     System.out.printf("Length of array without element {%d} is: %d\n", val, length);
     System.out.println(printArrayFromOneToN(numbers));
-
   }
 }

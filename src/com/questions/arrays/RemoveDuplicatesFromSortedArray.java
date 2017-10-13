@@ -13,26 +13,25 @@ public class RemoveDuplicatesFromSortedArray {
     if (nums == null || nums.length == 0) {
       return 0;
     }
-    if(nums.length == 1){
+    if (nums.length == 1) {
       return 1;
     }
 
     int fastRunner = 1, slowRunner = 0;
-    while(fastRunner < nums.length){
-      if(nums[slowRunner] == nums[fastRunner]){
+    while (fastRunner < nums.length) {
+      if (nums[slowRunner] == nums[fastRunner]) {
         fastRunner++;
-      }
-      else {
+      } else {
         nums[++slowRunner] = nums[fastRunner++];
       }
     }
-    return slowRunner+1;
+    return slowRunner + 1;
   }
 
-  public static void main(String[] args){
-    int[] numbers = {1,1,2,2,2,2,3,3};
+  public static void main(String[] args) {
+    int[] numbers = {1, 1, 2, 2, 2, 2, 3, 3};
     int length = lengthOfUniqueElementsInSortedArray(numbers);
-    System.out.println("Length of unique element array: "+ length);
+    System.out.println("Length of unique element array: " + length);
     System.out.println(printArrayFromOneToN(numbers));
   }
 }

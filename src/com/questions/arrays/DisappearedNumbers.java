@@ -17,23 +17,23 @@ public class DisappearedNumbers {
     List<Integer> missing = new ArrayList<Integer>();
     int val = 0;
     //Mark positions in array negative for all existing numbers
-    for(int i =0; i< numbers.length; i++ ){
+    for (int i = 0; i < numbers.length; i++) {
       val = Math.abs(numbers[i]) - 1;
-      if(numbers[val] > 0) {
+      if (numbers[val] > 0) {
         numbers[val] = -numbers[val];
       }
     }
     //Scan the array and find non-negative positions and they must be the missing elements in the array
-    for(int i = 0; i < numbers.length; i++) {
-      if(numbers[i] > 0) {
-        missing.add(i+1);
+    for (int i = 0; i < numbers.length; i++) {
+      if (numbers[i] > 0) {
+        missing.add(i + 1);
       }
     }
     return missing;
   }
 
   public static void main(String[] args) {
-    int[] numbers = {4,3,2,7,8,2,3,1};
+    int[] numbers = {4, 3, 2, 7, 8, 2, 3, 1};
     List<Integer> missing = findDisappearedNumbers(numbers);
     System.out.println(missing);
   }
