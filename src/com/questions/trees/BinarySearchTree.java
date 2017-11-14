@@ -11,7 +11,8 @@ import java.util.Set;
  */
 public class BinarySearchTree extends BinaryTree {
 
-  /** Constructor to initialize a binary search tree.
+  /**
+   * Constructor to initialize a binary search tree.
    *
    * @param n, value of the root node.
    * @param allowDuplicates, indicates if duplicate values are to be added to tree.
@@ -21,7 +22,8 @@ public class BinarySearchTree extends BinaryTree {
     this.allowDuplicates = allowDuplicates;
   }
 
-  /** Constructor to initialize a binary search tree.
+  /**
+   * Constructor to initialize a binary search tree.
    * By default, tree is configured to allow duplicate values into tree.
    *
    * @param n, value of the root node.
@@ -68,7 +70,8 @@ public class BinarySearchTree extends BinaryTree {
     return root;
   }
 
-  /**To add a given value to tree.
+  /**
+   * To add a given value to tree.
    * If the @param allowDuplicates is configured to true, a duplicated value is ignored and not added to tree.
    * Otherwise, a duplicate value is placed in the left sub-tree.
    *
@@ -93,7 +96,8 @@ public class BinarySearchTree extends BinaryTree {
     return root;
   }
 
-  /**Method deletes a node with given value from tree. In case of deleting a node with children, it replaces the node with
+  /**
+   * Method deletes a node with given value from tree. In case of deleting a node with children, it replaces the node with
    * right most node of left subtree. In case of duplicates, it deletes only one node.
    *
    * @param n, Nodes with this value to be deleted from the tree.
@@ -113,22 +117,24 @@ public class BinarySearchTree extends BinaryTree {
         return null;
       }
       //Node has only right child
-      else if (node.left == null && node.right != null) {
+      else if (node.left == null ) {
         return node.right;
       }
       //Node has only left child
-      else if (node.right == null && node.left != null) {
+      else if (node.right == null ) {
         return node.left;
-      } else {
+      }
+      else {
         TreeNode rightMostChildOfLeftSubTree = BinaryTreeUtils.getRightMostNode(node.left);
         node.val = rightMostChildOfLeftSubTree.val;
-        node.left = removeNode(node.left, node.val);
+        node.left = removeNode(node.left, rightMostChildOfLeftSubTree.val);
       }
     }
     return node;
   }
 
-  /**Method prints out tree node values, encountered while traversing tree inline.
+  /**
+   * Method prints out tree node values, encountered while traversing tree inline.
    */
   public void inOrderTraversal() {
     inOrderTraversal(root);
@@ -143,7 +149,8 @@ public class BinarySearchTree extends BinaryTree {
     inOrderTraversal(node.right);
   }
 
-  /**Method to see check, if the tree is a balanced tree or not.
+  /**
+   * Method to see check, if the tree is a balanced tree or not.
    * https://leetcode.com/problems/balanced-binary-tree/
    *
    * @return boolean, true if balanced, false otherwise.
@@ -166,14 +173,15 @@ public class BinarySearchTree extends BinaryTree {
     return Math.max(left, right) + 1;
   }
 
-  /**Method to find the kth smallest element in binary search tree.
+  /**
+   * Method to find the kth smallest element in binary search tree.
    * https://leetcode.com/problems/kth-smallest-element-in-a-bst/
    *
    * @param k, kth smallest element to be found in tree.
    * @return int, value of the kth smallest node.
    */
   public int kthSmallestElementInBST(int k) {
-    Set<Integer> setOfUnique = kthSmallestElementInBST(root, k, new LinkedHashSet<Integer>());
+    Set<Integer> setOfUnique = kthSmallestElementInBST(root, k, new LinkedHashSet<Integer>(k));
     if (setOfUnique.size() < k) {
       return -1;
     } else {
@@ -193,7 +201,8 @@ public class BinarySearchTree extends BinaryTree {
     return setOfUnique;
   }
 
-  /**Given the root of a binary search tree and 2 numbers min and max,
+  /**
+   * Given the root of a binary search tree and 2 numbers min and max,
    * trim the tree such that all the numbers in the new tree are between min and max (inclusive).
    * The resulting tree should still be a valid binary search tree.
    *

@@ -55,7 +55,8 @@ public class BinaryTree {
     return levelOrderTraversal(nextLevel, levelOrderOfTree);
   }
 
-  /**Method traverses the tree in levels and returns a list of each level from bottom to top..
+  /**
+   * Method traverses the tree in levels and returns a list of each level from bottom to top..
    * where each level is a list of all elements in that level from left to right.
    * https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
    *
@@ -94,7 +95,8 @@ public class BinaryTree {
     return levelOrderOfTree;
   }
 
-  /**Given a binary tree, return all root-to-leaf paths.
+  /**
+   * Given a binary tree, return all root-to-leaf paths.
    * For example, given the following binary tree:
    *    1
    *  /   \
@@ -138,7 +140,8 @@ public class BinaryTree {
     return pathString.toString();
   }
 
-  /**Method to find if there exists a leaf node, to which if traversed from root adds up to given sum..
+  /**
+   * Method to find if there exists a leaf node, to which if traversed from root adds up to given sum..
    * https://leetcode.com/problems/path-sum/
    *
    * @param sum, the sum of all elements from root to leaf.
@@ -160,7 +163,8 @@ public class BinaryTree {
     return hasPathSum(node.left, actualSum, sum) || hasPathSum(node.right, actualSum, sum);
   }
 
-  /** Method tells the maximum height of the tree.
+  /**
+   * Method tells the maximum height of the tree.
    *
    * @return height, returns the height of the tree <br/>
    *  -1 = Root node is null. <br/>
@@ -221,7 +225,8 @@ public class BinaryTree {
     }
   }
 
-  /**Method to identify the maximum depth of a tree.
+  /**
+   * Method to identify the maximum depth of a tree.
    * https://leetcode.com/problems/maximum-depth-of-binary-tree/
    *
    * @return height, maximum height of the tree.
@@ -237,7 +242,8 @@ public class BinaryTree {
     return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
   }
 
-  /**Method to identify the minimum depth of a tree.
+  /**
+   * Method to identify the minimum depth of a tree.
    * https://leetcode.com/problems/minimum-depth-of-binary-tree/
    *
    * @return height, minimum height of the tree.
@@ -258,7 +264,8 @@ public class BinaryTree {
     return Math.min(l, r) + 1;
   }
 
-  /**Invert a binary tree.
+  /**
+   * Invert a binary tree.
    *      4
    *    /   \
    *   2     7

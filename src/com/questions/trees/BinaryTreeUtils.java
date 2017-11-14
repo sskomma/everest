@@ -121,6 +121,7 @@ public class BinaryTreeUtils {
     return node;
   }
 
+
   /**Method to flatten a tree to right heavy tree. For more details look at the link below.
    * https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
    * @param node
