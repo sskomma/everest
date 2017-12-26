@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**Basic graph structure, that will be used in solving problems related to graphs. 
+/**
+ * Basic graph structure, that will be used in solving problems related to graphs.
  *
  * @author Ram Komma
  *

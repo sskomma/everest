@@ -8,7 +8,8 @@ import java.util.Stack;
 
 public class GraphUtils {
 
-  /**BFS Algorithm implementation. This method traverses the graph Breadth first
+  /**
+   * BFS Algorithm implementation. This method traverses the graph Breadth first
    * and prints each node as it visits it.
    *
    * @param graph
@@ -24,9 +25,7 @@ public class GraphUtils {
         while (!vertecesQueue.isEmpty()) {
           Vertex<Integer> v = vertecesQueue.poll();
           if (!visited.contains(v)) {
-            for (Vertex<Integer> adj : v.getAdjcentVerteces()) {
-              vertecesQueue.add(adj);
-            }
+            vertecesQueue.addAll(v.getAdjcentVerteces());
             visited.add(v);
             System.out.println(v);
           }
@@ -35,7 +34,8 @@ public class GraphUtils {
     }
   }
 
-  /**DFS Algorithm implemented the way BFS is but with a stack to store the next node to visit.
+  /**
+   * DFS Algorithm implemented the way BFS is but with a stack to store the next node to visit.
    * This method traverses the graph Depth first and prints each node.
    *
    * @param graph

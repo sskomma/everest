@@ -37,35 +37,6 @@ public class BinarySearchTree extends BinaryTree {
     root = n;
   }
 
-  public static void main(String[] args) {
-    BinarySearchTree tree = new BinarySearchTree(10);
-    tree.addToTree(5);
-    tree.addToTree(15);
-    tree.addToTree(3);
-    tree.addToTree(1);
-    tree.addToTree(2);
-    tree.addToTree(4);
-    tree.addToTree(4);
-    tree.addToTree(7);
-    tree.addToTree(6);
-    tree.addToTree(9);
-    tree.addToTree(8);
-    tree.addToTree(13);
-    tree.addToTree(14);
-    tree.addToTree(11);
-    tree.addToTree(12);
-    tree.addToTree(18);
-    tree.addToTree(16);
-    tree.addToTree(19);
-    tree.printTree();
-    try {
-      tree.trim(13, 16);
-    } catch (Exception e) {
-      System.out.println("Invalid range for min and max");
-    }
-    tree.printTree();
-  }
-
   public TreeNode getRoot() {
     return root;
   }
@@ -165,8 +136,7 @@ public class BinarySearchTree extends BinaryTree {
     }
     int left = isBalanced(node.left);
     int right = isBalanced(node.right);
-    int diff = left - right;
-    if (Math.pow(diff, 2) > 1 || left == Integer.MAX_VALUE || right == Integer.MAX_VALUE) {
+    if (Math.abs(left - right) > 1 || left == Integer.MAX_VALUE || right == Integer.MAX_VALUE) {
       return Integer.MAX_VALUE;
     }
 
@@ -235,5 +205,35 @@ public class BinarySearchTree extends BinaryTree {
       return trim(min, max, node.left);
     }
     return node;
+  }
+
+
+  public static void main(String[] args) {
+    BinarySearchTree tree = new BinarySearchTree(10);
+    tree.addToTree(5);
+    tree.addToTree(15);
+    tree.addToTree(3);
+    tree.addToTree(1);
+    tree.addToTree(2);
+    tree.addToTree(4);
+    tree.addToTree(4);
+    tree.addToTree(7);
+    tree.addToTree(6);
+    tree.addToTree(9);
+    tree.addToTree(8);
+    tree.addToTree(13);
+    tree.addToTree(14);
+    tree.addToTree(11);
+    tree.addToTree(12);
+    tree.addToTree(18);
+    tree.addToTree(16);
+    tree.addToTree(19);
+    tree.printTree();
+    try {
+      tree.trim(13, 16);
+    } catch (Exception e) {
+      System.out.println("Invalid range for min and max");
+    }
+    tree.printTree();
   }
 }

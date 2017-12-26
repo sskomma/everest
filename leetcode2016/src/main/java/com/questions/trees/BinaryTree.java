@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**Description: A Class that represents a binary tree.
+/**
+ * Description: A Class that represents a binary tree.
  * With implementations of common use cases encountered with it. 
  *
  * @author Ram Komma
@@ -41,14 +42,12 @@ public class BinaryTree {
     List<TreeNode> nextLevel = new ArrayList<TreeNode>();
 
     for (TreeNode node : nodes) {
-      if (node != null) {
-        currentLevelNumbers.add(node.val);
-        if (node.left != null) {
-          nextLevel.add(node.left);
-        }
-        if (node.right != null) {
-          nextLevel.add(node.right);
-        }
+      currentLevelNumbers.add(node.val);
+      if (node.left != null) {
+        nextLevel.add(node.left);
+      }
+      if (node.right != null) {
+        nextLevel.add(node.right);
       }
     }
     levelOrderOfTree.add(currentLevelNumbers);
@@ -272,7 +271,7 @@ public class BinaryTree {
    *  / \   / \
    * 1   3 6   9
    *
-   * to
+   *      to
    *      4
    *    /   \
    *   7     2
@@ -292,5 +291,83 @@ public class BinaryTree {
       root.left = temp;
     }
     return root;
+  }
+
+  /**
+   * Given two binary trees and imagine that when you put one of them to cover the other,
+   * some nodes of the two trees are overlapped while the others are not. You need to merge them into a new binary tree.
+   * The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node.
+   * Otherwise, the NOT null node will be used as the node of new tree.
+   *
+   * Example 1:
+   * Input:
+   * Tree 1                     Tree 2
+   *     1                         2
+   *    / \                       / \
+   *   3   2                     1   3
+   *  /                           \   \
+   * 5                             4   7
+   *
+   * Output:
+   * Merged tree:
+   *     3
+   *    / \
+   *   4   5
+   *  / \   \
+   * 5   4   7
+   *
+   * Note: The merging process must start from the root nodes of both trees.
+   * @param oneT
+   * @param twoT
+   * @return
+   */
+  public TreeNode mergeTrees(TreeNode oneT, TreeNode twoT) {
+    if (oneT == null && twoT == null) {
+      return null;
+    } else if (oneT == null) {
+      return twoT;
+    } else if (twoT == null) {
+      return oneT;
+    }
+    TreeNode mergeT = new TreeNode(oneT.val + twoT.val);
+    mergeT.left = mergeTrees(oneT.left, twoT.left);
+    mergeT.right = mergeTrees(oneT.right, twoT.right);
+    return mergeT;
+  }
+
+  /**
+   * https://leetcode.com/problems/same-tree/description/
+   * Given two binary trees, write a function to check if they are the same or not.
+   * Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
+   *
+   * @param p root node of first tree to compare.
+   * @param q root node of second tree to compare.
+   * @return True, if both the trees are same; false otherwise.
+   */
+  public boolean isSameTree(TreeNode p, TreeNode q) {
+    if (p == null && q == null) {
+      return true;
+    } else if (p == null || q == null) {
+      return false;
+    }
+
+    if (p.val == q.val) {
+      return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+    return false;
+  }
+
+  public List<Integer> preorderTraversal(TreeNode root) {
+    List<Integer> elements = new ArrayList<Integer>();
+    return preorderTraversal(root, elements);
+  }
+
+  public List<Integer> preorderTraversal(TreeNode node, List<Integer> elements) {
+    if (node != null) {
+      elements.add(node.val);
+      preorderTraversal(node.left, elements);
+      preorderTraversal(node.right, elements);
+    }
+    return elements;
   }
 }

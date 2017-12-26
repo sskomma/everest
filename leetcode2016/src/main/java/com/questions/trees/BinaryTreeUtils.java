@@ -196,15 +196,6 @@ public class BinaryTreeUtils {
     return rightElements;
   }
 
-  public static void main(String[] args) {
-    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19};
-    BinarySearchTree bst = new BinarySearchTree(sortedArrayToBST(numbers));
-    bst.printTree();
-    TreeNode root = bst.getRoot();
-    flattenBinaryTree(root);
-    bst.printTree();
-  }
-
   /** Method to find the least common ancestor in a Binary Search tree
    * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
    *
@@ -230,6 +221,15 @@ public class BinaryTreeUtils {
       return b;
     }
     return node;
+  }
+
+  public static void main(String[] args) {
+    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19};
+    BinarySearchTree bst = new BinarySearchTree(sortedArrayToBST(numbers));
+    bst.printTree();
+    TreeNode root = bst.getRoot();
+    flattenBinaryTree(root);
+    bst.printTree();
   }
 }
  
