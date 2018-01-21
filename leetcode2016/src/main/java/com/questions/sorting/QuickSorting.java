@@ -1,7 +1,8 @@
 package com.questions.sorting;
 
 public class QuickSorting {
-  /**Utility method to perform quick sort in an array of ints
+  /**
+   * Utility method to perform quick sort in an array of ints
    *
    * @param A, array to be sorted.
    * @return sorted array.
@@ -20,7 +21,7 @@ public class QuickSorting {
     return A;
   }
 
-  private static int partition(int[] A, int startIndex, int endIndex) {
+  public static int partition(int[] A, int startIndex, int endIndex) {
     int pivot = A[endIndex];
     int pivotIndex = startIndex - 1;
 
@@ -34,7 +35,7 @@ public class QuickSorting {
     return pivotIndex;
   }
 
-  private static void swapElementsInArray(int[] A, int i, int j) {
+  public static void swapElementsInArray(int[] A, int i, int j) {
     int temp = A[i];
     A[i] = A[j];
     A[j] = temp;

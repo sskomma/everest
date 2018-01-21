@@ -3,6 +3,8 @@ package com.questions.trees;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Description: A Class that represents a binary tree.
@@ -14,10 +16,123 @@ public class BinaryTree {
   protected TreeNode root;
   protected boolean allowDuplicates;
 
+  public BinaryTree(TreeNode root) {
+    this.root = root;
+  }
+
   private static void printWhitespaces(int count) {
     for (int i = 0; i < count; i++) {
       System.out.print(" ");
     }
+  }
+
+  /**
+   * https://leetcode.com/problems/construct-string-from-binary-tree/description/
+   * #leetcode606
+   *
+   * You need to construct a string consists of parenthesis and integers from a binary tree with the preorder traversing way.
+   * The null node needs to be represented by empty parenthesis pair "()". And you need to omit all the empty parenthesis pairs that don't
+   * affect the one-to-one mapping relationship between the string and the original binary tree.
+   *
+   *
+   * Input: Binary tree: [1,2,3,4]
+   *        1
+   *      /   \
+   *     2     3
+   *    /
+   *   4
+   *
+   * Output: "1(2(4))(3)"
+   *
+   * Explanation: Originallay it needs to be "1(2(4)())(3()())",
+   * but you need to omit all the unnecessary empty parenthesis pairs.
+   * And it will be "1(2(4))(3)".
+   */
+  public static String tree2str(TreeNode root) {
+    if (root == null) {
+      return "";
+    }
+    String treeString = String.valueOf(root.val);
+    String leftTreeStr = tree2str(root.left);
+    String rightTreeStr = tree2str(root.right);
+    if (leftTreeStr.isEmpty() && rightTreeStr.isEmpty()) {
+      return treeString;
+    } else if (leftTreeStr.isEmpty()) {
+      treeString = treeString + "()" + "(" + rightTreeStr + ")";
+    } else if (rightTreeStr.isEmpty()) {
+      treeString = treeString + "(" + leftTreeStr + ")";
+    } else {
+      treeString = treeString + "(" + leftTreeStr + ")" + "(" + rightTreeStr + ")";
+    }
+    return treeString;
+  }
+
+  /**
+   * You need to construct a binary tree from a string consisting of parenthesis and integers.
+   * The whole input represents a binary tree. It contains an integer followed by zero, one or two pairs of parenthesis.
+   * The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
+   * You always start to construct the left child node of the parent first if it exists.
+   *
+   * Input: "4(2(3)(1))(6(5))"
+   * Output: return the tree root node representing the following tree:
+   *        4
+   *      /   \
+   *     2     6
+   *    / \   /
+   *   3   1 5
+   *
+   * https://leetcode.com/problems/construct-binary-tree-from-string/description/
+   * #leetcode536
+   *
+   * @param treeStr
+   * @return
+   */
+  public static TreeNode str2tree(String treeStr) {
+    if(treeStr == null || treeStr.isEmpty())
+      return null;
+    //RegEx to parse root node and children
+    Pattern p = Pattern.compile("^(-?\\d*)(.*)$");
+    Matcher m = p.matcher(treeStr);
+    if (!m.matches()) {
+      return null;
+    }
+    TreeNode root = new TreeNode(Integer.parseInt(m.group(1)));
+    List<String> subTrees = getTreeString(m.group(2));
+    if (subTrees.size() > 0 && !subTrees.get(0).isEmpty()) {
+      root.left = str2tree(subTrees.get(0));
+    }
+    if (subTrees.size() > 1 && !subTrees.get(1).isEmpty()) {
+      root.right = str2tree(subTrees.get(1));
+    }
+    return root;
+  }
+
+  /**
+   * A private helper method to retrieve tree strings of children.
+   * Returns a list of children, from left to right.
+   * @param treeStr
+   * @return
+   */
+  private static List<String> getTreeString(String treeStr) {
+    int count = 0;
+    int startIndex = 0;
+    int i = 0;
+    List<String> subTrees = new ArrayList<>();
+    for (; i < treeStr.length(); i++) {
+      char c = treeStr.charAt(i);
+      if (c == '(') {
+        count++;
+      } else if (c == ')') {
+        count--;
+      }
+
+      if (count == 0) {
+        String subTree = treeStr.substring(startIndex, i + 1);
+        subTrees.add(subTree.substring(1, subTree.length() - 1));
+        startIndex = i + 1;
+      }
+    }
+    return subTrees;
   }
 
   /**

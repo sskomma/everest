@@ -105,8 +105,51 @@ public class AnagramProblems {
     char[] t2 = t.toCharArray();
     Arrays.sort(t2);
     System.out.println();
-    System.out.println(t2.toString());
+    System.out.println(new String(t2));
     return new String(s2).equals(new String(t2));
+  }
+
+  /**
+   * Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+   * Strings consists of lowercase English letters only and the length of both strings s and p will
+   * not be larger than 20,100.
+   *
+   * The order of output does not matter.
+   * #leetcode483
+   * https://leetcode.com/problems/find-all-anagrams-in-a-string/
+   * @param s, input string
+   * @param p, patten string find anagrams of.
+   */
+  public static List<Integer> findAnagrams(String s, String p) {
+    List<Integer> anagramIndexes = new ArrayList<>();
+
+    //Validations
+    if (s == null || s.isEmpty() || p == null || p.length() == 0 || s.length() < p.length()) {
+      return anagramIndexes;
+    }
+    Map<Character, Integer> characterCount = new HashMap<>();
+    for (Character c : p.toCharArray()) {
+      characterCount.put(c, characterCount.getOrDefault(c, 0) + 1);
+    }
+    int lastIndex = s.length() - p.length();
+    for (int window = 0; window <= lastIndex; window++) {
+      char[] subStr = s.substring(window, window + p.length()).toCharArray();
+      Map<Character, Integer> charCount = new HashMap<>(characterCount);
+      for (Character c : subStr) {
+        Integer count = charCount.get(c);
+        if (count == null) {
+          break;
+        } else if (count == 1) {
+          charCount.remove(c);
+        } else {
+          charCount.put(c, --count);
+        }
+      }
+      if (charCount.isEmpty()) {
+        anagramIndexes.add(window);
+      }
+    }
+    return anagramIndexes;
   }
 
   public static void main(String[] args) {

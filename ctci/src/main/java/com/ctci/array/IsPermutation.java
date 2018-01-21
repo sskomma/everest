@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 public class IsPermutation {
+
   /*  public static boolean isPermutation(String s1, String s2) {
       if(StringUtils.isEmpty(s1) || StringUtils.isEmpty(s2)){
         throw new IllegalArgumentException();
@@ -21,7 +22,9 @@ public class IsPermutation {
         return (xor == 0);
       }
       return false;
-    }*/
+    }
+    */
+
   public static boolean isPermutation(String s1, String s2) {
     if (StringUtils.isEmpty(s1) || StringUtils.isEmpty(s2)) {
       throw new IllegalArgumentException();

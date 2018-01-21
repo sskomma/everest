@@ -18,7 +18,7 @@ public class BinarySearchTree extends BinaryTree {
    * @param allowDuplicates, indicates if duplicate values are to be added to tree.
    */
   public BinarySearchTree(int n, boolean allowDuplicates) {
-    root = new TreeNode(n);
+    super(new TreeNode(n));
     this.allowDuplicates = allowDuplicates;
   }
 
@@ -29,12 +29,12 @@ public class BinarySearchTree extends BinaryTree {
    * @param n, value of the root node.
    */
   public BinarySearchTree(int n) {
-    root = new TreeNode(n);
+    super(new TreeNode(n));
     allowDuplicates = true;
   }
 
   public BinarySearchTree(TreeNode n) {
-    root = n;
+    super(n);
   }
 
   public TreeNode getRoot() {

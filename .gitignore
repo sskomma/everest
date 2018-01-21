@@ -59,8 +59,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-.gitignore
 bin/
 .settings
-DataStructuresAndAlgorithms.iml
 target/
+*.iml
