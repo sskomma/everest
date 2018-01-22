@@ -88,8 +88,9 @@ public class BinaryTree {
    * @return
    */
   public static TreeNode str2tree(String treeStr) {
-    if(treeStr == null || treeStr.isEmpty())
+    if (treeStr == null || treeStr.isEmpty()) {
       return null;
+    }
     //RegEx to parse root node and children
     Pattern p = Pattern.compile("^(-?\\d*)(.*)$");
     Matcher m = p.matcher(treeStr);
@@ -138,8 +139,9 @@ public class BinaryTree {
   /**
    * Method traverses the tree in levels and returns a list of each level from top to bottom..
    * where each level is a list of all elements in that level from left to right.
-   * https://leetcode.com/problems/binary-tree-level-order-traversal/
    *
+   * https://leetcode.com/problems/binary-tree-level-order-traversal/
+   * #leetcode102
    * @return
    */
   public List<List<Integer>> levelOrderTraversal() {

@@ -4,19 +4,23 @@ package com.questions.linkedlist;
  * Definition for singly-linked list.*/
 
 public class ListNode {
-  int val;
-  ListNode next;
+  public int val;
+  public ListNode next;
 
-  ListNode(int x) {
+  public ListNode(int x) {
     val = x;
   }
 
-  boolean hasNext() {
+  public boolean hasNext() {
     return next != null;
   }
 
-  ListNode getNext() {
+  public ListNode getNext() {
     return next;
+  }
+
+  public int getVal() {
+    return val;
   }
 
   public String toString() {

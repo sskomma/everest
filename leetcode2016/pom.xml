@@ -9,6 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>leetcode-2016</artifactId>
+    <artifactId>leetcode2016</artifactId>
 
 </project>
