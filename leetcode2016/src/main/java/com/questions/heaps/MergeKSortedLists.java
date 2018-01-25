@@ -2,7 +2,9 @@ package com.questions.heaps;
 
 import com.questions.linkedlist.ListNode;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.PriorityQueue;
 
 /**
@@ -35,7 +37,7 @@ public class MergeKSortedLists {
     C.next = new ListNode(34);
     MergeKSortedLists mergeLists = new MergeKSortedLists();
     ListNode[] list2 = {null};
-    ListNode head = mergeLists.mergeSortedLists(list2);
+    ListNode head = mergeLists.mergeSortedLists(listOfLists);
     if (head != null) {
       while (head.hasNext()) {
         System.out.println(head.val);
@@ -51,11 +53,7 @@ public class MergeKSortedLists {
     PriorityQueue<ListNode> minHeap =
         new PriorityQueue<>(lists.length, Comparator.comparingInt(ListNode::getVal));
 
-    for (ListNode node : lists) {
-      if (node != null) {
-        minHeap.add(node);
-      }
-    }
+    Arrays.stream(lists).filter(Objects::nonNull).forEach(minHeap::add);
 
     ListNode resultHead = new ListNode(0);
     ListNode traverser = resultHead;
