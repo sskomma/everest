@@ -1,7 +1,13 @@
 package com.ctci.linkedlist;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
+/**
+ *
+ * https://leetcode.com/problems/palindrome-linked-list/description/
+ * #leetcode234
+ */
 public class Palindrome {
   public static boolean isPalindrome(Node node) {
     if(node == null) {
@@ -9,7 +15,7 @@ public class Palindrome {
     }
 
     Node p1 = node, p2 = node;
-    Stack<Integer> stack = new Stack<Integer>();
+    Deque<Integer> stack = new LinkedList<>();
     while(p1 != null && p1.next != null) {
       p1 = p1.next;
       p1 = p1.next;
@@ -21,7 +27,7 @@ public class Palindrome {
       stack.push(p2.data);
     }
 
-    while(!stack.empty()) {
+    while(!stack.isEmpty()) {
         if(p2.data != stack.pop()){
           return false;
         }
