@@ -2,6 +2,8 @@ package com.questions.trees;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -486,5 +488,58 @@ public class BinaryTree {
       preorderTraversal(node.right, elements);
     }
     return elements;
+  }
+
+  /**
+   * Given a binary tree where every node has a unique value, and a target key k,
+   * find the value of the nearest leaf node to target k in the tree.
+   * Here, nearest to a leaf means the least number of edges travelled on the binary tree to reach any leaf of the tree.
+   * Also, a node is called a leaf if it has no children.
+   * In the following examples, the input tree is represented in flattened form row by row.
+   * The actual root tree given will be a TreeNode object.
+   *
+   * https://leetcode.com/problems/closest-leaf-in-a-binary-tree/description/
+   * #leetcode742
+   * @param k, value of kth node.
+   * @return, value in the leaf node closer to k. Returns -1, if not found.
+   */
+  // Use BFS to search for tree and then search for leaf node
+  public int closerLeaf(int k) {
+    if (root == null) {
+      return -1;
+    }
+    //Search for node with value K.
+    Deque<TreeNode> queue = new LinkedList<>();
+    TreeNode kNode = null;
+    queue.offer(root);
+    while (!queue.isEmpty()) {
+      TreeNode current = queue.poll();
+      if (current != null) {
+        if (current.val == k) {
+          kNode = current;
+          break;
+        }
+        queue.offer(current.left);
+        queue.offer(current.right);
+      }
+    }
+    //Return -1 if not found.
+    if (kNode == null) {
+      return -1;
+    }
+    //Do BFS to get to the the first leaf node.
+    queue = new LinkedList<>();
+    queue.offer(kNode);
+    while (!queue.isEmpty()) {
+      TreeNode current = queue.poll();
+      if (current != null) {
+        if (current.left == null && current.right == null) {
+          return current.val;
+        }
+        queue.offer(current.left);
+        queue.offer(current.right);
+      }
+    }
+    return -1;
   }
 }
