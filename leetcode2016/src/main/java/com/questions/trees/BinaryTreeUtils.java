@@ -2,14 +2,18 @@ package com.questions.trees;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**A utilities class, that does various things with Binary trees and Binary search trees.  
  *
  * @author Ram Komma
  */
 public class BinaryTreeUtils {
+
   /**Method to see if the given tree with the root node is a binary search tree or not.
    *
    * @param root, root node of a binary tree, which is to be determined as binary search tree or not.
@@ -71,7 +75,7 @@ public class BinaryTreeUtils {
   /** Method to find the least common ancestor in a Binary tree
    * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
    *
-   * @param node, root node of the tree.
+   * @param root, root node of the tree.
    * @param a, fist node of which common ancestor is to be found.
    * @param b, second node of which common ancestor is to be found.
    * @return TreeNode, least common ancestor of node a and node b.
@@ -120,7 +124,6 @@ public class BinaryTreeUtils {
 
     return node;
   }
-
 
   /**Method to flatten a tree to right heavy tree. For more details look at the link below.
    * https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
@@ -179,7 +182,7 @@ public class BinaryTreeUtils {
       return null;
     }
     int size = nodes.size();
-    List<TreeNode> nextLevel = new ArrayList<TreeNode>();
+    List<TreeNode> nextLevel = new ArrayList<>();
     for (int i = 0; i < size; i++) {
       TreeNode n = nodes.get(i);
       if (n.left != null) {
@@ -194,6 +197,194 @@ public class BinaryTreeUtils {
     }
     rightSideView(nextLevel, rightElements);
     return rightElements;
+  }
+
+  /**
+   * #leetcode199
+   * @param root
+   * @return
+   */
+  public static List<Integer> rightSideViewII(TreeNode root) {
+    if (root == null) {
+      return Collections.EMPTY_LIST;
+    }
+    List<Integer> rightSide = new ArrayList<>();
+    Deque<TreeNode> queueLevels = new LinkedList<>();
+    queueLevels.add(root);
+    Deque<TreeNode> queueOfElements = new LinkedList<>();
+
+    while (!queueLevels.isEmpty()) {
+      TreeNode node = queueLevels.remove();
+
+      if (node.left != null) {
+        queueOfElements.add(node.left);
+      }
+      if (node.right != null) {
+        queueOfElements.add(node.right);
+      }
+      if (queueLevels.isEmpty()) {
+        rightSide.add(node.val);
+        Deque<TreeNode> temp = queueLevels;
+        queueLevels = queueOfElements;
+        queueOfElements = temp;
+      }
+    }
+    return rightSide;
+  }
+
+  /**
+   * https://leetcode.com/problems/boundary-of-binary-tree/description/
+   * #leetcode545
+   *
+   * The following method fails because it uses one BFS traversal to pick both left and right boundaries.
+   * In cases where there is only one element in a level, we do not have enough information to distinguish if
+   * that node should belong to right boundary or left boundary..
+   *
+   * Simple solution:
+   * https://leetcode.com/problems/boundary-of-binary-tree/discuss/101280/Java(12ms)-left-boundary-left-leaves-right-leaves-right-boundary
+   * @param root
+   * @return
+   */
+  public static List<Integer> boundaryOfBinaryTree(TreeNode root) {
+    if (root == null) {
+      return Collections.EMPTY_LIST;
+    }
+    List<TreeNode> left = new ArrayList<>();
+
+    /*Elements on bottom side are collected into a stack, because DFS collects them in right to left order.
+     But for boundary purposes, we need this in reverse order.*/
+    Deque<TreeNode> leafsStack = new LinkedList<>();
+
+    /*Elements on right side are collected into a stack, because BFS collects them in top - bottom order.
+     But for boundary purposes, we need this in reverse order.*/
+    Deque<TreeNode> rightStack = new LinkedList<>();
+
+    Deque<TreeNode> currentLevelQ = new LinkedList<>();
+    Deque<TreeNode> nextLevelQ = new LinkedList<>();
+
+    // Perform BFS to collect left and right boundaries.
+    currentLevelQ.add(root);
+    left.add(root);
+    while (!currentLevelQ.isEmpty()) {
+      TreeNode node = currentLevelQ.remove();
+      if (node.left != null) {
+        nextLevelQ.add(node.left);
+      }
+      if (node.right != null) {
+        nextLevelQ.add(node.right);
+      }
+      if (currentLevelQ.isEmpty()) {
+        rightStack.push(node);
+        if (nextLevelQ.size() > 1) {
+          left.add(nextLevelQ.peek());
+        }
+        Deque<TreeNode> temp = currentLevelQ;
+        currentLevelQ = nextLevelQ;
+        nextLevelQ = temp;
+      }
+    }
+
+    // Perform DFS to collect leaf nodes, since they can be spread across multiple levels.
+    Deque<TreeNode> stackForDFS = new LinkedList<>();
+    stackForDFS.add(root);
+    while (!stackForDFS.isEmpty()) {
+      TreeNode node = stackForDFS.pop();
+      if (isLeafNode(node)) {
+        leafsStack.push(node);
+      }
+      if (node.left != null) {
+        stackForDFS.push(node.left);
+      }
+      if (node.right != null) {
+        stackForDFS.push(node.right);
+      }
+    }
+
+    //Remove last element of right, since it would be the root, which is already on left.
+    if (!rightStack.isEmpty()) {
+      rightStack.removeLast();
+    }
+
+    List<Integer> boundary = new ArrayList<>();
+    boundary.addAll(left
+        .stream()
+        .filter(a -> !isLeafNode(a))
+        .map(a -> a.val)
+        .collect(Collectors.toList())
+    );
+    boundary.addAll(leafsStack
+        .stream()
+        .map(a -> a.val)
+        .collect(Collectors.toList())
+    );
+    boundary.addAll(rightStack
+        .stream()
+        .filter(a -> !isLeafNode(a))
+        .map(a -> a.val)
+        .collect(Collectors.toList())
+    );
+    return boundary;
+  }
+
+  public static boolean isLeafNode(TreeNode node) {
+    if (node == null) {
+      return false;
+    }
+    return node.left == null && node.right == null;
+  }
+
+  /**
+   * Given a binary tree, write a function to get the maximum width of the given tree.
+   * The width of a tree is the maximum width among all levels.
+   * The binary tree has the same structure as a full binary tree, but some nodes are null.
+   * The width of one level is defined as the length between the end-nodes (the leftmost and right
+   * most non-null nodes in the level, where the null nodes between the end-nodes are also counted into the length calculation.
+   *
+   * https://leetcode.com/problems/maximum-width-of-binary-tree/
+   * #leetcode662
+   * @param root
+   * @return
+   */
+  public static int widthOfBinaryTree(TreeNode root) {
+    if (root == null) {
+      return 0;
+    }
+    Deque<TreeNode> currentLevel = new LinkedList<>();
+    Deque<TreeNode> nextLevel = new LinkedList<>();
+    currentLevel.add(root);
+    int width = 1;
+    while (!currentLevel.isEmpty()) {
+      TreeNode node = currentLevel.remove();
+      if (node != null) {
+        nextLevel.add(node.left);
+        nextLevel.add(node.right);
+      } else {
+        nextLevel.add(null);
+        nextLevel.add(null);
+      }
+
+      if (currentLevel.isEmpty()) {
+        while(!nextLevel.isEmpty()  && nextLevel.peekFirst() == null) {
+          nextLevel.removeFirst();
+        }
+        while (!nextLevel.isEmpty()  && nextLevel.peekLast() == null) {
+          nextLevel.removeLast();
+        }
+        width = Math.max(width, nextLevel.size());
+        Deque<TreeNode> temp = currentLevel;
+        currentLevel = nextLevel;
+        nextLevel = temp;
+      }
+    }
+    return width;
+  }
+
+  public static void main(String[] args) {
+    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19};
+    int[] numbers2 = {1};
+    BinarySearchTree bst = new BinarySearchTree(sortedArrayToBST(numbers));
+    bst.printTree();
+    System.out.println(widthOfBinaryTree(bst.root));
   }
 
   /** Method to find the least common ancestor in a Binary Search tree
@@ -221,15 +412,6 @@ public class BinaryTreeUtils {
       return b;
     }
     return node;
-  }
-
-  public static void main(String[] args) {
-    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19};
-    BinarySearchTree bst = new BinarySearchTree(sortedArrayToBST(numbers));
-    bst.printTree();
-    TreeNode root = bst.getRoot();
-    flattenBinaryTree(root);
-    bst.printTree();
   }
 }
  

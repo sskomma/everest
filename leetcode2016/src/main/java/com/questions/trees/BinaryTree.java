@@ -477,7 +477,7 @@ public class BinaryTree {
   }
 
   public List<Integer> preorderTraversal(TreeNode root) {
-    List<Integer> elements = new ArrayList<Integer>();
+    List<Integer> elements = new ArrayList<>();
     return preorderTraversal(root, elements);
   }
 
@@ -492,11 +492,13 @@ public class BinaryTree {
 
   /**
    * Given a binary tree where every node has a unique value, and a target key k,
-   * find the value of the nearest leaf node to target k in the tree.
+   * find the value of the NEAREST leaf node to target k in the tree.
    * Here, nearest to a leaf means the least number of edges travelled on the binary tree to reach any leaf of the tree.
    * Also, a node is called a leaf if it has no children.
    * In the following examples, the input tree is represented in flattened form row by row.
    * The actual root tree given will be a TreeNode object.
+   *
+   * HINT: NEAREST leaf, may not be a child. It can be leaf of a Sibling.
    *
    * https://leetcode.com/problems/closest-leaf-in-a-binary-tree/description/
    * #leetcode742
@@ -517,7 +519,11 @@ public class BinaryTree {
       if (current != null) {
         if (current.val == k) {
           kNode = current;
-          break;
+        }
+        if(kNode != null) {
+          if (current.left == null && current.right == null) {
+            return current.val;
+          }
         }
         queue.offer(current.left);
         queue.offer(current.right);
