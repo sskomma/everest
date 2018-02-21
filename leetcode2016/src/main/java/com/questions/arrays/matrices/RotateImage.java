@@ -13,11 +13,7 @@ package com.questions.arrays.matrices;
 public class RotateImage {
 
   public static void main(String[] args) {
-    int[][] input = {
-        {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9}
-    };
+    int[][] input = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     System.out.println("Input:");
     MatrixUtils.printMatrix(input, 3);
     System.out.println("Rotating Clockwise:");
@@ -25,8 +21,7 @@ public class RotateImage {
     MatrixUtils.printMatrix(input, 3);
     System.out.println("Rotate anti clockwise:");
     rotateAntiClockWise(input);
-    MatrixUtils.printMatrix(input,3);
-
+    MatrixUtils.printMatrix(input, 3);
   }
 
   public static void rotateClockWise(int[][] matrix) {
@@ -37,7 +32,7 @@ public class RotateImage {
     int col = matrix[0].length;
 
     //Move up to down
-    for (int i = 0; i <= row / 2; i++) {
+    for (int i = 0; i < row / 2; i++) {
       for (int j = 0; j < col; j++) {
         int temp = matrix[i][j];
         matrix[i][j] = matrix[row - i - 1][j];
