@@ -2,6 +2,7 @@ package com.questions.strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -115,11 +116,12 @@ public class AnagramProblems {
    * not be larger than 20,100.
    *
    * The order of output does not matter.
-   * #leetcode483
+   * #leetcode438
    * https://leetcode.com/problems/find-all-anagrams-in-a-string/
    * @param s, input string
    * @param p, patten string find anagrams of.
    */
+  //This code is timing out.
   public static List<Integer> findAnagrams(String s, String p) {
     List<Integer> anagramIndexes = new ArrayList<>();
 
@@ -152,9 +154,60 @@ public class AnagramProblems {
     return anagramIndexes;
   }
 
+  /**
+   * This code is written with the below technique
+   * https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92007/sliding-window-algorithm-template-to-solve-all-the-leetcode-substring-search-problem
+   *
+   * @param s
+   * @param p
+   * @return
+   */
+  public static List<Integer> findAnagramV2(String s, String p) {
+    if (s == null || p == null || s.length() < p.length()) {
+      return Collections.emptyList();
+    }
+
+    Map<Character, Integer> freqMap = new HashMap<>(p.length());
+    for (Character c : p.toCharArray()) {
+      freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
+    }
+    int count = freqMap.size();
+    int begin = 0, end = 0;
+    List<Integer> result = new ArrayList<>();
+    while (end < s.length()) {
+      Character c = s.charAt(end);
+
+      if (freqMap.containsKey(c)) {
+        freqMap.put(c, freqMap.get(c) - 1);
+        if (freqMap.get(c) == 0) {
+          count--;
+        }
+      }
+      end++;
+
+      while (count == 0) {
+        Character temp = s.charAt(begin);
+        if (freqMap.containsKey(temp)) {
+          freqMap.put(temp, freqMap.get(temp) + 1);
+          if (freqMap.get(temp) > 0) {
+            count++;
+          }
+        }
+        if (end - begin == p.length()) {
+          result.add(begin);
+        }
+        begin++;
+      }
+    }
+
+    return result;
+  }
+
   public static void main(String[] args) {
     String[] words = {"iceman", "cinema", "mary", "army", "cat", "baba", "nana", "abba", "nnaa"};
-    findAnagramsInList(words);
-    System.out.println("is anagram" + isAnagram("ab", "ba"));
+    /*findAnagramsInList(words);
+    System.out.println("is anagram" + isAnagram("ab", "ba"));*/
+
+    System.out.println(findAnagramV2("cbaebabacd", "abc"));
   }
 }

@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+/**
+ * Given a string, sort it in decreasing order based on the frequency of characters.
+ *
+ * https://leetcode.com/problems/sort-characters-by-frequency/description/
+ * #leetcode451
+ */
 public class SortCharactersByFrequency {
 
   public static String frequencySort(String s) {
@@ -12,14 +18,14 @@ public class SortCharactersByFrequency {
       return null;
     }
 
-    Map<Character, Integer> charCountMap = new HashMap<>();
-    PriorityQueue<Map.Entry<Character, Integer>> maxHeap =
-        new PriorityQueue<>(s.length(), (a, b) -> b.getValue().compareTo(a.getValue()));
-
+    Map<Character, Integer> frequencyMap = new HashMap<>();
     for (Character c : s.toCharArray()) {
-      charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+      frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
     }
-    maxHeap.addAll(charCountMap.entrySet());
+
+    PriorityQueue<Map.Entry<Character, Integer>> maxHeap =
+        new PriorityQueue<>(frequencyMap.size(), (a, b) -> b.getValue().compareTo(a.getValue()));
+    maxHeap.addAll(frequencyMap.entrySet());
 
     StringBuffer sb = new StringBuffer();
     while (!maxHeap.isEmpty()) {

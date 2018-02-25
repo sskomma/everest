@@ -17,10 +17,8 @@ public class MaximumSubarray {
     int maxSum = Integer.MIN_VALUE;
     int sum = Integer.MIN_VALUE;
     for (int i = 0; i < nums.length; i++) {
-      if (nums[i] > 0) {
+      if (nums[i] >= 0) {
         sum = sum < 0 ? nums[i] : sum + nums[i];
-      } else if (nums[i] == 0) {
-        sum = sum < 0 ? 0 : sum;
       } else {
         if (sum < 0) {
           sum = Math.max(sum, nums[i]);
