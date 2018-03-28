@@ -3,7 +3,8 @@ package com.questions.strings;
 import java.util.HashSet;
 import java.util.Set;
 
-/**Remove duplicate characters in a given string keeping only the first occurrences. 
+/**
+ * Remove duplicate characters in a given string keeping only the first occurrences.
  * For example, if the input is �tree traversal� the output will be �tre avsl�
  *
  * http://www.ardendertat.com/2012/01/06/programming-interview-questions-25-remove-duplicate-characters-in-string/
@@ -17,7 +18,7 @@ public class RemoveDupChars {
       return word;
     }
     StringBuffer uniqeCharStr = new StringBuffer();
-    Set<Character> seenChars = new HashSet<Character>();
+    Set<Character> seenChars = new HashSet<>();
     for (Character c : word.toCharArray()) {
       if (!seenChars.contains(c)) {
         seenChars.add(c);

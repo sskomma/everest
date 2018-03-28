@@ -2,8 +2,10 @@ package com.questions.strings;
 
 import java.util.Arrays;
 
-/**Given a number, find the next higher number using only the digits in the given number. 
+/**
+ * Given a number, find the next higher number using only the digits in the given number.
  * For example if the given number is 1234, next higher number with same digits is 1243.
+ *
  * http://www.ardendertat.com/2012/01/02/programming-interview-questions-24-find-next-higher-number-with-same-digits/
  * @author Komma
  *
@@ -11,7 +13,7 @@ import java.util.Arrays;
 public class FindNextHigherNumWithSameDigits {
 
   public static int findNextHigherNumberWithSameDigits(int number) {
-    char[] numChars = (new Integer(number).toString()).toCharArray();
+    char[] numChars = (Integer.toString(number)).toCharArray();
     for (int i = numChars.length - 1; i > 0; i--) {
       if (numChars[i] > numChars[i - 1]) {
         char t = numChars[i - 1];

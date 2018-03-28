@@ -1,6 +1,7 @@
 package com.questions.strings;
 
-/**Problem:  Find the substring in the given text.
+/**
+ * Problem:  Find the substring in the given text.
  *
  * Algorithm: Knuth-Morris-Pratt(KMP) Pattern matching. The complexity of this algorith is O(m+n),
  * where m is the length of text and n is the length of pattern
@@ -33,8 +34,8 @@ public class SubStringSearch {
    * @return integer array, with comparision positions.
    */
   private int[] computeTemporaryArray(char[] pattern) {
-    int j = 0, i = 1;
 
+    int j = 0, i = 1;
     int[] tempArray = new int[pattern.length];
     tempArray[j] = 0;
 

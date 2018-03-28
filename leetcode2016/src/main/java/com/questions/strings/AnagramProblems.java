@@ -122,6 +122,7 @@ public class AnagramProblems {
    * @param p, patten string find anagrams of.
    */
   //This code is timing out.
+  /*
   public static List<Integer> findAnagrams(String s, String p) {
     List<Integer> anagramIndexes = new ArrayList<>();
 
@@ -153,11 +154,13 @@ public class AnagramProblems {
     }
     return anagramIndexes;
   }
+  */
 
   /**
    * This code is written with the below technique
    * https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss/92007/sliding-window-algorithm-template-to-solve-all-the-leetcode-substring-search-problem
    *
+   * #leetcode438
    * @param s
    * @param p
    * @return
@@ -203,11 +206,70 @@ public class AnagramProblems {
     return result;
   }
 
+  /**
+   * Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1.
+   * In other words, one of the first string's permutations is the substring of the second string.
+   *
+   * https://leetcode.com/problems/permutation-in-string/description/
+   *
+   * #leetcode567
+   */
+  public static boolean checkInclusion(String s1, String s2) {
+    if (s1 == null || s2 == null || s2.length() < s1.length()) {
+      return false;
+    }
+    Map<Character, Integer> frequencyMap = new HashMap<>();
+    for (Character c : s1.toCharArray()) {
+      frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+    }
+    int count = frequencyMap.size();
+
+    int begin = 0, end = 0;
+    while (end < s2.length()) {
+      Character currentChar = s2.charAt(end);
+      if (frequencyMap.containsKey(currentChar)) {
+        frequencyMap.put(currentChar, frequencyMap.get(currentChar) - 1);
+        if (frequencyMap.get(currentChar) == 0) {
+          count--;
+          if (count == 0) {
+            return true;
+          }
+        }
+        //In case when number of occurrences of a char goes below 0, it's not a permutation anymore.
+        while (frequencyMap.get(currentChar) < 0) {
+          char temp = s2.charAt(begin);
+          if (frequencyMap.containsKey(temp)) {
+            frequencyMap.put(temp, frequencyMap.get(temp) + 1);
+            if (frequencyMap.get(temp) == 1) {
+              count++;
+            }
+          }
+          begin++;
+        }
+      } else {
+        while (begin <= end) {
+          char temp = s2.charAt(begin);
+          if (frequencyMap.containsKey(temp)) {
+            frequencyMap.put(temp, frequencyMap.get(temp) + 1);
+            if (frequencyMap.get(temp) == 1) {
+              count++;
+            }
+          }
+          begin++;
+        }
+      }
+      end++;
+    }
+    return false;
+  }
+
   public static void main(String[] args) {
-    String[] words = {"iceman", "cinema", "mary", "army", "cat", "baba", "nana", "abba", "nnaa"};
-    /*findAnagramsInList(words);
+    /*String[] words = {"iceman", "cinema", "mary", "army", "cat", "baba", "nana", "abba", "nnaa"};
+    findAnagramsInList(words);
     System.out.println("is anagram" + isAnagram("ab", "ba"));*/
 
-    System.out.println(findAnagramV2("cbaebabacd", "abc"));
+    //System.out.println(checkInclusion("adc", "dcda"));
+    System.out.println(checkInclusion("trinitrophenylmethylnitramine",
+        "dinitrophenylhydrazinetrinitrophenylmethylnitramine"));
   }
 }
