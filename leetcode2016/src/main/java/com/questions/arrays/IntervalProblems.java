@@ -5,13 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**Interval problems
+/**
+ * Interval problems
  *
  * @author Ram Komma
  */
 public class IntervalProblems {
 
-  /**Given a collection of intervals, merge all overlapping intervals.
+  /**
+   * Given a collection of intervals, merge all overlapping intervals.
    *
    * For example,
    * Given [1,3],[2,6],[8,10],[15,18],

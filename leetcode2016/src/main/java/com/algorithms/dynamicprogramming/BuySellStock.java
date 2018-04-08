@@ -61,7 +61,8 @@ public class BuySellStock {
   }
 
   public static void main(String[] args) {
-    int[] prices = {4, 2};
-    System.out.println(maxProfitOneTransaction(prices));
+    int[] prices = {2, 4, 5, 6};
+    System.out.println(maxProfitUnlimitedTransactions(prices));
   }
+
 }

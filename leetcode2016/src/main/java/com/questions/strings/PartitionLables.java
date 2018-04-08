@@ -26,7 +26,7 @@ import java.util.List;
 public class PartitionLables {
   public static List<Integer> partitionLabels(String S) {
     if (S == null || S.isEmpty()) {
-      return Collections.EMPTY_LIST;
+      return Collections.emptyList();
     }
     int[] lastOccurance = new int[26];
     List<Integer> result = new ArrayList<>();

@@ -37,8 +37,8 @@ public class MaxProductSubArray {
         maxProduct = Math.max(maxProduct * arr[i], arr[i]);
         minProduct = Math.min(minProduct * arr[i], 0);
       }
-             /* If this element is 0, then the maximum product cannot
-                end here, make both maxProduct and minProduct 0. */
+       /* If this element is 0, then the maximum product cannot
+          end here, make both maxProduct and minProduct 0. */
       else if (arr[i] == 0) {
         maxProduct = 0;
         minProduct = 0;

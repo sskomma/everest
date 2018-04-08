@@ -1,4 +1,4 @@
-package com.assessments.amazon;
+package com.assessments;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * #amazon
+ */
 public class Question2 {
   public List<Integer> minWindow( List<String> targetList, List<String> availableTagList) {
     if (targetList.size() > availableTagList.size()) {

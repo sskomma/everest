@@ -7,9 +7,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**Description: http://www.ardendertat.com/2011/09/17/programming-interview-questions-1-array-pair-sum/
+/**
+ * Description: http://www.ardendertat.com/2011/09/17/programming-interview-questions-1-array-pair-sum/
  *
- *Given an integer array, output all pairs that sum up to a specific value k.
+ * Given an integer array, output all pairs that sum up to a specific value k.
  *
  * @author Ram Komma
  *
@@ -26,7 +27,8 @@ public class ArrayPairSum {
     }
   }
 
-  /**Description: https://leetcode.com/problems/two-sum/
+  /**
+   * Description: https://leetcode.com/problems/two-sum/
    *
    * Better solution: refer to findPairsThatSumUpToK() method above.
    *
@@ -62,8 +64,8 @@ public class ArrayPairSum {
   }
 
   public List<Pair> findPairsThatSumUpToK(int[] input, int sum) {
-    Set<Integer> set = new TreeSet<Integer>();
-    List<Pair> list = new ArrayList<Pair>();
+    Set<Integer> set = new TreeSet<>();
+    List<Pair> list = new ArrayList<>();
     for (int element : input) {
       if (set.contains(sum - element)) {
         set.remove(element - sum);

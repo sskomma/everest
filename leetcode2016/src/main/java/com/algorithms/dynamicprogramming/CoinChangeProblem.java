@@ -2,26 +2,28 @@ package com.algorithms.dynamicprogramming;
 
 import java.util.ArrayList;
 
-/**Give a dollar value, and list of denominations find the least number of denominations,
- * to make up the dollar value. 
+/**
+ * Give a dollar value, and list of denominations find the least number of denominations,
+ * to make up the dollar value.
+ *
  * https://leetcode.com/problems/coin-change/
  * @author Ram Komma
- *
  */
 public class CoinChangeProblem {
 
   public static void main(String[] args) {
     CoinChangeProblem c = new CoinChangeProblem();
-    int[] denominations = {7, 2, 3, 6};
-    int total = 13;
+    int[] denominations = {186, 419, 83, 408};
+    int total = 6249;
     System.out.println("Least number of coins to make total of " + total + " are :" + c
-        .findLeastDenominations(total, denominations));
+        .countLeastNumOfDenominations(total, denominations));
   }
 
-  /**The method finds out the least number of coins to make up the dollar amount.
+  /**
+   * The method finds out the least number of coins to make up the dollar amount.
    *
    * @param total, the total dollar amount to make up with the denominations.
-   * @param denominations, list of coins we have.. we have these in infinite supply
+   * @param denomination, list of coins we have.. we have these in infinite supply
    * @return Map with key denomination and value, number of denominations.
    */
   public int findLeastDenominations(int total, int[] denomination) {
@@ -50,7 +52,7 @@ public class CoinChangeProblem {
       }
     }
     //Identify all coins used to make up the total
-    ArrayList<Integer> coins = new ArrayList<Integer>();
+    ArrayList<Integer> coins = new ArrayList<>();
     int i = total;
     while (i > 0) {
       int coin = coinUsed[i];
@@ -63,5 +65,39 @@ public class CoinChangeProblem {
     }
     System.out.println("");
     return numOfCoins[total];
+  }
+
+  /**
+   * A recursive approach to identify number of coins required to render amount.
+   * It uses backtracking and memoization to keep track of
+   * @param amount
+   * @param coins
+   * @return
+   */
+  public int countLeastNumOfDenominations(int amount, int[] coins) {
+    if (amount == 0 || coins == null || coins.length == 0) {
+      return 0;
+    }
+    //Arrays.sort(coins);
+    return countDenominations(amount, coins, new int[amount]);
+  }
+
+  private int countDenominations(int remaining, int[] coins, int[] buffer) {
+    if (remaining < 0) {
+      return -1;
+    }
+    if (remaining == 0) {
+      return 0;
+    }
+    if (buffer[remaining - 1] != 0) {
+      return buffer[remaining - 1];
+    }
+    int min = Integer.MAX_VALUE;
+    for (int coin : coins) {
+      int num = countDenominations(remaining - coin, coins, buffer);
+      min = num >= 0 ? Math.min(min, num) + 1 : min;
+    }
+    buffer[remaining - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
+    return buffer[remaining - 1];
   }
 }

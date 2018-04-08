@@ -1,6 +1,7 @@
 package com.questions.arrays;
 
-/**Problem Description: https://leetcode.com/problems/jump-game/description/
+/**
+ * Problem Description: https://leetcode.com/problems/jump-game/description/
  *
  * Given an array of non-negative integers, you are initially positioned at the first index of the array.
  * Each element in the array represents your maximum jump length at that position.

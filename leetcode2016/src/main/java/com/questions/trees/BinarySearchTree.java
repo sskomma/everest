@@ -191,7 +191,7 @@ public class BinarySearchTree extends BinaryTree {
 
   private TreeNode trim(int min, int max, TreeNode node) {
     if (node == null) {
-      return node;
+      return null;
     } else if (node.val == min) {
       node.left = null;
     } else if (node.val == max) {

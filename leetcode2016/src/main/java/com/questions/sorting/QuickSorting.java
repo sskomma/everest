@@ -2,7 +2,7 @@ package com.questions.sorting;
 
 public class QuickSorting {
   /**
-   * Utility method to perform quick sort in an array of ints
+   * Utility method to perform quick sort in an array of integers
    *
    * @param A, array to be sorted.
    * @return sorted array.
@@ -12,7 +12,7 @@ public class QuickSorting {
   }
 
   private static int[] quickSort(int[] A, int startIndex, int endIndex) {
-    int p = 0;
+    int p;
     if (startIndex < endIndex) {
       p = partition(A, startIndex, endIndex);
       quickSort(A, startIndex, p - 1);

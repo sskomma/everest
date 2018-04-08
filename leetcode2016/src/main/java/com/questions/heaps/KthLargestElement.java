@@ -19,9 +19,9 @@ public class KthLargestElement {
   /**
    * The following method uses a heap to find the kth largest element.
    * which has a complexity of O(NlogK)
-   * @param numbers
+   * @param numbers, input numbers.
    * @param k
-   * @return
+   * @return kth largest number
    */
   public static int findKthLargest(int[] numbers, int k) {
     if (numbers == null || numbers.length == 0) {
@@ -43,7 +43,12 @@ public class KthLargestElement {
     return pq.poll();
   }
 
-
+  /**
+   * Uses quick sort to find out kth largest element in an array.
+   * @param numbers array of numbers of which kth largest is to be found.
+   * @param k the value of k
+   * @return Kth largest number in the array.
+   */
   public static int findKthLargestNumber(int[] numbers, int k) {
     int low = 0;
     int high = numbers.length - 1;

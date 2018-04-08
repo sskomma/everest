@@ -2,14 +2,16 @@ package com.questions.arrays;
 
 import static com.questions.arrays.ArrayUtils.printArrayFromNtoOne;
 
-/**Give two arrays. Treat each array as an number and add them.. 
-
+/**
+ * Give two arrays. Treat each array as an number and add them..
+ *
  * @author Ram Komma
  */
 public class ArrayAddition {
 
   /**
    * This method takes in two arrays, and adds them together. Where the number is put together from 0 - n
+   *
    * @param a, first array of single digit integers to be added to other array.
    * @param b, second array of single digit integers to be added to the other array.
    * @return an array of integers, resulted after addition of  input arrays.

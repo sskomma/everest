@@ -1,7 +1,6 @@
 package com.questions.heaps;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +27,7 @@ public class TopKFrequentElements {
       return null;
     }
 
-    Map<Integer, Pair> numFreqMap = new HashMap<Integer, Pair>();
+    Map<Integer, Pair> numFreqMap = new HashMap<>();
     for (int i : numbers) {
       Pair pair = numFreqMap.get(i);
       if (pair == null) {
@@ -40,11 +39,8 @@ public class TopKFrequentElements {
       numFreqMap.put(i, pair);
     }
 
-    PriorityQueue<Pair> kElements = new PriorityQueue<>(k, new Comparator<Pair>() {
-      public int compare(Pair a, Pair b) {
-        return Integer.compare(a.frequency, b.frequency);
-      }
-    });
+    PriorityQueue<Pair> kElements =
+        new PriorityQueue<>(k, (a, b) -> Integer.compare(a.frequency, b.frequency));
     int j = 0;
     for (Integer key : numFreqMap.keySet()) {
       if (j < k) {
@@ -80,7 +76,7 @@ public class TopKFrequentElements {
     maxHeap.addAll(frequencyMap.entrySet());
     List<Integer> result = new ArrayList<>(k);
     for (int i = 0; i < k; i++) {
-      Map.Entry<Integer, Integer> entry =  maxHeap.remove();
+      Map.Entry<Integer, Integer> entry = maxHeap.remove();
       result.add(entry.getKey());
     }
     return result;
