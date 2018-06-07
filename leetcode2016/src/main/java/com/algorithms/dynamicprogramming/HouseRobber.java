@@ -12,7 +12,6 @@ package com.algorithms.dynamicprogramming;
  * determine the maximum amount of money you can rob tonight without alerting the police.
  *
  * @author Ram Komma
- *
  */
 public class HouseRobber {
 

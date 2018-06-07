@@ -2,6 +2,17 @@ package com.ctci.array;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * One Away: There are three types of edits that can be performed on strings: insert a character,
+ * remove a character, or replace a character. Given two strings, write a function to check if they are
+ * one edit (or zero edits) away.
+ *
+ * EXAMPLE
+ * pale, ple -> true
+ * pales, pale -> true
+ * pale, bale -> true
+ * pale, bake -> false
+ */
 public class OneAway {
   public static boolean oneAway(String s1, String s2) {
     if (StringUtils.isEmpty(s1) || StringUtils.isEmpty(s2)) {
@@ -20,7 +31,8 @@ public class OneAway {
     //To delete one character
     else if (delta == 1 && l2 > l1) {
       return oneDeleteAway(s2.toCharArray(), s1.toCharArray(), l2, l1);
-    } else if (l1 == l2) {
+    }
+    else if (l1 == l2) {
       int count = 0;
       for (int i = 0; i < l1; i++) {
         if (s1.charAt(i) != s2.charAt(i)) {

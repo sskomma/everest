@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Given two strings, write a method to decide if one is a permutation of the other.
+ */
 public class IsPermutation {
 
   /*  public static boolean isPermutation(String s1, String s2) {

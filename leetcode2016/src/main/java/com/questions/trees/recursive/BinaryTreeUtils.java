@@ -1,14 +1,19 @@
-package com.questions.trees;
+package com.questions.trees.recursive;
+
+import com.questions.trees.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
-/**A utilities class, that does various things with Binary trees and Binary search trees.  
+/**
+ * A utilities class, that does various things with Binary trees and Binary search trees.
  *
  * @author Ram Komma
  */
@@ -377,6 +382,25 @@ public class BinaryTreeUtils {
       }
     }
     return width;
+  }
+
+  /**
+   * A tree is "superbalanced" if the difference between the depths of any two leaf nodes
+   * is no greater than one.
+   * @param root root node of the binary tree.
+   * @return True if super balanced: false otherwise.
+   */
+  public static boolean isSuperBalanced(TreeNode root) {
+    if(root == null) {
+      return false;
+    }
+    Set<Integer> heights = new HashSet<>(2);
+
+
+  }
+
+  private static int isSuperBalanced(TreeNode node, int length) {
+    if(node == null )
   }
 
   public static void main(String[] args) {

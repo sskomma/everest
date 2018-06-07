@@ -1,6 +1,6 @@
 package com.questions.trees;
 
-import static org.junit.Assert.*;
+import com.questions.trees.recursive.BinaryTree;
 
 import org.junit.Test;
 

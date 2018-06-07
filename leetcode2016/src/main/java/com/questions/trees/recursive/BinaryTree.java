@@ -1,4 +1,6 @@
-package com.questions.trees;
+package com.questions.trees.recursive;
+
+import com.questions.trees.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Description: A Class that represents a binary tree.
@@ -520,7 +524,7 @@ public class BinaryTree {
         if (current.val == k) {
           kNode = current;
         }
-        if(kNode != null) {
+        if (kNode != null) {
           if (current.left == null && current.right == null) {
             return current.val;
           }
@@ -547,5 +551,44 @@ public class BinaryTree {
       }
     }
     return -1;
+  }
+
+  /**
+   * Given a binary tree, you need to compute the length of the diameter of the tree.
+   * The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
+   * This path may or may not pass through the root.
+   *
+   * Example:
+   * Given a binary tree
+   *     1
+   *    / \
+   *   2   3
+   *  / \
+   * 4   5
+   *
+   * Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3]
+   * Note: The length of path between two nodes is represented by the number of edges between them.
+   * @return the diameter of the tree.
+   */
+  public int diameterOfABinaryTree(TreeNode root) {
+    return diameterOfBinaryTree(root, 0).getLeft();
+  }
+
+  /**
+   * A private recursive method to support diameter calculation.
+   * @param node Node for which diameter is to be calculated.
+   * @param maxDiameter maximum diameter so far.
+   * @return {@link Pair} with diameter to left and max height to right
+   */
+  private Pair<Integer, Integer> diameterOfBinaryTree(TreeNode node, int maxDiameter) {
+    if (node == null) {
+      return Pair.of(0, 0);
+    }
+    Pair<Integer, Integer> left = diameterOfBinaryTree(node.left, maxDiameter);
+    Pair<Integer, Integer> right = diameterOfBinaryTree(node.right, maxDiameter);
+    int diameterOfNode = left.getRight() + right.getRight() + 1;
+
+    return Pair
+        .of(Math.max(maxDiameter, diameterOfNode), Math.max(left.getRight(), right.getRight()) + 1);
   }
 }

@@ -28,25 +28,20 @@ public class IntervalProblems {
     if (intervals == null || intervals.isEmpty()) {
       return Collections.emptyList();
     }
-    Collections.sort(intervals, new Comparator<Interval>() {
-      public int compare(Interval o1, Interval o2) {
-        Integer i1 = o1.start;
-        Integer i2 = o2.start;
-        return i1.compareTo(i2);
-      }
-    });
-    List<Interval> mergedList = new ArrayList<Interval>();
-    Interval current = intervals.get(0);
+    Collections.sort(intervals, Comparator.comparingInt(Interval::getStart));
+
+    List<Interval> mergedList = new ArrayList<>();
+    Interval previous = intervals.get(0);
     for (int i = 1; i < intervals.size(); i++) {
-      Interval c = intervals.get(i);
-      if (c.start <= current.end) {
-        current.end = Math.max(current.end, c.end);
+      Interval current = intervals.get(i);
+      if (current.start <= previous.end) {
+        previous.end = Math.max(previous.end, current.end);
       } else {
-        mergedList.add(current);
-        current = c;
+        mergedList.add(previous);
+        previous = current;
       }
     }
-    mergedList.add(current);
+    mergedList.add(previous);
     return mergedList;
   }
 
@@ -91,6 +86,14 @@ class Interval {
   Interval() {
     start = 0;
     end = 0;
+  }
+
+  public int getStart() {
+    return start;
+  }
+
+  public int getEnd() {
+    return end;
   }
 
   Interval(int s, int e) {

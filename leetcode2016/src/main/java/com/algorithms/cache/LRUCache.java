@@ -1,4 +1,4 @@
-package com.algorithms.design;
+package com.algorithms.cache;
 
 import java.util.HashMap;
 import java.util.Map;

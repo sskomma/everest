@@ -1,9 +1,12 @@
-package com.questions.trees;
+package com.questions.trees.recursive;
+
+import com.questions.trees.TreeNode;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**Description: A Class that represents a binary search tree.
+/**
+ * Description: A Class that represents a binary search tree.
  * With implementations of common use cases encountered with it. 
  *
  * @author Ram Komma
@@ -35,6 +38,30 @@ public class BinarySearchTree extends BinaryTree {
 
   public BinarySearchTree(TreeNode n) {
     super(n);
+  }
+
+  public static void main(String[] args) {
+    BinarySearchTree tree = new BinarySearchTree(10);
+/*
+    tree.addToTree(5);
+    tree.addToTree(15);
+    tree.addToTree(3);
+    tree.addToTree(1);
+    tree.addToTree(2);
+    tree.addToTree(4);
+    tree.addToTree(4);
+    tree.addToTree(7);
+    tree.addToTree(6);
+    tree.addToTree(9);
+    tree.addToTree(8);*/
+    tree.printTree();
+    System.out.println("Diameter of tree is:" + tree.diameterOfABinaryTree(tree.root));
+    /*try {
+      tree.trim(13, 16);
+    } catch (Exception e) {
+      System.out.println("Invalid range for min and max");
+    }*/
+    //tree.printTree();
   }
 
   public TreeNode getRoot() {
@@ -88,14 +115,13 @@ public class BinarySearchTree extends BinaryTree {
         return null;
       }
       //Node has only right child
-      else if (node.left == null ) {
+      else if (node.left == null) {
         return node.right;
       }
       //Node has only left child
-      else if (node.right == null ) {
+      else if (node.right == null) {
         return node.left;
-      }
-      else {
+      } else {
         TreeNode rightMostChildOfLeftSubTree = BinaryTreeUtils.getRightMostNode(node.left);
         node.val = rightMostChildOfLeftSubTree.val;
         node.left = removeNode(node.left, rightMostChildOfLeftSubTree.val);
@@ -142,6 +168,7 @@ public class BinarySearchTree extends BinaryTree {
 
     return Math.max(left, right) + 1;
   }
+
 
   /**
    * Method to find the kth smallest element in binary search tree.
@@ -205,35 +232,5 @@ public class BinarySearchTree extends BinaryTree {
       return trim(min, max, node.left);
     }
     return node;
-  }
-
-
-  public static void main(String[] args) {
-    BinarySearchTree tree = new BinarySearchTree(10);
-    tree.addToTree(5);
-    tree.addToTree(15);
-    tree.addToTree(3);
-    tree.addToTree(1);
-    tree.addToTree(2);
-    tree.addToTree(4);
-    tree.addToTree(4);
-    tree.addToTree(7);
-    tree.addToTree(6);
-    tree.addToTree(9);
-    tree.addToTree(8);
-    tree.addToTree(13);
-    tree.addToTree(14);
-    tree.addToTree(11);
-    tree.addToTree(12);
-    tree.addToTree(18);
-    tree.addToTree(16);
-    tree.addToTree(19);
-    tree.printTree();
-    try {
-      tree.trim(13, 16);
-    } catch (Exception e) {
-      System.out.println("Invalid range for min and max");
-    }
-    tree.printTree();
   }
 }
