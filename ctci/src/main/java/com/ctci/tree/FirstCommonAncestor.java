@@ -1,6 +1,7 @@
 package com.ctci.tree;
 
 public class FirstCommonAncestor {
+
   public static Result lca(TreeNode root, TreeNode n1, TreeNode n2) {
     if (root == null) {
       return null;

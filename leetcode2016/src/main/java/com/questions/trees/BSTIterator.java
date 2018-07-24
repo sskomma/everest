@@ -1,7 +1,5 @@
 package com.questions.trees;
 
-import com.questions.trees.recursive.BinarySearchTree;
-
 import java.util.Deque;
 import java.util.LinkedList;
 

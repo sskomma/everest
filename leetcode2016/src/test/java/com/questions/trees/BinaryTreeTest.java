@@ -1,7 +1,5 @@
 package com.questions.trees;
 
-import com.questions.trees.recursive.BinaryTree;
-
 import org.junit.Test;
 
 public class BinaryTreeTest {

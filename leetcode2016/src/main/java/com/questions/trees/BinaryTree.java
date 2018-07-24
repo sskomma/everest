@@ -1,4 +1,4 @@
-package com.questions.trees.recursive;
+package com.questions.trees;
 
 import com.questions.trees.TreeNode;
 

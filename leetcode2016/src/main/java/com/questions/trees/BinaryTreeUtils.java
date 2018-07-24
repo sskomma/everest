@@ -1,6 +1,4 @@
-package com.questions.trees.recursive;
-
-import com.questions.trees.TreeNode;
+package com.questions.trees;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +17,8 @@ import java.util.stream.Collectors;
  */
 public class BinaryTreeUtils {
 
-  /**Method to see if the given tree with the root node is a binary search tree or not.
+  /**
+   * Method to see if the given tree with the root node is a binary search tree or not.
    *
    * @param root, root node of a binary tree, which is to be determined as binary search tree or not.
    * @return boolean, true if it is a binary search tree; false, otherwise.
@@ -28,18 +27,17 @@ public class BinaryTreeUtils {
     if (root == null) {
       return true;
     }
-    List<Integer> sequence = new ArrayList<Integer>();
-    sequence = inOrderTraversal(root, sequence);
-    if (!sequence.isEmpty()) {
-      int lastVisited = sequence.get(0);
-      for (int i = 1; i < sequence.size(); i++) {
-        if (lastVisited >= sequence.get(i)) {
-          return false;
-        }
-        lastVisited = sequence.get(i);
-      }
+    return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  }
+
+  private static boolean isBST(TreeNode node, int min, int max) {
+    if (node == null) {
+      return true;
     }
-    return true;
+    if (node.val >= min && node.val <= max) {
+      return isBST(node.left, min, node.val) && isBST(node.right, node.val, max);
+    }
+    return false;
   }
 
   private static List<Integer> inOrderTraversal(TreeNode node, List<Integer> sequence) {
@@ -52,7 +50,8 @@ public class BinaryTreeUtils {
     return sequence;
   }
 
-  /**Method to convert a sorted array to balanced Binary search tree.
+  /**
+   * Method to convert a sorted array to balanced Binary search tree.
    * https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
    *
    * @param numbers, array of sorted numbers of which tree to be constructed.
@@ -77,7 +76,8 @@ public class BinaryTreeUtils {
     return currentNode;
   }
 
-  /** Method to find the least common ancestor in a Binary tree
+  /**
+   * Method to find the least common ancestor in a Binary tree
    * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
    *
    * @param root, root node of the tree.
@@ -87,9 +87,9 @@ public class BinaryTreeUtils {
    */
   public static TreeNode lowestCommonAncestorOfBinaryTree(TreeNode root, TreeNode a, TreeNode b) {
     assert (root != null && a != null && b != null);
-    Stack<TreeNode> aStack = new Stack<TreeNode>();
+    Stack<TreeNode> aStack = new Stack<>();
     findNodeInTree(root, a, aStack);
-    Stack<TreeNode> bStack = new Stack<TreeNode>();
+    Stack<TreeNode> bStack = new Stack<>();
     findNodeInTree(root, b, bStack);
 
     TreeNode lca = root;
@@ -130,7 +130,8 @@ public class BinaryTreeUtils {
     return node;
   }
 
-  /**Method to flatten a tree to right heavy tree. For more details look at the link below.
+  /**
+   * Method to flatten a tree to right heavy tree. For more details look at the link below.
    * https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
    * @param node
    */
@@ -155,7 +156,8 @@ public class BinaryTreeUtils {
     }
   }
 
-  /**Given a binary tree, imagine yourself standing on the right side of it,
+  /**
+   * Given a binary tree, imagine yourself standing on the right side of it,
    * return the values of the nodes you can see ordered from top to bottom.
    *
    * For example:
@@ -176,9 +178,9 @@ public class BinaryTreeUtils {
     if (node == null) {
       return Collections.emptyList();
     }
-    List<TreeNode> nodes = new ArrayList<TreeNode>();
+    List<TreeNode> nodes = new ArrayList<>();
     nodes.add(node);
-    List<Integer> rightElements = new ArrayList<Integer>();
+    List<Integer> rightElements = new ArrayList<>();
     return rightSideView(nodes, rightElements);
   }
 
@@ -214,24 +216,24 @@ public class BinaryTreeUtils {
       return Collections.EMPTY_LIST;
     }
     List<Integer> rightSide = new ArrayList<>();
-    Deque<TreeNode> queueLevels = new LinkedList<>();
-    queueLevels.add(root);
-    Deque<TreeNode> queueOfElements = new LinkedList<>();
+    Deque<TreeNode> currentLevel = new LinkedList<>();
+    currentLevel.add(root);
+    Deque<TreeNode> nextLevel = new LinkedList<>();
 
-    while (!queueLevels.isEmpty()) {
-      TreeNode node = queueLevels.remove();
+    while (!currentLevel.isEmpty()) {
+      TreeNode node = currentLevel.remove();
 
       if (node.left != null) {
-        queueOfElements.add(node.left);
+        nextLevel.add(node.left);
       }
       if (node.right != null) {
-        queueOfElements.add(node.right);
+        nextLevel.add(node.right);
       }
-      if (queueLevels.isEmpty()) {
+      if (currentLevel.isEmpty()) {
         rightSide.add(node.val);
-        Deque<TreeNode> temp = queueLevels;
-        queueLevels = queueOfElements;
-        queueOfElements = temp;
+        Deque<TreeNode> temp = currentLevel;
+        currentLevel = nextLevel;
+        nextLevel = temp;
       }
     }
     return rightSide;
@@ -369,10 +371,10 @@ public class BinaryTreeUtils {
       }
 
       if (currentLevel.isEmpty()) {
-        while(!nextLevel.isEmpty()  && nextLevel.peekFirst() == null) {
+        while (!nextLevel.isEmpty() && nextLevel.peekFirst() == null) {
           nextLevel.removeFirst();
         }
-        while (!nextLevel.isEmpty()  && nextLevel.peekLast() == null) {
+        while (!nextLevel.isEmpty() && nextLevel.peekLast() == null) {
           nextLevel.removeLast();
         }
         width = Math.max(width, nextLevel.size());
@@ -391,24 +393,44 @@ public class BinaryTreeUtils {
    * @return True if super balanced: false otherwise.
    */
   public static boolean isSuperBalanced(TreeNode root) {
-    if(root == null) {
+    if (root == null) {
       return false;
     }
-    Set<Integer> heights = new HashSet<>(2);
+    Set<Integer> pathHeights = new HashSet<>(2);
+    isSuperBalanced(root, 0, pathHeights);
+    boolean superBalanced = false;
+    if (pathHeights.size() < 2) {
+      superBalanced = true;
+    } else if (pathHeights.size() == 2) {
+      Integer[] heights = new Integer[2];
+      pathHeights.toArray(heights);
+      superBalanced = Math.abs(heights[0] - heights[1]) == 1;
+    }
 
-
+    return superBalanced;
   }
 
-  private static int isSuperBalanced(TreeNode node, int length) {
-    if(node == null )
+  private static void isSuperBalanced(TreeNode node, int height, Set<Integer> pathHeights) {
+    if (node == null) {
+      pathHeights.add(height);
+      return;
+    }
+    height++;
+
+    isSuperBalanced(node.left, height, pathHeights);
+    isSuperBalanced(node.right, height, pathHeights);
   }
 
-  public static void main(String[] args) {
-    int[] numbers = {1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 18, 19};
-    int[] numbers2 = {1};
-    BinarySearchTree bst = new BinarySearchTree(sortedArrayToBST(numbers));
-    bst.printTree();
-    System.out.println(widthOfBinaryTree(bst.root));
+  /**
+   * Method prints out tree node values, encountered while traversing tree inline.
+   */
+  public static void inOrderTraversal(TreeNode node) {
+    if (node == null) {
+      return;
+    }
+    inOrderTraversal(node.left);
+    System.out.print(node.val + "->");
+    inOrderTraversal(node.right);
   }
 
   /** Method to find the least common ancestor in a Binary Search tree

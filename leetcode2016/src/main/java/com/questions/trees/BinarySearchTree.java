@@ -1,8 +1,8 @@
-package com.questions.trees.recursive;
+package com.questions.trees;
 
-import com.questions.trees.TreeNode;
-
+import java.util.Deque;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -38,30 +38,6 @@ public class BinarySearchTree extends BinaryTree {
 
   public BinarySearchTree(TreeNode n) {
     super(n);
-  }
-
-  public static void main(String[] args) {
-    BinarySearchTree tree = new BinarySearchTree(10);
-/*
-    tree.addToTree(5);
-    tree.addToTree(15);
-    tree.addToTree(3);
-    tree.addToTree(1);
-    tree.addToTree(2);
-    tree.addToTree(4);
-    tree.addToTree(4);
-    tree.addToTree(7);
-    tree.addToTree(6);
-    tree.addToTree(9);
-    tree.addToTree(8);*/
-    tree.printTree();
-    System.out.println("Diameter of tree is:" + tree.diameterOfABinaryTree(tree.root));
-    /*try {
-      tree.trim(13, 16);
-    } catch (Exception e) {
-      System.out.println("Invalid range for min and max");
-    }*/
-    //tree.printTree();
   }
 
   public TreeNode getRoot() {
@@ -134,16 +110,7 @@ public class BinarySearchTree extends BinaryTree {
    * Method prints out tree node values, encountered while traversing tree inline.
    */
   public void inOrderTraversal() {
-    inOrderTraversal(root);
-  }
-
-  private void inOrderTraversal(TreeNode node) {
-    if (node == null) {
-      return;
-    }
-    inOrderTraversal(node.left);
-    System.out.print(node.val + "->");
-    inOrderTraversal(node.right);
+    BinaryTreeUtils.inOrderTraversal(root);
   }
 
   /**
@@ -169,7 +136,6 @@ public class BinarySearchTree extends BinaryTree {
     return Math.max(left, right) + 1;
   }
 
-
   /**
    * Method to find the kth smallest element in binary search tree.
    * https://leetcode.com/problems/kth-smallest-element-in-a-bst/
@@ -178,7 +144,7 @@ public class BinarySearchTree extends BinaryTree {
    * @return int, value of the kth smallest node.
    */
   public int kthSmallestElementInBST(int k) {
-    Set<Integer> setOfUnique = kthSmallestElementInBST(root, k, new LinkedHashSet<Integer>(k));
+    Set<Integer> setOfUnique = kthSmallestElementInBST(root, k, new LinkedHashSet<>(k));
     if (setOfUnique.size() < k) {
       return -1;
     } else {
@@ -233,4 +199,48 @@ public class BinarySearchTree extends BinaryTree {
     }
     return node;
   }
+
+
+  //To be tested. Returns Next bigger element in Binary Search Tree. 
+  public int findNextNode(TreeNode root, int number) {
+    Deque<TreeNode> stack = new LinkedList<>();
+    stack.push(root);
+
+    boolean elementFound = false;
+    while (!elementFound && !stack.isEmpty()) {
+      TreeNode node = stack.peek();
+      if(node == null){
+        stack.pop();
+        return -1;
+      }
+      if (node.val == number) {
+        elementFound = true;
+      } else if (node.val > number) {
+        stack.push(node.left);
+      } else {
+        stack.push(node.right);
+      }
+    }
+
+    Integer result = -1;
+    while(elementFound && !stack.isEmpty()) {
+      TreeNode node = stack.pop();
+      result = findLeftMostElement(node);
+      if(result != null) {
+        elementFound = true;
+      }
+    }
+
+    return result;
+  }
+  private Integer findLeftMostElement(TreeNode node) {
+    if(node == null) {
+      return null;
+    }
+    while (node.left != null) {
+      node = node.left;
+    }
+    return node.val;
+  }
+
 }

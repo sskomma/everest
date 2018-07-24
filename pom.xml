@@ -21,6 +21,7 @@
         <module>leetcode2016</module>
         <module>ctci</module>
         <module>Take3</module>
+        <module>assessments</module>
     </modules>
 
     <dependencies>
