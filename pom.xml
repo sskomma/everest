@@ -18,10 +18,9 @@
         <jdk.version>1.8</jdk.version>
     </properties>
     <modules>
+        <module>challenges</module>
         <module>leetcode2016</module>
         <module>ctci</module>
-        <module>Take3</module>
-        <module>assessments</module>
     </modules>
 
     <dependencies>

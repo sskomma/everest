@@ -24,7 +24,7 @@ public class SortCharactersByFrequency {
     }
 
     PriorityQueue<Map.Entry<Character, Integer>> maxHeap =
-        new PriorityQueue<>(frequencyMap.size(), (a, b) -> b.getValue().compareTo(a.getValue()));
+        new PriorityQueue<>(frequencyMap.size(), (a, b) -> Integer.compare(b.getValue(), a.getValue()));
     maxHeap.addAll(frequencyMap.entrySet());
 
     StringBuffer sb = new StringBuffer();

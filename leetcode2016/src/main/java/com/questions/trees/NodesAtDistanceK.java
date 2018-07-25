@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-//import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/
@@ -35,8 +35,9 @@ public class NodesAtDistanceK {
   }
 
   public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
-    if(K == 0)
+    if (K == 0) {
       return Collections.singletonList(target.val);
+    }
     Map<TreeNode, Set<TreeNode>> adjMap = new HashMap<>();
     List<Integer> nodesAtK = new ArrayList<>();
     constructAdjacencyMap(root, null, adjMap);
@@ -45,24 +46,25 @@ public class NodesAtDistanceK {
 
     Deque<Pair<TreeNode, Integer>> stack = new LinkedList<>();
     for (TreeNode node : adjMap.get(target)) {
-      stack.push(new Pair<>(node, K-1));
+      stack.push(Pair.of(node, K - 1));
     }
 
     while (!stack.isEmpty()) {
       Pair<TreeNode, Integer> pair = stack.pop();
       TreeNode node = pair.getLeft();
       Integer currentDistance = pair.getRight();
-      if(visited.contains(node.val)) {
+      if (visited.contains(node.val)) {
         continue;
       }
       visited.add(node.val);
       if (currentDistance == 0) {
         nodesAtK.add(node.val);
       } else {
-        for(TreeNode adj: adjMap.get(node)) {
-          if(visited.contains(adj.val))
+        for (TreeNode adj : adjMap.get(node)) {
+          if (visited.contains(adj.val)) {
             continue;
-          stack.push(new Pair<>(adj, currentDistance -1));
+          }
+          stack.push(Pair.of(adj, currentDistance - 1));
         }
       }
     }
@@ -87,36 +89,6 @@ public class NodesAtDistanceK {
     if (node.right != null) {
       adjSet.add(node.right);
       constructAdjacencyMap(node.right, node, adjMap);
-    }
-  }
-
-
-  class Pair<X, Y> {
-    X left;
-    Y right;
-
-    public Pair(X x, Y y) {
-      this.left = x;
-      this.right = y;
-    }
-
-/*    public <X, Y>Pair<X, Y> of(X x, Y y) {
-      return new Pair(x, y);
-    }*/
-    public X getLeft() {
-      return left;
-    }
-
-    public void setLeft(X left) {
-      this.left = left;
-    }
-
-    public Y getRight() {
-      return right;
-    }
-
-    public void setRight(Y right) {
-      this.right = right;
     }
   }
 }

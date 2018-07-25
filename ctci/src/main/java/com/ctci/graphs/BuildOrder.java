@@ -39,8 +39,8 @@ public class BuildOrder {
       return;
     }
     graph.buildStatus.put(project, Graph.Build.BUILDING);
-    if (graph.adjList.get(project) != null) {
-      for (Character child : graph.adjList.get(project)) {
+    if (graph.adjMap.get(project) != null) {
+      for (Character child : graph.adjMap.get(project)) {
         buildProject(child, graph, buildOrder);
       }
     }
@@ -65,31 +65,31 @@ public class BuildOrder {
 
   public static class Graph {
     List<Character> nodes;
-    Map<Character, List<Character>> adjList;
-    Map<Character,Build> buildStatus;
+    Map<Character, List<Character>> adjMap;
+    Map<Character, Build> buildStatus;
 
-    public Graph() {
+    Graph() {
       nodes = new ArrayList<>();
-      adjList = new HashMap<>();
+      adjMap = new HashMap<>();
       buildStatus = new HashMap<>();
     }
-    public enum Build {
-      UNBUILT, BUILDING, BUILT;
-    }
-    public void addNode(Character c) {
-      if(!nodes.contains(c)) {
+
+    void addNode(Character c) {
+      if (!nodes.contains(c)) {
         nodes.add(c);
         buildStatus.put(c, Build.UNBUILT);
       }
     }
 
-    public void addEdge(Character start, Character end) {
-      if(adjList.get(start) == null) {
-        adjList.put(start, new ArrayList<>());
+    void addEdge(Character start, Character end) {
+      adjMap.putIfAbsent(start, new ArrayList<>());
+      if (!adjMap.get(start).contains(end)) {
+        adjMap.get(start).add(end);
       }
-      if(!adjList.get(start).contains(end)) {
-        adjList.get(start).add(end);
-      }
+    }
+
+    enum Build {
+      UNBUILT, BUILDING, BUILT
     }
   }
 }
