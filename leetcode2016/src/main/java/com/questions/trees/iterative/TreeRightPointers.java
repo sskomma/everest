@@ -1,4 +1,4 @@
-package com.questions.trees;
+package com.questions.trees.iterative;
 
 import java.util.Deque;
 import java.util.LinkedList;

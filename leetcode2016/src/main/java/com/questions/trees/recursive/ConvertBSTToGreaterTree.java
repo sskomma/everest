@@ -1,4 +1,6 @@
-package com.questions.trees;
+package com.questions.trees.recursive;
+
+import com.questions.trees.TreeNode;
 
 /**
  * #LeetCode538 #amazon

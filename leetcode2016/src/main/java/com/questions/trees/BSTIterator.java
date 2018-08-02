@@ -1,5 +1,7 @@
 package com.questions.trees;
 
+import com.questions.trees.recursive.BinarySearchTree;
+
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -46,7 +48,7 @@ public class BSTIterator {
     tree.addToTree(14);
     tree.addToTree(13);
     tree.printTree();
-    BSTIterator iterator = new BSTIterator(tree.root);
+    BSTIterator iterator = new BSTIterator(tree.getRoot());
     while (iterator.hasNext()) {
       System.out.println(iterator.next());
     }

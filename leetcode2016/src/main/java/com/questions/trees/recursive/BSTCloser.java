@@ -1,4 +1,6 @@
-package com.questions.trees;
+package com.questions.trees.recursive;
+
+import com.questions.trees.TreeNode;
 
 public class BSTCloser {
   public static void main(String[] args) {
@@ -13,19 +15,5 @@ public class BSTCloser {
     }
     double b = closestValue(kid, target);
     return Math.abs(a - target) < Math.abs(b - target) ? a : b;
-  }
-
-  static class TreeNode {
-    public double val;
-    public TreeNode left;
-    public TreeNode right;
-
-    public TreeNode(double x) {
-      val = x;
-    }
-
-    public String toString() {
-      return Double.toString(val);
-    }
   }
 }

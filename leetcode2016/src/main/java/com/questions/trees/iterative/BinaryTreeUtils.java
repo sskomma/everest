@@ -1,4 +1,6 @@
-package com.questions.trees;
+package com.questions.trees.iterative;
+
+import com.questions.trees.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
