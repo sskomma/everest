@@ -1,6 +1,0 @@
-The implementation of Stack provided uses a Dynamic Array.
-The data holding array's size, is doubled every time when the array reaches full capacity.
-Well, doubled + 1. For our conversation sake, let's just assume, we are only doubling it. It makes calculations easy to follow.
-
-
-
