@@ -1,6 +1,6 @@
 package com.questions.arrays;
 
-/**Set of general problems that are solved in various static methods.. 
+/**Set of general problems that are solved in various static methods..
  *
  * @author Ram Komma
  *
@@ -12,8 +12,8 @@ public class NumberProblems {
    *
    * The problem is to reverse a given integer.
    *
-   * @param number
-   * @return
+   * @param number, number to be reversed.
+   * @return number reversed.
    */
   public static int reverseNumber(int number) {
     boolean isNegative = number < 0;
@@ -32,6 +32,40 @@ public class NumberProblems {
       return 0;
     }
     return reverseNumber;
+  }
+
+  public static int reverseNumberII(int num) {
+    int result = 0;
+    while (num > 0) {
+      int remainder = num % 10;
+      if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && remainder > 7)) {
+        return 0;
+      }
+      if (result < Integer.MIN_VALUE / 10 || (result == Integer.MIN_VALUE / 10 && remainder < -8)) {
+        return 0;
+      }
+      num = num / 10;
+      result = result * 10 + remainder;
+    }
+    return result;
+  }
+
+  /**
+   * Implement int sqrt(int x).
+   * Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+   * Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+   *
+   *  https://leetcode.com/problems/sqrtx/description/
+   *
+   * @param x number for which sqrt is to be computed.
+   * @return sqrt of given number.
+   */
+  public static int mySqrt(int x) {
+    int result = x;
+    while (result * result > x) {
+      result = (result + x / result) / 2;
+    }
+    return result;
   }
 
   /**Description: Determine whether an integer is a Palindrome. Do this without extra space.
@@ -95,8 +129,8 @@ public class NumberProblems {
   }
 
   public static void main(String[] args) {
-    System.out.println(sqareRoot(17));
-    //System.out.println(reverseNumber(534236469));
-
+    //System.out.println(sqareRoot(17));
+    System.out.println(reverseNumberII(2147483647));
   }
+
 }
