@@ -1,4 +1,4 @@
-package com.questions.salesforce.component;
+package com.salesforce.component;
 
 public class Installer {
 

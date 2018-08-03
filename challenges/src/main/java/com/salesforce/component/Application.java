@@ -1,4 +1,4 @@
-package com.questions.salesforce.component;
+package com.salesforce.component;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
