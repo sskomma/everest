@@ -24,18 +24,31 @@ public class ReplaceKommaRam {
     if (StringUtils.isBlank(hayStack)) {
       return hayStack;
     }
-
-    StringBuffer hayStackBuffer = new StringBuffer(hayStack);
+    long totalTime = 0, start = 0, stop = 0;
+    StringBuilder hayStackBuffer = new StringBuilder(hayStack);
 
     // Replace
+    start = System.currentTimeMillis();
     replaceNeedlesWithArrows(hayStackBuffer, needle, arrow);
+    stop = System.currentTimeMillis();
+    totalTime += (stop - start);
+    System.out.println("Time took to replace: " + (stop - start));
 
     // Reverse haystack
+    start = System.currentTimeMillis();
     hayStackBuffer.reverse();
+    stop = System.currentTimeMillis();
+    totalTime += (stop - start);
+    System.out.println("Time took to reverse string: " + (stop - start));
 
     // Reverse words in haystack.
-    hayStackBuffer = reverseWords(hayStackBuffer);
+    start = System.currentTimeMillis();
+    hayStackBuffer = reverseWordsII(hayStackBuffer);
+    stop = System.currentTimeMillis();
+    totalTime += (stop - start);
+    System.out.println("Time took to reverse words: " + (stop - start));
 
+    System.out.println("Total time:" + totalTime);
     return hayStackBuffer.toString();
   }
 
@@ -48,7 +61,7 @@ public class ReplaceKommaRam {
    * @param arrow arrow to replaceNeedlesWithArrows needle with.
    * @return {@link StringBuffer} haystack with arrows.
    */
-  StringBuffer replaceNeedlesWithArrows(StringBuffer hayStack, String needle, String arrow) {
+  StringBuilder replaceNeedlesWithArrows(StringBuilder hayStack, String needle, String arrow) {
 
     if(StringUtils.isEmpty(needle))
       return hayStack;
@@ -115,19 +128,33 @@ public class ReplaceKommaRam {
    * @param text reverses words in-place.
    * @return text will all of its words reversed in-place.
    */
-  StringBuffer reverseWords(StringBuffer text) {
+  StringBuilder reverseWords(StringBuilder text) {
     int begin = 0;
     int end = 0;
     text.append(' ');
     for (int i = 0; i < text.length(); i++) {
-      if(text.charAt(i) == ' '){
+      if (text.charAt(i) == ' ') {
         end = i;
         String word = text.substring(begin, end);
-        String reversed = new StringBuffer(word).reverse().toString();
+        String reversed = new StringBuilder(word).reverse().toString();
         text.replace(begin, end, reversed);
         begin = end + 1;
       }
     }
     return text.deleteCharAt(end);
+  }
+
+  StringBuilder reverseWordsII(StringBuilder text) {
+    //System.out.println(text.toString());
+    text.append(" -");
+    String[] words = text.toString().split(" ");
+    text = new StringBuilder();
+    for (String s : words) {
+      text.append(new StringBuilder(s).reverse());
+      text.append(" ");
+    }
+    text.deleteCharAt(text.length() - 1);
+    text.deleteCharAt(text.length() - 1);
+    return text.deleteCharAt(text.length() - 1);
   }
 }
