@@ -1,4 +1,4 @@
-package com.assessments;
+package com.amazon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,14 +8,16 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ *
+ * Find all substrings of length k, with unique characters.
  * #amazon
  */
-public class Question1 {
+public class SubstringsWithUniqueCharsOfLenghthK {
 
-  public static List<String> subStringsKDist(String inputStr, int num) {
+  public static List<String> subStringsWithUniqueCharsOfLenK(String inputStr, int num) {
     Set<String> result = new HashSet<>();
     if (inputStr == null) {
-      return new ArrayList<>(result);
+      return new ArrayList<>();
     }
     Map<Character, Integer> charToIndexMap = new HashMap<>();
 
@@ -24,7 +26,7 @@ public class Question1 {
       if (charToIndexMap.containsKey(inputStr.charAt(i))) {
 
         int oldIndex = charToIndexMap.get(inputStr.charAt(i));
-        for (int j = i -num ; j <= oldIndex; j++) {
+        for (int j = i - num ; j <= oldIndex; j++) {
           if (j >= 0)
             charToIndexMap.remove(inputStr.charAt(j));
         }
@@ -41,9 +43,7 @@ public class Question1 {
   }
 
   public static void main(String[] args) {
-    List<String> strins = subStringsKDist("awaglknagawunagwkwagl", 4);
-    for (String s : strins) {
-      System.out.println(s);
-    }
+    List<String> strings = subStringsWithUniqueCharsOfLenK("awaglknagawunagwkwagl", 4);
+    System.out.println(strings);
   }
 }

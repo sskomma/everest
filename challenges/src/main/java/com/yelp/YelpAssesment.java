@@ -1,4 +1,4 @@
-package com.assessments;
+package com.yelp;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.assessments;
+package com.amazon;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * #amazon
  */
 public class Question2 {
-  public List<Integer> minWindow( List<String> targetList, List<String> availableTagList) {
+  public List<Integer> minWindow(List<String> targetList, List<String> availableTagList) {
     if (targetList.size() > availableTagList.size()) {
-      return Collections.EMPTY_LIST;
+      return Collections.emptyList();
     }
     Map<String, Integer> targetListMap = new HashMap<>();
     for (String tag : targetList) {
@@ -50,7 +51,7 @@ public class Question2 {
       }
     }
     if (len == Integer.MAX_VALUE) {
-      return Collections.EMPTY_LIST;
+      return Collections.emptyList();
     }
     List<Integer> result = new ArrayList<>();
     result.add(head);
