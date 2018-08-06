@@ -8,7 +8,7 @@ public class TrieNode {
   boolean isTerminating;
 
   public TrieNode() {
-    charMap = new HashMap<Character, TrieNode>();
+    charMap = new HashMap<>();
     this.isTerminating = false;
   }
 }

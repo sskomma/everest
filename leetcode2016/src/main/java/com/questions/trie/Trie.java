@@ -3,8 +3,9 @@ package com.questions.trie;
 import java.util.ArrayList;
 import java.util.List;
 
-/**Trie Datastructure implememnted in Java. 
- * Here is the explination of how its done. 
+/**T
+ * rie Datastructure implememnted in Java.
+ * Here is the explanation of how its done.
  * https://www.youtube.com/watch?v=AXjmTQ8LEoI
  *
  * @author Komma
@@ -23,6 +24,10 @@ public class Trie {
     }
   }
 
+  /**
+   * Insert a word into trie.
+   * @param word word to be inserted.
+   */
   public void insert(String word) {
     if (root == null) {
       root = new TrieNode();

@@ -40,19 +40,22 @@ public class ProductofArrayExceptSelf {
   }
 
   public static int[] productOfArrayExceptSelfNoDiv(int[] nums) {
-    int[] t1 = new int[nums.length];
-    int[] t2 = new int[nums.length];
-    int[] result = new int[nums.length];
+    if(nums == null)
+      return nums;
+    int len = nums.length;
+    int[] result = new int[len];
 
-    t1[0] = t2[nums.length - 1] = 1;
-    for (int i = 0; i < nums.length - 1; i++) {
-      t1[i + 1] = nums[i] * t1[i];
+    // Left product array- product of all elements from 0 to i-1
+    result[0] = 1;
+    for(int i = 1; i < len; i++) {
+      result[i] = nums[i-1] * result[i-1];
     }
-    for (int i = nums.length - 1; i > 0; i--) {
-      t2[i - 1] = nums[i] * t2[i - 1];
-    }
-    for (int i = 0; i < nums.length; i++) {
-      result[i] = t1[i] * t2[i];
+
+    //Right product array - product of all elements from n to i -1
+    int rightPrd = 1;
+    for(int i = len - 2 ; i>=0 ; i-- ) {
+      rightPrd = rightPrd * nums[i+1];
+      result[i] = result[i] * rightPrd;
     }
     return result;
   }

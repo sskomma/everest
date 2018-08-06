@@ -13,12 +13,13 @@ import org.apache.commons.lang3.tuple.Pair;
 public class BinaryTreeIterative {
 
   /**
+   *
    * https://leetcode.com/problems/binary-tree-paths/description/
    *
-   * @param root
-   * @return
+   * @param root root node of the tree.
+   * @return {@link List} of Strings with paths.
    */
-  public List<String> binaryTreePaths(TreeNode root) {
+  public static List<String> binaryTreePaths(TreeNode root) {
     if (root == null) {
       return Collections.emptyList();
     }
@@ -44,7 +45,7 @@ public class BinaryTreeIterative {
     return paths;
   }
 
-  private boolean isLeaf(TreeNode node) {
+  private static boolean isLeaf(TreeNode node) {
     return node.left == null && node.right == null;
   }
 }

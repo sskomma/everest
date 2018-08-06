@@ -1,6 +1,5 @@
 package com.questions.trees.recursive;
 
-import com.questions.trees.iterative.BinaryTreeUtils;
 import com.questions.trees.TreeNode;
 
 import java.util.Deque;

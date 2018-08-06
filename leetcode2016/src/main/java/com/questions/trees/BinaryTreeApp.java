@@ -1,6 +1,6 @@
 package com.questions.trees;
 
-import com.questions.trees.iterative.BinaryTreeUtils;
+import com.questions.trees.recursive.BinaryTreeUtils;
 import com.questions.trees.recursive.BinaryTree;
 
 public class BinaryTreeApp {
