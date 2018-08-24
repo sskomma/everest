@@ -11,7 +11,7 @@ public class RemoveDups {
     Node head = node;
     Node prev = node;
 
-    Set<Integer> buffer = new HashSet<Integer>();
+    Set<Integer> buffer = new HashSet<>();
     buffer.add(node.data);
 
     node = node.next;

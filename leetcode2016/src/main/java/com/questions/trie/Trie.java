@@ -3,8 +3,8 @@ package com.questions.trie;
 import java.util.ArrayList;
 import java.util.List;
 
-/**T
- * rie Datastructure implememnted in Java.
+/**
+ * Trie Datastructure implememnted in Java.
  * Here is the explanation of how its done.
  * https://www.youtube.com/watch?v=AXjmTQ8LEoI
  *

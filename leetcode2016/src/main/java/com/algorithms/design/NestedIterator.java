@@ -1,4 +1,4 @@
-package com.questions.misc;
+package com.algorithms.design;
 
 import java.util.Deque;
 import java.util.Iterator;

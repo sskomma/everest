@@ -2,8 +2,10 @@ package com.questions.trie;
 
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
@@ -35,6 +37,21 @@ public class WordBreak {
     WordBreak wb = new WordBreak();
     TrieNode tn = new TrieNode();
     wb.wordBreak("catsandog", dictionary);
+  }
+
+  //Dynamic programming solution.
+  public boolean dpWordBreak(String word, List<String> wordDict) {
+    Set<String> dictionary = new HashSet<>(wordDict);
+    boolean[] dpArray = new boolean[word.length() + 1];
+    dpArray[0] = true;
+    for (int i = 1; i <= word.length(); i++) {
+      for (int j = 0; j < i; j++) {
+        if (dpArray[j] && dictionary.contains(word.substring(j, i))) {
+          dpArray[j] = true;
+        }
+      }
+    }
+    return dpArray[word.length()];
   }
 
   public boolean wordBreak(String word, List<String> dictionary) {

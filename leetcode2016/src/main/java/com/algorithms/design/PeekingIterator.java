@@ -1,4 +1,4 @@
-package com.questions.misc;
+package com.algorithms.design;
 
 import com.google.common.primitives.Ints;
 
