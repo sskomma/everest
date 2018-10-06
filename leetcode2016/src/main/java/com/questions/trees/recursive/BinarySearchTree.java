@@ -232,9 +232,9 @@ public class BinarySearchTree extends BinaryTree {
         elementFound = true;
       }
     }
-
     return result;
   }
+
   private Integer findLeftMostElement(TreeNode node) {
     if(node == null) {
       return null;

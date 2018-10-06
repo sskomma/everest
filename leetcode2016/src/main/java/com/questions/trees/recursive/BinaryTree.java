@@ -151,7 +151,7 @@ public class BinaryTree {
    * @return
    */
   public List<List<Integer>> levelOrderTraversal() {
-    List<List<Integer>> levelOrderOfTree = new ArrayList<List<Integer>>();
+    List<List<Integer>> levelOrderOfTree = new ArrayList<>();
     return levelOrderTraversal(Collections.singletonList(root), levelOrderOfTree);
   }
 
@@ -210,7 +210,7 @@ public class BinaryTree {
     }
     List<List<Integer>> levelOrderOfTree = levelOrderBottom(nextLevel);
     if (levelOrderOfTree == null) {
-      levelOrderOfTree = new ArrayList<List<Integer>>();
+      levelOrderOfTree = new ArrayList<>();
     }
     levelOrderOfTree.add(currentLevelNumbers);
 
@@ -231,7 +231,7 @@ public class BinaryTree {
    * @return List of strings
    */
   public List<String> binaryTreePaths() {
-    List<String> paths = new ArrayList<String>();
+    List<String> paths = new ArrayList<>();
     int[] path = new int[1000];
     binaryTreePaths(root, path, 0, paths);
     return paths;

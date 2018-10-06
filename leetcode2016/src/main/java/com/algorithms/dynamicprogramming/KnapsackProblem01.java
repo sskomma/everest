@@ -18,7 +18,7 @@ public class KnapsackProblem01 {
    * @param weight, maximum weight knapsack can handle.
    * @param itemsWeight, weight of items in increasing order that can be put.
    * @param itemsValue, Value of items, positioned in array, in correspondence with weights array.
-   * @return an array of weights that are to be included in knapsack to get maximum value of.
+   * @return an array of weights that are to be included in knapsack to get maximum value.
    */
   public static List<Integer> knapSack01(int weight, int[] itemsWeight, int[] itemsValue) {
     int[][] temp = new int[itemsWeight.length + 1][weight + 1];
@@ -39,7 +39,7 @@ public class KnapsackProblem01 {
     j--;
     System.out.println("Max Value in Kanpsack 0/1 is :" + temp[i][j]);
     //Grab items that are in knapsack.
-    List<Integer> selectedItems = new ArrayList<Integer>();
+    List<Integer> selectedItems = new ArrayList<>();
     while (i > 0 && j > 0 && temp[i][j] != 0) {
       //The i'th element is included in selected items
       if (temp[i][j] != temp[i - 1][j]) {

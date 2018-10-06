@@ -55,18 +55,23 @@ public class HouseRobber {
       return 0;
     }
     int numOfHouses = money.length;
-    int[] picked = new int[numOfHouses + 1];
-    int[] notPicked = new int[numOfHouses + 1];
+    int[] picked = new int[numOfHouses];
+    int[] notPicked = new int[numOfHouses];
 
     //Init
-    picked[1] = money[0];
-    notPicked[1] = 0;
+    picked[0] = money[0];
+    notPicked[0] = 0;
 
-    for (int i = 2; i <= numOfHouses; i++) {
-      picked[i] = Math.max(picked[i - 2], notPicked[i - 1]) + money[i - 1];
+    for (int i = 1; i < numOfHouses; i++) {
+        if(i==1){
+            picked[i] = notPicked[i - 1] + money[i];
+        }else {
+            picked[i] = Math.max(picked[i - 2], notPicked[i - 1]) + money[i];
+        }
+
       notPicked[i] = Math.max(picked[i - 1], notPicked[i - 1]);
     }
-    return Math.max(picked[numOfHouses], notPicked[numOfHouses]);
+    return Math.max(picked[numOfHouses-1], notPicked[numOfHouses-1]);
   }
 
   public static void main(String[] args) {

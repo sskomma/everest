@@ -1,95 +1,62 @@
 package com.algorithms.design;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class MaxStack {
-
-  private StackNode[] stack;
-  private int top;
-  private int capacity;
+  private PriorityQueue<ListNode> pq;
+  private ListNode head;
+  private ListNode tail;
 
   /** initialize your data structure here. */
   public MaxStack() {
-    //Zero indexed
-    top = -1;
-    // One indexed
-    capacity = 10;
-    stack = new StackNode[capacity];
+    pq = new PriorityQueue<>(Comparator.comparingInt(ListNode::getVal).reversed());
+    head = new ListNode();
+    tail = new ListNode(head, -1, head);
+    head.prev = tail;
+    head.next = tail;
   }
 
   public void push(int x) {
-    ensureCapacity();
-    stack[top + 1] = new StackNode(x, Math.min(x, peekMax()));
-    top = top + 1;
+    ListNode node = new ListNode(head, x, head.next);
+    head.next = node;
+    head.next.prev = node;
+
+    pq.add(node);
   }
 
   public int pop() {
-    if (!isEmpty()) {
-      return stack[top--].val;
-    }
-    return Integer.MAX_VALUE;
+    return 0;
   }
 
   public int top() {
-    if (!isEmpty()) {
-      return stack[top].val;
-    }
-    return Integer.MAX_VALUE;
+    return 0;
   }
 
   public int peekMax() {
-    if (!isEmpty()) {
-      return stack[top].max;
-    }
-    return Integer.MIN_VALUE;
+    return 0;
   }
 
   public int popMax() {
-    int max = peekMax();
-    Deque<Integer> tempStack = new LinkedList<>();
-    boolean found = false;
-    while (!isEmpty()){
-      StackNode node = stack[top--];
-      tempStack.push(node.val);
-      if(node.val == max) {
-        found = true;
-        break;
-      }
-    }
-    if(found){
-      //stack[top] = new StackNode(tempStack.pop(), Math.max());
-      top++;
-
-    }
-    return Integer.MIN_VALUE;
+    return 0;
   }
 
-  public boolean isEmpty() {
-    return top < 0;
-  }
-
-  private void ensureCapacity() {
-
-    if (top + 1 >= capacity) {
-      int newCapacity = capacity * 2;
-      StackNode[] newStack = new StackNode[newCapacity];
-      int i = 0;
-      for (StackNode sNode : stack) {
-        newStack[i++] = sNode;
-      }
-      capacity = newCapacity;
-      stack = newStack;
-    }
-  }
-
-  static class StackNode {
-    int max;
+  static class ListNode {
     int val;
+    ListNode prev;
+    ListNode next;
 
-    StackNode(int val, int max) {
+    ListNode() {
+    }
+
+    ListNode(ListNode prev, int val, ListNode next) {
+      this.prev = prev;
       this.val = val;
-      this.max = max;
+      this.next = next;
+    }
+
+    public int getVal() {
+      return val;
     }
   }
 }
