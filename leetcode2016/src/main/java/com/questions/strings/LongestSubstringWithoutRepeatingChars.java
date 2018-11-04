@@ -1,7 +1,9 @@
 package com.questions.strings;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Description: https://leetcode.com/problems/longest-substring-without-repeating-characters/
@@ -24,7 +26,7 @@ public class LongestSubstringWithoutRepeatingChars {
       return 0;
     }
 
-    Map<Character, Integer> existing = new HashMap<Character, Integer>();
+    Map<Character, Integer> existing = new HashMap<>();
 
     while (i < s.length()) {
       if (existing.get(s.charAt(i)) == null) {
@@ -77,9 +79,36 @@ public class LongestSubstringWithoutRepeatingChars {
     return result;
   }
 
+  public static int lengthOfLongestSubstringV2(String s) {
+    int begin = 0;
+    int end = 0;
+    Set<Character> charsSet = new HashSet<>();
+    int maxLength = 1;
+    while(end < s.length()) {
+      char insertedChar = s.charAt(end);
+      boolean duplicate = charsSet.add(insertedChar);
+      end++;
+      if(duplicate) {
+        maxLength = Math.max(maxLength, end-begin);
+      } else{
+        while(begin < end) {
+          if(s.charAt(begin) != insertedChar) {
+            charsSet.remove(s.charAt(begin));
+            begin++;
+          } else {
+            begin++;
+            break;
+          }
+        }
+      }
+    }
+    return maxLength;
+  }
+
   public static void main(String[] args) {
     String str =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCD";
-    System.out.println("Length of maximum sub-string is: " + longestSubStrWithOutDups(str));
+
+    System.out.println("Length of maximum sub-string is: " + lengthOfLongestSubstringV2("pwwkew"));
   }
 }

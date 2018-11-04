@@ -1,4 +1,4 @@
-package com.algorithms.dynamicprogramming;
+package com.algorithms.backtracking;
 
 import java.util.ArrayList;
 

@@ -18,6 +18,11 @@ import java.util.List;
  *   [1,4],
  * ]
  * https://leetcode.com/problems/combinations/description/
+ *
+ * // Choose
+ * // Explore
+ * // un-choose
+ * https://www.youtube.com/watch?v=78t_yHuGg-0
  */
 public class Combinations {
     public List<List<Integer>> combine(int n, int k) {

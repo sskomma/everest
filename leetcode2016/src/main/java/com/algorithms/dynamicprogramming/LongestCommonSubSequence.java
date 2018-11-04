@@ -1,6 +1,8 @@
 package com.algorithms.dynamicprogramming;
 
-/**A program to print longest common subsequence of two given strings. 
+import java.util.Arrays;
+
+/**A program to print longest common subsequence of two given strings.
  *
  * Thanks to @TusharRoy. https://www.youtube.com/watch?v=NnD96abizww&index=2&list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr
  *
@@ -42,6 +44,22 @@ public class LongestCommonSubSequence {
     System.out.println(sb.toString());
 
     return matrix[s1.length][s2.length];
+  }
+
+  public int lengthOfLIS(int[] nums) {
+    int[] dp = new int[nums.length];
+    int len = 0;
+    for (int num : nums) {
+      int i = Arrays.binarySearch(dp, 0, len, num);
+      if (i < 0) {
+        i = -(i + 1);
+      }
+      dp[i] = num;
+      if (i == len) {
+        len++;
+      }
+    }
+    return len;
   }
 
   public static void main(String[] args) {

@@ -13,7 +13,8 @@ import java.util.List;
  */
 public class KnapsackProblem01 {
 
-  /**Method to solve KnapSack 1/0 problem. i.e.. Include or exclude a given item and not splitting it into pieces.
+  /**
+   * Method to solve KnapSack 1/0 problem. i.e.. Include or exclude a given item and not splitting it into pieces.
    *
    * @param weight, maximum weight knapsack can handle.
    * @param itemsWeight, weight of items in increasing order that can be put.
