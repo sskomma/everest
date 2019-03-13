@@ -50,7 +50,7 @@ public class BinaryTree {
    *
    * Output: "1(2(4))(3)"
    *
-   * Explanation: Originallay it needs to be "1(2(4)())(3()())",
+   * Explanation: Originally it needs to be "1(2(4)())(3()())",
    * but you need to omit all the unnecessary empty parenthesis pairs.
    * And it will be "1(2(4))(3)".
    */
@@ -460,6 +460,7 @@ public class BinaryTree {
 
   /**
    * https://leetcode.com/problems/same-tree/description/
+   *
    * Given two binary trees, write a function to check if they are the same or not.
    * Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
    *
@@ -520,18 +521,15 @@ public class BinaryTree {
     queue.offer(root);
     while (!queue.isEmpty()) {
       TreeNode current = queue.poll();
-      if (current != null) {
-        if (current.val == k) {
-          kNode = current;
-        }
-        if (kNode != null) {
-          if (current.left == null && current.right == null) {
-            return current.val;
-          }
-        }
-        queue.offer(current.left);
-        queue.offer(current.right);
+      if (current == null) {
+        continue;
       }
+      if (current.val == k) {
+        kNode = current;
+        break;
+      }
+      queue.offer(current.left);
+      queue.offer(current.right);
     }
     //Return -1 if not found.
     if (kNode == null) {

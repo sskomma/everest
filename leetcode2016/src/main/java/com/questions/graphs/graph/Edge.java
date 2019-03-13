@@ -1,4 +1,4 @@
-package com.questions.graphs;
+package com.questions.graphs.graph;
 
 class Edge<T> {
   private boolean isDirected;

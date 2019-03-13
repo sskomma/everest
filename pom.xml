@@ -21,6 +21,7 @@
         <module>challenges</module>
         <module>leetcode2016</module>
         <module>ctci</module>
+        <module>design-patterns</module>
     </modules>
 
     <dependencies>

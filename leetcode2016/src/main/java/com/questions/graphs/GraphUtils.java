@@ -1,5 +1,8 @@
 package com.questions.graphs;
 
+import com.questions.graphs.graph.Graph;
+import com.questions.graphs.graph.Vertex;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -25,7 +28,7 @@ public class GraphUtils {
         while (!vertecesQueue.isEmpty()) {
           Vertex<Integer> v = vertecesQueue.poll();
           if (!visited.contains(v)) {
-            vertecesQueue.addAll(v.getAdjcentVerteces());
+            vertecesQueue.addAll(v.getAdjacentVertices());
             visited.add(v);
             System.out.println(v);
           }
@@ -49,7 +52,7 @@ public class GraphUtils {
         while (!vertecesStack.isEmpty()) {
           Vertex<Integer> v = vertecesStack.pop();
           if (!visited.contains(v)) {
-            for (Vertex<Integer> adj : v.getAdjcentVerteces()) {
+            for (Vertex<Integer> adj : v.getAdjacentVertices()) {
               vertecesStack.add(adj);
             }
             visited.add(v);
@@ -76,7 +79,7 @@ public class GraphUtils {
   private static void DFS2_VISIT(Vertex<Integer> vertex, Set<Vertex<Integer>> visited) {
     visited.add(vertex);
     System.out.println(vertex);
-    for (Vertex<Integer> adj : vertex.getAdjcentVerteces()) {
+    for (Vertex<Integer> adj : vertex.getAdjacentVertices()) {
       if (!visited.contains(adj)) {
         DFS2_VISIT(adj, visited);
       }

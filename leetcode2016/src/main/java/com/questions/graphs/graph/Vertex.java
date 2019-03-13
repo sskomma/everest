@@ -1,4 +1,4 @@
-package com.questions.graphs;
+package com.questions.graphs.graph;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 public class Vertex<T> {
   private long id;
   private T data;
-  private List<Edge<T>> adjcentEdges = new ArrayList<Edge<T>>();
-  private List<Vertex<T>> adjcentVerteces = new ArrayList<Vertex<T>>();
+  private List<Edge<T>> adjacentEdges = new ArrayList<>();
+  private List<Vertex<T>> adjacentVertices = new ArrayList<>();
 
   public Vertex(long id) {
     this.id = id;
@@ -29,17 +29,17 @@ public class Vertex<T> {
     this.data = data;
   }
 
-  public List<Vertex<T>> getAdjcentVerteces() {
-    return adjcentVerteces;
+  public List<Vertex<T>> getAdjacentVertices() {
+    return adjacentVertices;
   }
 
   public void addAdjcentVertex(Edge<T> edge, Vertex<T> adjcentVertex) {
-    adjcentEdges.add(edge);
-    adjcentVerteces.add(adjcentVertex);
+    adjacentEdges.add(edge);
+    adjacentVertices.add(adjcentVertex);
   }
 
-  public List<Edge<T>> getAdjcentEdges() {
-    return adjcentEdges;
+  public List<Edge<T>> getAdjacentEdges() {
+    return adjacentEdges;
   }
 
   @Override

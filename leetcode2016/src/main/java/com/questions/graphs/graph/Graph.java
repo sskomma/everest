@@ -1,4 +1,4 @@
-package com.questions.graphs;
+package com.questions.graphs.graph;
 
 import java.util.ArrayList;
 import java.util.Collection;

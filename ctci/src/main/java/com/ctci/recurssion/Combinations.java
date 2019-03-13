@@ -29,7 +29,7 @@ public class Combinations {
   }
 
   public static void main(String[] args) {
-    char[] chars = {'a','a','b', 'c'};
+    char[] chars = {'a','b', 'c'};
     System.out.println(combinations(chars));
   }
 }

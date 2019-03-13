@@ -1,4 +1,4 @@
-package com.questions.sorting;
+package com.questions.heaps;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;

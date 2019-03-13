@@ -67,7 +67,7 @@ public class HashMapWithArray {
     while (keys[index] != key && keys[index] != -1) {
       index = (index + collisionCounter * doubleHash) % capacity;
       collisionCounter++;
-      if(collisionCounter > capacity){
+      if(collisionCounter > capacity) {
         ensureCapacity(true);
         put(key, value);
         return;
@@ -143,7 +143,6 @@ public class HashMapWithArray {
    * @return double hash.
    */
   private int reHash(int key) {
-    //return (13 - (key % 13));
     return (key ^ (key >> 16));
   }
 
