@@ -1,7 +1,12 @@
 package com.questions.recurssion;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PermutationOfIntegers {
@@ -62,6 +67,34 @@ public class PermutationOfIntegers {
             }
         }
     }
+
+
+    public List<List<Integer>> permuteV3(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Deque<Integer> slate = new LinkedList<>();
+        List<Integer> numbers = Arrays.stream(nums).boxed().collect(toList());
+        permute_helper(numbers, slate, result);
+        return result;
+    }
+
+    private void permute_helper(List<Integer> usable_nums, Deque<Integer> slate, List<List<Integer>> result) {
+        if(usable_nums.isEmpty()) {
+            result.add(new ArrayList<>(slate));
+            return;
+        }
+
+        for(int i = 0; i< usable_nums.size(); i++) {
+
+            List<Integer> new_usable_nums = new ArrayList<>(usable_nums);
+            new_usable_nums.remove(usable_nums.get(i));
+
+            int num = usable_nums.get(i);
+            slate.addLast(num);
+            permute_helper(new_usable_nums, slate, result);
+            slate.removeLast();
+        }
+    }
+
 
     public static void main(String[] args) {
         PermutationOfIntegers poi = new PermutationOfIntegers();

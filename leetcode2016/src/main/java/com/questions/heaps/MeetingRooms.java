@@ -1,6 +1,7 @@
 package com.questions.heaps;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class MeetingRooms {
@@ -28,19 +29,18 @@ public class MeetingRooms {
     if (intervals == null || intervals.length == 0) {
       return 0;
     }
-    Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
-    PriorityQueue<Interval> queue = new PriorityQueue<>((a, b) -> Integer.compare(a.end, b.end));
+    Arrays.sort(intervals, Comparator.comparingInt(a -> a.start));
+    PriorityQueue<Interval> queue = new PriorityQueue<>(Comparator.comparingInt(a -> a.end));
     queue.add(intervals[0]);
     for (int i = 1; i < intervals.length; i++) {
       Interval iv = queue.poll();
       if (iv.end > intervals[i].start) {
         queue.add(intervals[i]);
       } else {
-        iv.end = intervals[i].end;
+        iv = intervals[i];
       }
       queue.add(iv);
     }
-
     return queue.size();
   }
 
@@ -57,7 +57,7 @@ public class MeetingRooms {
     if (intervals == null || intervals.length == 0) {
       return false;
     }
-    Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
+    Arrays.sort(intervals, Comparator.comparingInt(a -> a.start));
     int endTime = 0;
     for (Interval interval : intervals) {
       if (endTime <= interval.start) {

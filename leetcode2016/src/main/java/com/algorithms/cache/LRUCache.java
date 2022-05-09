@@ -4,79 +4,105 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LRUCache {
-  ListNode head;
-  ListNode tail;
-  int capacity;
-  Map<Integer, ListNode> map;
 
-  public LRUCache(int capacity) {
-    head = new ListNode(0, 0);
-    tail = new ListNode(0, 0);
-    head.next = tail;
-    tail.previous = head;
-    map = new HashMap<>(capacity);
-    this.capacity = capacity;
-  }
-
-  public static void main(String[] args) {
-    LRUCache cache = new LRUCache(2);
-    cache.put(1, 1);
-    cache.put(2, 2);
-    System.out.println(cache.get(1));
-    cache.put(3, 3);
-    System.out.println(cache.get(2));
-    cache.put(4, 4);
-    System.out.println(cache.get(1));
-    System.out.println(cache.get(3));
-    System.out.println(cache.get(4));
-  }
-
-  public int get(int key) {
-    if (map.containsKey(key)) {
-      updateKey(key);
-      return map.get(key).value;
+    static class Node {
+        int key;
+        int value;
+        Node prev;
+        Node next;
     }
-    return -1;
-  }
 
-  public void put(int key, int value) {
-    if (map.containsKey(key)) {
-      updateKey(key);
-      map.get(key).value = value;
-    } else if (map.size() == capacity) {
-      ListNode nodeToDelete = head.next;
-      head.next = nodeToDelete.next;
-      nodeToDelete.next.previous = head;
-      map.remove(nodeToDelete.key);
+    private Map<Integer, Node> cache;
+    private Node head;
+    private Node tail;
+    private int capacity;
+    private int occupancy;
+
+    public LRUCache(int capacity) {
+        this.cache = new HashMap<>();
+        this.capacity = capacity;
+        this.occupancy = 0;
+        this.head = new Node();
+        this.tail = new Node();
+        head.next = tail;
+        tail.prev = head;
     }
-    ListNode newNode = new ListNode(key, value);
-    newNode.previous = tail.previous;
-    newNode.previous.next = newNode;
-    tail.previous = newNode;
-    newNode.next = tail;
-    map.put(key, newNode);
-  }
 
-  private void updateKey(int key) {
-    ListNode node = map.get(key);
-    node.next.previous = node.previous;
-    node.previous.next = node.next;
-
-    node.previous = tail.previous;
-    tail.previous.next = node;
-    tail.previous = node;
-    node.next = tail;
-  }
-
-  static class ListNode {
-    int key;
-    int value;
-    ListNode previous;
-    ListNode next;
-
-    ListNode(int key, int value) {
-      this.key = key;
-      this.value = value;
+    public int get(int key) {
+        if (!cache.containsKey(key)) {
+            return -1;
+        }
+        pushAhead(cache.get(key));
+        return head.next.value;
     }
-  }
+
+    public void put(int key, int value) {
+        if(cache.containsKey(key)) {
+            Node n = cache.get(key);
+            n.value = value;
+            pushAhead(n);
+            return;
+        }
+
+        //if Over capacity evict.
+        if (capacity == occupancy) {
+            // evict
+            Node toRemove = removeTail();
+            cache.remove(toRemove.key);
+            occupancy--;
+        }
+        // Add new K, V to map
+        Node newNode = new Node();
+        newNode.key = key;
+        newNode.value = value;
+
+        cache.put(key, newNode);
+        pushAhead(newNode);
+        occupancy++;
+    }
+
+    private void pushAhead(Node node) {
+        Node prev = node.prev;
+        Node next = node.next;
+        if (prev != null && next != null) {
+            prev.next = next;
+            next.prev = prev;
+        }
+
+        next = head.next;
+
+        head.next = node;
+        node.prev = head;
+
+        node.next = next;
+        next.prev = node;
+    }
+
+    private Node removeTail() {
+        Node toRemove = tail.prev;
+        Node prev = toRemove.prev;
+        Node next = toRemove.next;
+        prev.next = next;
+        next.prev = prev;
+
+        toRemove.next = null;
+        toRemove.prev = null;
+        return toRemove;
+    }
+
+    public static void main(String[] args) {
+        LRUCache cache = new LRUCache(2);
+        System.out.println(cache.get(2));
+        cache.put(2, 6);
+        System.out.println(cache.get(1));
+        cache.put(1, 5);
+        cache.put(1, 2);
+        System.out.println(cache.get(1));
+        System.out.println(cache.get(2));
+    }
+
+    /**
+     * ["LRUCache","get","put","get","put","put","get","get"]
+     * [[2],[2],[2,6],[1],[1,5],[1,2],[1],[2]]
+     */
 }

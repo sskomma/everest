@@ -1,10 +1,15 @@
 package com.questions.stack;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 /**
  * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
@@ -88,6 +93,37 @@ public class ValidParentheses {
     }
 
     return maxLength;
+  }
+
+  public List<String> generateParenthesis(int n) {
+    List<String> output = new ArrayList<>();
+    helper(new LinkedList<>(), n, n, output);
+    return output;
+  }
+
+  private void helper(Deque<Character> slate, int open, int close, List<String> output) {
+    if(open == 0 && close == 0) {
+      output.add(concat(slate));
+      return;
+    }
+
+    // open
+    if(open > 0) {
+      slate.addLast('(');
+      helper(slate, open-1, close, output);
+      slate.removeLast();
+    }
+
+    // close
+    if(close > open) {
+      slate.addLast(')');
+      helper(slate, open, close-1, output);
+      slate.removeLast();
+    }
+  }
+
+  private String concat(Deque<Character> slate) {
+    return Arrays.stream(slate.toArray()).map(String::valueOf).collect(Collectors.joining(""));
   }
 
   public static void main(String[] args) {
